@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="بن ناجح — منصة البرمجة والذكاء الاصطناعي للصف الثاني بكالوريا. مذكّرات مرسومة، عروض، بنك أسئلة، وتطبيق موبايل.">
+<meta name="theme-color" content="#FFFCF2">
+<title>بــن نــاجــح · منصة البرمجة والذكاء الاصطناعي — الصف الثاني بكالوريا</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Lalezar&family=Rakkas&family=Aref+Ruqaa:wght@400;700&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<!-- ═══ النافبار ═══ -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <nav class="navbar" aria-label="التنقّل الرئيسي">
+      <a class="brand" href="#top" aria-label="بن ناجح — الرئيسية">
+        <span class="bmark" aria-hidden="true">ب</span>
+        <span class="btext">
+          <span class="lockup">بــن نــاجــح</span>
+          <span class="bsub">البرمجة والذكاء الاصطناعي</span>
+        </span>
+      </a>
+
+      <div class="nlinks">
+        <span class="nink" aria-hidden="true"></span>
+        <a href="#how" data-spy="how">إزاي بتشتغل<span class="ndot" aria-hidden="true"></span></a>
+        <a href="#courses" data-spy="courses">الوحدات<span class="ndot" aria-hidden="true"></span></a>
+        <a href="#reviews" data-spy="reviews">آراء الطلبة<span class="ndot" aria-hidden="true"></span></a>
+        <a href="#app" data-spy="app">التطبيق<span class="ndot" aria-hidden="true"></span></a>
+      </div>
+
+      <div class="nav-right">
+        <a class="napp" href="#app"><span class="live" aria-hidden="true"></span> التطبيق متاح</a>
+        <a class="btn btn-primary btn-sm magnetic" href="#courses">ابدأ مجانًا</a>
+      </div>
+
+      <span class="nprog" aria-hidden="true"><i></i></span>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ═══════════════════════════════════════════════
+     ١ · الهيرو
+     ═══════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <!-- خلفية: ضربة قلم فسفوري لكل لون من الخمسة -->
+  <div class="pens" aria-hidden="true">
+    <span class="pen p1"></span><span class="pen p2"></span><span class="pen p3"></span>
+    <span class="pen p4"></span><span class="pen p5"></span>
+  </div>
+  <div class="dots dots-mask" aria-hidden="true"></div>
+  <span class="hero-vig" aria-hidden="true"></span>
+
+  <!-- خربشات حبر باهتة في الأركان الفاضية -->
+  <div class="doodles" aria-hidden="true">
+    <svg class="dd-1 par" style="--md:.5" viewBox="0 0 150 90" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 62c14-40 44-56 70-38s22 52 48 44"/>
+      <path d="M116 62l10 6-2 12"/>
+      <circle cx="30" cy="16" r="5"/><circle cx="56" cy="8" r="3.4"/>
+    </svg>
+
+    <svg class="dd-2 par" style="--md:-.7" viewBox="0 0 120 96" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M46 6a34 34 0 0 0-16 62v10h32V68A34 34 0 0 0 46 6Z"/>
+      <path d="M32 86h28M36 94h20"/>
+      <path d="M46 40v18M38 48l8-8 8 8"/>
+    </svg>
+
+    <svg class="dd-3 par" style="--md:.8" viewBox="0 0 118 74" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M34 12 8 37l26 25"/>
+      <path d="M84 12l26 25-26 25"/>
+      <path d="M66 6 52 68"/>
+    </svg>
+
+    <svg class="dd-4 par" style="--md:-.55" viewBox="0 0 168 104" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="18" cy="52" r="9"/><circle cx="84" cy="18" r="9"/>
+      <circle cx="84" cy="86" r="9"/><circle cx="150" cy="52" r="9"/>
+      <path d="M26 46l50-22M26 58l50 22M92 24l50 22M92 80l50-22"/>
+    </svg>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-grid">
+
+      <!-- ═══ يمين: الاسم بيترسم + الاقتباس + الزرّ ═══ -->
+      <div class="hero-copy rv-host">
+        <h1 class="wordwrap">
+          <span class="sr">بن ناجح</span>
+          <svg class="wordart" viewBox="0 0 1000 344" role="img" aria-hidden="true"
+               xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- ثلاث ضربات فرشاة بتكشف الاسم من اليمين للشمال -->
+              <mask id="paintMask" maskUnits="userSpaceOnUse" x="-60" y="-60" width="1120" height="470">
+                <path class="brush b1" pathLength="1" stroke-width="122"
+                      d="M990 94C812 62 660 126 496 90S184 54 18 98"/>
+                <path class="brush b2" pathLength="1" stroke-width="122"
+                      d="M990 176C800 144 636 208 480 170S178 134 18 180"/>
+                <path class="brush b3" pathLength="1" stroke-width="122"
+                      d="M990 256C806 224 646 286 486 248S182 214 18 260"/>
+                <path class="brush b4" pathLength="1" stroke-width="118"
+                      d="M990 322C800 292 636 350 480 314S178 286 18 326"/>
+              </mask>
+            </defs>
+
+            <path class="swipe" pathLength="1" d="M948 272C762 250 562 290 374 264S142 246 64 264"/>
+
+            <g mask="url(#paintMask)">
+              <text x="500" y="222" text-anchor="middle" textLength="898" lengthAdjust="spacingAndGlyphs"
+                    font-family="Rakkas, Lalezar, serif" font-size="212" fill="#FF4D6D" opacity=".45"
+                    transform="translate(11,13)">بــن نــاجــح</text>
+              <text x="500" y="222" text-anchor="middle" textLength="898" lengthAdjust="spacingAndGlyphs"
+                    font-family="Rakkas, Lalezar, serif" font-size="212" fill="#FFC93C"
+                    transform="translate(5,6)">بــن نــاجــح</text>
+              <text x="500" y="222" text-anchor="middle" textLength="898" lengthAdjust="spacingAndGlyphs"
+                    font-family="Rakkas, Lalezar, serif" font-size="212" fill="#1E2A46">بــن نــاجــح</text>
+            </g>
+          </svg>
+
+        </h1>
+
+        <blockquote class="hquote" data-anim="rise" style="--d:.3s">
+          <span class="qmark" aria-hidden="true">”</span>
+          <q>الدرس اللي تفهمه مرة،<br>عمره ما يحتاج تحفظه تاني.</q>
+          <footer>
+            <span class="qrule" aria-hidden="true"></span>
+            <cite>م. محمد ناجح</cite>
+          </footer>
+        </blockquote>
+
+        <div class="ctaZone" data-anim="rise" style="--d:.42s">
+          <span class="megaRing">
+            <a class="mega magnetic" href="#courses">
+              <span class="arrow" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5-13-7.5Z"/></svg>
+              </span>
+              ابدأ الوحدة الأولى
+              <span class="free">مجانًا</span>
+              <span class="shine" aria-hidden="true"></span>
+            </a>
+          </span>
+
+          <span class="spinBadge" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="53" fill="none" stroke="#1E2A46" stroke-width="2.4" stroke-dasharray="11 10" stroke-linecap="round" opacity=".85"/>
+              <circle cx="60" cy="60" r="44" fill="none" stroke="#FF4D6D" stroke-width="1.6" stroke-dasharray="3 8" stroke-linecap="round" opacity=".7"/>
+            </svg>
+            <span class="spinCore"><b>ابدأ</b><i>دلوقتي</i></span>
+          </span>
+        </div>
+      </div>
+
+      <!-- ═══ شمال: الصورة كاملة في إطارها ═══ -->
+      <div class="shot" data-anim="rise" style="--d:.2s">
+        <span class="shot-back" aria-hidden="true"></span>
+
+        <figure class="shot-card">
+          <img src="hero.png" alt="م. محمد ناجح — مؤسّس منصة بن ناجح" width="960" height="1280" fetchpriority="high">
+          <span class="shot-grain" aria-hidden="true"></span>
+          <span class="shot-vig" aria-hidden="true"></span>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="band band-white" id="how">
+  <div class="tear" aria-hidden="true">
+    <svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path fill="#FFFFFF" d="M0 34 V11.6 C32.6 5.6 48.1 15.3 77.5 14.8 C114.6 14.9 132.3 2.0 165.8 5.9 C204.3 2.0 222.7 5.0 257.5 6.0 C304.3 2.2 326.5 8.6 368.9 6.9 C418.2 5.4 441.6 20.3 486.2 13.7 C516.6 10.7 531.1 12.9 558.6 17.9 C590.4 22.3 605.6 5.2 634.5 9.6 C676.1 7.8 695.9 15.3 733.5 14.6 C764.3 10.5 778.9 8.4 806.7 5.9 C845.1 7.1 863.3 9.1 898.1 9.7 C933.8 12.5 950.7 13.3 983.0 16.9 C1024.5 22.2 1044.3 16.1 1081.8 12.9 C1117.2 7.5 1134.1 18.6 1166.2 19.7 C1180.4 19.5 1187.1 2.0 1200.0 7.3 V34 Z"/></svg>
+    <span class="thread"></span>
+  </div>
+  <span class="seam k-violet" aria-hidden="true"><b>٠١</b><i>إزاي بتشتغل</i></span>
+  <span class="tape stripe-sun" style="top:12px; inset-inline-end:8%; width:112px; transform:rotate(-3.4deg)" aria-hidden="true"></span>
+  <span class="tape dot-berry" style="top:16px; inset-inline-start:11%; width:84px; transform:rotate(4.2deg)" aria-hidden="true"></span>
+
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="ribbon r-violet" data-anim="left"><i>٠١</i> إزاي بتشتغل</span>
+      <h2 class="h2" data-anim="rise" style="--d:.1s">
+        مسار واحد واضح، من أول الدرس <span class="pop-v">لحد الامتحان</span>
+      </h2>
+      <p class="lede" data-anim="rise" style="--d:.18s">
+        المشكلة مش إنك مش بتذاكر — المشكلة إن المنهج متفرّق: كتاب هنا، فيديو هناك، أسئلة من حتة تالتة.
+        المنصّة بتلمّه في أربع خطوات <span class="hl hl-mint mark" style="--d:.7s">تعرف منها إنت فين وإيه اللي بعده</span>.
+      </p>
+      <svg class="swash" width="230" height="13" viewBox="0 0 230 13" fill="none" aria-hidden="true" data-anim="fade" style="--d:.3s">
+        <path class="draw" style="--len:250" d="M3 8C30 2 44 11 72 6s36 6 64 0 34 7 62 1 26-3 26-3" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="jour" id="jour">
+      <span class="rail" aria-hidden="true"><span class="bg"></span><span class="fill"></span></span>
+      <ol class="jsteps">
+      <li class="jstep st1">
+        <span class="gh" aria-hidden="true">١</span>
+        <div class="med">
+          <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" pathLength="1"/></svg>
+          <span class="pin" aria-hidden="true">١</span>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5V5.5Z"/><path d="M8 8h7M8 12h5"/></svg>
+        </div>
+        <div class="capwrap"><span class="cap">اقرا الدرس</span>
+          <p>شرح مرسوم بخرايط ومقارنات، وتنبيه على الأخطاء الشائعة قبل ما تقع فيها.</p></div>
+      </li>
+      <li class="jstep st2">
+        <span class="gh" aria-hidden="true">٢</span>
+        <div class="med">
+          <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" pathLength="1"/></svg>
+          <span class="pin" aria-hidden="true">٢</span>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="13" rx="2.5"/><path d="M10 9.2v4.1l4-2.05-4-2.05Z" fill="currentColor" stroke="none"/><path d="M8 21h8"/></svg>
+        </div>
+        <div class="capwrap"><span class="cap">اتفرّج</span>
+          <p>عرض الدرس ٢٦ شريحة — نفس المحتوى بس متحرّك، يراجعه في ربع ساعة.</p></div>
+      </li>
+      <li class="jstep st3">
+        <span class="gh" aria-hidden="true">٣</span>
+        <div class="med">
+          <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" pathLength="1"/></svg>
+          <span class="pin" aria-hidden="true">٣</span>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6V3Z"/><path d="M15 3v4h4"/><path d="m9.5 13.5 1.8 1.8 3.4-3.6"/></svg>
+        </div>
+        <div class="capwrap"><span class="cap">حُلّ</span>
+          <p>بنك أسئلة على نمط الامتحان، وكل سؤال معاه الإجابة النموذجية.</p></div>
+      </li>
+      <li class="jstep st4">
+        <span class="gh" aria-hidden="true">٤</span>
+        <div class="med">
+          <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" pathLength="1"/></svg>
+          <span class="pin" aria-hidden="true">٤</span>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V10M10 19V5M16 19v-6M22 19H2"/></svg>
+        </div>
+        <div class="capwrap"><span class="cap">تابع</span>
+          <p>خريطة المنهج بتقول لك خلّصت كام من ١٤، وإيه الدرس اللي بعده.</p></div>
+      </li>
+      </ol>
+      <p class="jmeter" aria-hidden="true">
+        <span>خلّصت</span>
+        <b id="jnum">٠</b>
+        <span>من ٤ خطوات</span>
+        <span class="pips" id="jpips"><i></i><i></i><i></i><i></i></span>
+      </p>
+    </div>
+
+    <div class="versus">
+      <div class="vside v-old" data-anim="right">
+        <h3>المذاكرة من غير نظام</h3>
+        <ul>
+          <li><i>✕</i><span>تقرا الدرس ٣ مرات وتنساه بعد يومين</span></li>
+          <li><i>✕</i><span>مش عارف الدرس ده مطلوب منه إيه بالظبط</span></li>
+          <li><i>✕</i><span>الأسئلة بتيجي في الامتحان بشكل تاني خالص</span></li>
+          <li><i>✕</i><span>تكتشف الفجوة قبل الامتحان بأسبوع</span></li>
+        </ul>
+      </div>
+      <div class="vside v-new" data-anim="left" style="--d:.08s">
+        <h3>المذاكرة مع بن ناجح</h3>
+        <ul>
+          <li><i>✔</i><span>الدرس مرسوم: خرايط وأشكال تفضل في دماغك</span></li>
+          <li><i>✔</i><span>أهداف تعلّم مكتوبة فوق كل درس</span></li>
+          <li><i>✔</i><span>بنك أسئلة على نفس نمط الامتحان بإجابة نموذجية</span></li>
+          <li><i>✔</i><span>خريطة منهج توريك إنت فين من ١٤ درسًا</span></li>
+        </ul>
+      </div>
+      <span class="vmark" data-anim="stamp" style="--d:.4s">ضـد</span>
+    </div>
+
+    <div class="callout" data-anim="unroll">
+      <span class="badge" aria-hidden="true">✳</span>
+      <div>
+        <b>ليه المحتوى مرسوم بالشكل ده؟</b>
+        <p>
+          كل درس متصمّم كخرايط وألوان ومقارنات مش كنص متصل، لأن المخّ بيفتكر
+          <span class="hl hl-berry mark" style="--d:.5s">الصورة والمكان</span>
+          أسرع بكتير ما بيفتكر سطر مكتوب. الرسمة هنا جزء من الشرح، مش زينة.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     ٣ · الوحدات
+     ═══════════════════════════════════════════════ -->
+<section class="band band-warm" id="courses">
+  <div class="tear" aria-hidden="true">
+    <svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path fill="#FBF5E4" d="M0 34 V11.6 C32.6 5.6 48.1 15.3 77.5 14.8 C114.6 14.9 132.3 2.0 165.8 5.9 C204.3 2.0 222.7 5.0 257.5 6.0 C304.3 2.2 326.5 8.6 368.9 6.9 C418.2 5.4 441.6 20.3 486.2 13.7 C516.6 10.7 531.1 12.9 558.6 17.9 C590.4 22.3 605.6 5.2 634.5 9.6 C676.1 7.8 695.9 15.3 733.5 14.6 C764.3 10.5 778.9 8.4 806.7 5.9 C845.1 7.1 863.3 9.1 898.1 9.7 C933.8 12.5 950.7 13.3 983.0 16.9 C1024.5 22.2 1044.3 16.1 1081.8 12.9 C1117.2 7.5 1134.1 18.6 1166.2 19.7 C1180.4 19.5 1187.1 2.0 1200.0 7.3 V34 Z"/></svg>
+    <span class="thread"></span>
+  </div>
+  <span class="seam k-berry" aria-hidden="true"><b>٠٢</b><i>الوحدات</i></span>
+  <div class="dots dots-mask" aria-hidden="true"></div>
+  <span class="tape stripe-mint" style="top:14px; inset-inline-start:7%; width:96px; transform:rotate(-5deg)" aria-hidden="true"></span>
+
+  <div class="wrap">
+    <div class="courses-head">
+      <div class="sec-head">
+        <span class="ribbon r-berry" data-anim="left"><i>٠٢</i> محتوى الترم الأول</span>
+        <h2 class="h2" data-anim="rise" style="--d:.1s">
+          مش هتشتري وإنت مش شايف. <span class="pop">شوف الأول.</span>
+        </h2>
+        <p class="lede" data-anim="rise" style="--d:.18s">
+          كل وحدة معاها معاينة حيّة من جوّه المنصّة — قلّب المذكّرة، شغّل العرض، وجرّب سؤال حقيقي
+          <span class="hl hl-mint mark" style="--d:.7s">قبل ما تبدأ</span>.
+        </p>
+      </div>
+      <a class="btn btn-line" href="curriculum-map.html" data-anim="rise" style="--d:.24s">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v14L9 18l6 2.5 6-2.5v-14L15 6.5 9 4Z"/><path d="M9 4v14M15 6.5v14"/></svg>
+        خريطة المنهج كاملة
+      </a>
+    </div>
+
+    <div class="ugrid">
+
+      <!-- ═══ الوحدة ١ — مميّزة، معاينة حيّة ═══ -->
+      <article class="ucard u1 feat" style="--rot:-.4deg" data-anim="rise">
+        <div class="uhead">
+          <span class="unum">١</span>
+          <span class="utitle">
+            <b>تكنولوجيا المعلومات والمجتمع</b>
+            <em>٤ دروس · ص ٤ – ٣٠ · الوحدة كاملة</em>
+          </span>
+          <span class="ustat tag tag-ready">✔ كاملة ومجانية</span>
+        </div>
+
+        <div class="ubody">
+
+          <!-- الويدجت -->
+          <div class="widget" data-widget>
+            <div class="wtabs" role="tablist" aria-label="معاينة محتوى الوحدة الأولى">
+              <button class="wtab on" role="tab" data-view="doc" aria-selected="true" id="t1-doc" aria-controls="p1-doc">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6V3Z"/><path d="M15 3v4h4"/><path d="M9 12h6M9 16h4"/></svg>
+                المذكّرة <i>٨ ص</i>
+              </button>
+              <button class="wtab" role="tab" data-view="slides" aria-selected="false" tabindex="-1" id="t1-slides" aria-controls="p1-slides">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="13" rx="2.5"/><path d="M10 9.4v4.2l4-2.1-4-2.1Z" fill="currentColor" stroke="none"/><path d="M8 21h8"/></svg>
+                العرض <i>٢٦</i>
+              </button>
+              <button class="wtab" role="tab" data-view="quiz" aria-selected="false" tabindex="-1" id="t1-quiz" aria-controls="p1-quiz">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.2 9a2.8 2.8 0 1 1 3.6 2.7c-.7.25-1.1.9-1.1 1.6v.4"/><path d="M11.7 17.4h.01"/><circle cx="12" cy="12" r="9"/></svg>
+                الأسئلة <i>١٩</i>
+              </button>
+            </div>
+
+            <div class="wframe">
+              <div class="wchrome">
+                <span class="wdots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="wurl">lesson-1-1.html</span>
+                <a class="wopen" href="lesson-1-1.html" target="_blank" rel="noopener">
+                  افتح كامل
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 7H7M17 7v10"/></svg>
+                </a>
+              </div>
+
+              <div class="wport">
+
+                <!-- المذكّرة -->
+                <div class="wview on" data-view="doc" data-href="lesson-1-1.html" id="p1-doc" role="tabpanel" aria-labelledby="t1-doc">
+                  <div class="wskel" aria-hidden="true">
+                    <div class="sk r"></div>
+                    <div class="sk t"></div>
+                    <div class="sk a"></div><div class="sk hs"></div><div class="sk c"></div>
+                    <div class="sk b"></div><div class="sk hm"></div><div class="sk a"></div>
+                    <div class="sk c"></div><div class="sk b"></div>
+                  </div>
+                  <div class="wshot">
+                    <iframe data-src="lesson-1-1.html" title="معاينة مذكّرة الدرس ١-١" loading="lazy" scrolling="no" tabindex="-1" aria-hidden="true"></iframe>
+                  </div>
+                </div>
+
+                <!-- العرض -->
+                <div class="wview" data-view="slides" data-href="presentation-1-1.html" id="p1-slides" role="tabpanel" aria-labelledby="t1-slides">
+                  <div class="wskel" aria-hidden="true" style="background:linear-gradient(150deg,#1E2532,#0E1116)"></div>
+                  <div class="wshot">
+                    <iframe data-src="presentation-1-1.html" title="معاينة عرض الدرس ١-١" loading="lazy" scrolling="no" tabindex="-1" aria-hidden="true"></iframe>
+                  </div>
+                  <div class="wplay">
+                    <button type="button" aria-label="شغّل معاينة العرض">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5-13-7.5Z"/></svg>
+                    </button>
+                    <span class="plabel">٢٦ شريحة · ١٤ دقيقة</span>
+                  </div>
+                </div>
+
+                <!-- الأسئلة -->
+                <div class="wview" data-view="quiz" data-href="questions-1-1.html" id="p1-quiz" role="tabpanel" aria-labelledby="t1-quiz">
+                  <div class="quiz">
+                    <span class="qmark" aria-hidden="true">؟</span>
+                    <div class="qtop">
+                      <span class="qtag">سؤال مقالي</span>
+                      <span class="qmeta">٣ من ١٩ · درجتان</span>
+                    </div>
+                    <p class="qq">اذكر مرحلتين من مراحل تطوّر تكنولوجيا المعلومات، ووضّح أثر كلٍّ منهما على شكل التواصل بين الناس.</p>
+                    <button type="button" class="qbtn" aria-expanded="false">
+                      <span class="qlabel">اكشف الإجابة النموذجية</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="qans">
+                      <div>
+                        <p>
+                          <b>١) الحواسيب الشخصية:</b> نقلت المعالجة من مراكز ضخمة إلى بيت كل أسرة، فبقى الفرد ينتج المحتوى بنفسه بدل ما يستقبله بس.
+                          <br>
+                          <b>٢) الإنترنت والهواتف الذكية:</b> خلّت التواصل فوريًّا وعابرًا للمسافة، فاتحوّل من رسائل بطيئة لمحادثة مستمرة ومشاركة لحظية.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <span class="wglare" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="wfoot">
+              <span class="wpages" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="whint">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                حُطّ الماوس على المعاينة عشان تقلّب
+              </span>
+            </div>
+          </div>
+
+          <!-- عمود المعلومات -->
+          <div class="uside">
+            <div class="uchips">
+              <span class="uchip">مذكّرة ٨ صفحات</span>
+              <span class="uchip">عرض ٢٦ شريحة</span>
+              <span class="uchip">١٩ ورقة أسئلة</span>
+              <span class="uchip">أوفلاين</span>
+            </div>
+
+            <div class="ulist">
+              <a class="lrow done" href="lesson-1-1.html"><span class="n">١-١</span><span class="t">تطوّر تكنولوجيا المعلومات والتحوّل الاجتماعي</span><span class="c" aria-hidden="true">✓</span></a>
+              <a class="lrow done" href="lesson-1-2.html"><span class="n">١-٢</span><span class="t">كيف يعمل الذكاء الاصطناعي</span><span class="c" aria-hidden="true">✓</span></a>
+              <a class="lrow done" href="lesson-1-3.html"><span class="n">١-٣</span><span class="t">الذكاء الاصطناعي في الحياة اليومية والصناعة</span><span class="c" aria-hidden="true">✓</span></a>
+              <a class="lrow done" href="lesson-1-4.html"><span class="n">١-٤</span><span class="t">القضايا الأخلاقية المتعلقة بالذكاء الاصطناعي</span><span class="c" aria-hidden="true">✓</span></a>
+            </div>
+
+            <div class="umeter">
+              <div class="track"><i style="--p:100%"></i></div>
+              <span>٤ من ٤</span>
+            </div>
+
+            <div class="ucta">
+              <a class="btn btn-ink btn-sm" href="lesson-1-1.html">ابدأ الوحدة</a>
+              <a class="btn btn-line btn-sm" href="questions-1-1.html">بنك الأسئلة</a>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      <!-- ═══ الوحدة ٢ ═══ -->
+      <article class="ucard u2" style="--rot:.7deg" data-anim="rise">
+        <div class="uhead">
+          <span class="unum">٢</span>
+          <span class="utitle">
+            <b>الأمن السيبراني</b>
+            <em>٣ دروس · ص ٣١ – ٤٩</em>
+          </span>
+        </div>
+        <div class="ubody">
+          <div class="widget sealed" data-widget>
+            <div class="wtabs" role="tablist" aria-label="معاينة الوحدة الثانية">
+              <button class="wtab on" role="tab" data-view="doc" aria-selected="true" disabled>المذكّرة <i>قريبًا</i></button>
+              <button class="wtab" role="tab" data-view="slides" aria-selected="false" tabindex="-1" disabled>العرض</button>
+              <button class="wtab" role="tab" data-view="quiz" aria-selected="false" tabindex="-1" disabled>الأسئلة</button>
+            </div>
+            <div class="wframe">
+              <div class="wchrome">
+                <span class="wdots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="wurl">قيد التجهيز</span>
+              </div>
+              <div class="wport">
+                <div class="wview on" data-view="doc">
+                  <div class="wskel" aria-hidden="true">
+                    <div class="sk r"></div><div class="sk t"></div>
+                    <div class="sk a"></div><div class="sk hs"></div><div class="sk c"></div><div class="sk b"></div>
+                  </div>
+                  <div class="wlock">
+                    <span class="wseal">الوحدة<br>الثانية</span>
+                    <span class="ltape">قريبًا · قيد التجهيز</span>
+                  </div>
+                </div>
+                <span class="wglare" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="wfoot">
+              <span class="wpages" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="whint">٣ دروس في الطريق</span>
+            </div>
+          </div>
+
+          <div class="uside">
+            <div class="ulist">
+              <div class="lrow todo"><span class="n">٢-١</span><span class="t">تقنيات التشفير والمصادقة</span><span class="c" aria-hidden="true">•</span></div>
+              <div class="lrow todo"><span class="n">٢-٢</span><span class="t">تصميم أمان الشبكات</span><span class="c" aria-hidden="true">•</span></div>
+              <div class="lrow todo"><span class="n">٢-٣</span><span class="t">الاستجابة للحوادث وإدارة المخاطر</span><span class="c" aria-hidden="true">•</span></div>
+            </div>
+            <div class="umeter">
+              <div class="track"><i style="--p:0%"></i></div>
+              <span>٠ من ٣</span>
+            </div>
+            <div class="ucta">
+              <a class="btn btn-line btn-sm btn-block" href="curriculum-map.html">شوف اللي جاي</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ الوحدة ٣ ═══ -->
+      <article class="ucard u3" style="--rot:-.6deg" data-anim="rise" data-d="1">
+        <div class="uhead">
+          <span class="unum">٣</span>
+          <span class="utitle">
+            <b>تطبيقات الويب</b>
+            <em>٣ دروس · ص ٥٠ – ٦٧</em>
+          </span>
+        </div>
+        <div class="ubody">
+          <div class="widget sealed" data-widget>
+            <div class="wtabs" role="tablist" aria-label="معاينة الوحدة الثالثة">
+              <button class="wtab on" role="tab" data-view="doc" aria-selected="true" disabled>المذكّرة <i>قريبًا</i></button>
+              <button class="wtab" role="tab" data-view="slides" aria-selected="false" tabindex="-1" disabled>العرض</button>
+              <button class="wtab" role="tab" data-view="quiz" aria-selected="false" tabindex="-1" disabled>الأسئلة</button>
+            </div>
+            <div class="wframe">
+              <div class="wchrome">
+                <span class="wdots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="wurl">قيد التجهيز</span>
+              </div>
+              <div class="wport">
+                <div class="wview on" data-view="doc">
+                  <div class="wskel" aria-hidden="true">
+                    <div class="sk r"></div><div class="sk t"></div>
+                    <div class="sk c"></div><div class="sk hm"></div><div class="sk a"></div><div class="sk b"></div>
+                  </div>
+                  <div class="wlock">
+                    <span class="wseal">الوحدة<br>الثالثة</span>
+                    <span class="ltape">قريبًا · قيد التجهيز</span>
+                  </div>
+                </div>
+                <span class="wglare" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="wfoot">
+              <span class="wpages" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="whint">٣ دروس في الطريق</span>
+            </div>
+          </div>
+
+          <div class="uside">
+            <div class="ulist">
+              <div class="lrow todo"><span class="n">٣-١</span><span class="t">البنية العامة لتطبيقات الويب</span><span class="c" aria-hidden="true">•</span></div>
+              <div class="lrow todo"><span class="n">٣-٢</span><span class="t">طرق اتصال تطبيقات الويب</span><span class="c" aria-hidden="true">•</span></div>
+              <div class="lrow todo"><span class="n">٣-٣</span><span class="t">أساسيات تقنية الواجهة الأمامية</span><span class="c" aria-hidden="true">•</span></div>
+            </div>
+            <div class="umeter">
+              <div class="track"><i style="--p:0%"></i></div>
+              <span>٠ من ٣</span>
+            </div>
+            <div class="ucta">
+              <a class="btn btn-line btn-sm btn-block" href="curriculum-map.html">شوف اللي جاي</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ الوحدة ٤ ═══ -->
+      <article class="ucard u4" style="--rot:.5deg" data-anim="rise" data-d="2">
+        <div class="uhead">
+          <span class="unum">٤</span>
+          <span class="utitle">
+            <b>تصميم الويب والوسائط</b>
+            <em>٤ دروس · ص ٦٨ – ٩٣</em>
+          </span>
+        </div>
+        <div class="ubody">
+          <div class="widget sealed" data-widget>
+            <div class="wtabs" role="tablist" aria-label="معاينة الوحدة الرابعة">
+              <button class="wtab on" role="tab" data-view="doc" aria-selected="true" disabled>المذكّرة <i>قريبًا</i></button>
+              <button class="wtab" role="tab" data-view="slides" aria-selected="false" tabindex="-1" disabled>العرض</button>
+              <button class="wtab" role="tab" data-view="quiz" aria-selected="false" tabindex="-1" disabled>الأسئلة</button>
+            </div>
+            <div class="wframe">
+              <div class="wchrome">
+                <span class="wdots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="wurl">قيد التجهيز</span>
+              </div>
+              <div class="wport">
+                <div class="wview on" data-view="doc">
+                  <div class="wskel" aria-hidden="true">
+                    <div class="sk r"></div><div class="sk t"></div>
+                    <div class="sk b"></div><div class="sk hs"></div><div class="sk c"></div><div class="sk a"></div>
+                  </div>
+                  <div class="wlock">
+                    <span class="wseal">الوحدة<br>الرابعة</span>
+                    <span class="ltape">قريبًا · قيد التجهيز</span>
+                  </div>
+                </div>
+                <span class="wglare" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="wfoot">
+              <span class="wpages" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span class="whint">٤ دروس في الطريق</span>
+            </div>
+          </div>
+
+          <div class="uside">
+            <div class="ulist">
+              <div class="lrow todo"><span class="n">٤-١</span><span class="t">أنواع الوسائط وخصائصها</span><span class="c" aria-hidden="true">•</span></div>
+              <div class="lrow todo"><span class="n">٤-٢</span><span class="t">تصميم المعلومات وتجربة المستخدم</span><span class="c" aria-hidden="true">•</span></div>
+              <div class="lrow todo"><span class="n">٤-٣</span><span class="t">طرق تقييم المواقع الإلكترونية</span><span class="c" aria-hidden="true">•</span></div>
+              <div class="lrow todo"><span class="n">٤-٤</span><span class="t">عملية التحسين التكراري للمواقع</span><span class="c" aria-hidden="true">•</span></div>
+            </div>
+            <div class="umeter">
+              <div class="track"><i style="--p:0%"></i></div>
+              <span>٠ من ٤</span>
+            </div>
+            <div class="ucta">
+              <a class="btn btn-line btn-sm btn-block" href="curriculum-map.html">شوف اللي جاي</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     ٤ · آراء الطلبة
+     ═══════════════════════════════════════════════ -->
+<section class="band band-white" id="reviews">
+  <div class="tear" aria-hidden="true">
+    <svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path fill="#FFFFFF" d="M0 34 V11.6 C32.6 5.6 48.1 15.3 77.5 14.8 C114.6 14.9 132.3 2.0 165.8 5.9 C204.3 2.0 222.7 5.0 257.5 6.0 C304.3 2.2 326.5 8.6 368.9 6.9 C418.2 5.4 441.6 20.3 486.2 13.7 C516.6 10.7 531.1 12.9 558.6 17.9 C590.4 22.3 605.6 5.2 634.5 9.6 C676.1 7.8 695.9 15.3 733.5 14.6 C764.3 10.5 778.9 8.4 806.7 5.9 C845.1 7.1 863.3 9.1 898.1 9.7 C933.8 12.5 950.7 13.3 983.0 16.9 C1024.5 22.2 1044.3 16.1 1081.8 12.9 C1117.2 7.5 1134.1 18.6 1166.2 19.7 C1180.4 19.5 1187.1 2.0 1200.0 7.3 V34 Z"/></svg>
+    <span class="thread"></span>
+  </div>
+  <span class="seam k-mint" aria-hidden="true"><b>٠٣</b><i>الآراء</i></span>
+  <span class="tape plain-sky" style="top:15px; inset-inline-end:12%; width:78px; transform:rotate(5deg)" aria-hidden="true"></span>
+
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ribbon r-mint" data-anim="left"><i>٠٣</i> كلام الطلبة نفسهم</span>
+      <h2 class="h2" data-anim="rise" style="--d:.1s">
+        مش إحنا اللي بنقول — <span class="pop">هُمّ</span> اللي بيقولوا.
+      </h2>
+      <div class="rate-head" data-anim="rise" style="--d:.18s">
+        <div class="rate-big"><b>٤.٩</b><em>من ٥</em></div>
+        <div>
+          <div class="stars" aria-label="٤.٩ من ٥">★★★★★</div>
+          <p class="small">بناءً على ٣٤٠ تقييمًا من طلبة الصف الثاني بكالوريا</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tgrid">
+
+      <figure class="slip" style="--rot:-1.1deg" data-anim="tilt">
+        <span class="sl-tape stripe-sun" aria-hidden="true"></span>
+        <div class="stars" aria-label="٥ من ٥">★★★★★</div>
+        <q>أول مرة أذاكر تكنولوجيا من غير ما أحفظ صمّ. الدرس ١-١ خلاني <span class="hl hl-sun mark">أفتكر الترتيب من الصورة</span> — غرفة، مكتب، جيب، سحابة. دخلت الامتحان وأنا شايف الرسمة قدّامي.</q>
+        <figcaption class="who">
+          <span class="av" aria-hidden="true">م</span>
+          <span><b>مريم عبد الرحمن</b><em>ثانية بكالوريا · القاهرة</em></span>
+        </figcaption>
+      </figure>
+
+      <figure class="slip" style="--rot:.8deg" data-anim="tilt">
+        <span class="sl-tape dot-berry" aria-hidden="true"></span>
+        <div class="stars" aria-label="٥ من ٥">★★★★★</div>
+        <q>كنت بكره الأسئلة لأني مش عارف الإجابة اتقبلت ولا لأ. هنا الإجابة النموذجية بنفس صيغة التصحيح، فبقيت أعرف أنا ناقص إيه بالظبط.</q>
+        <figcaption class="who">
+          <span class="av" aria-hidden="true">ي</span>
+          <span><b>يوسف مصطفى</b><em>ثانية بكالوريا · المنصورة</em></span>
+        </figcaption>
+      </figure>
+
+      <figure class="slip" style="--rot:-.5deg" data-anim="tilt">
+        <span class="sl-tape plain-sky" aria-hidden="true"></span>
+        <div class="stars" aria-label="٤ من ٥">★★★★☆</div>
+        <q>خريطة المنهج أحسن حاجة. بشوف إني خلّصت ٢ من ١٤، وعارف اللي بعده إيه وفي أنهي صفحة من الكتاب. حسّيت إن المذاكرة بقى ليها آخر.</q>
+        <figcaption class="who">
+          <span class="av" aria-hidden="true">ح</span>
+          <span><b>حبيبة شريف</b><em>ثانية بكالوريا · طنطا</em></span>
+        </figcaption>
+      </figure>
+
+      <figure class="slip" style="--rot:1.2deg" data-anim="tilt">
+        <span class="sl-tape stripe-mint" aria-hidden="true"></span>
+        <div class="stars" aria-label="٥ من ٥">★★★★★</div>
+        <q>«خُد بالك من دي» أنقذتني. كنت فاكر إن الهواتف الذكية سبقت الإنترنت التجاري — وطلعت غلطة شائعة مكتوبة حرفيًّا في المذكّرة قبل ما أقع فيها.</q>
+        <figcaption class="who">
+          <span class="av" aria-hidden="true">ع</span>
+          <span><b>عمر خالد</b><em>ثانية بكالوريا · الإسكندرية</em></span>
+        </figcaption>
+      </figure>
+
+      <figure class="slip" style="--rot:-1.3deg" data-anim="tilt">
+        <span class="sl-tape stripe-sun" aria-hidden="true"></span>
+        <div class="stars" aria-label="٥ من ٥">★★★★★</div>
+        <q>التطبيق بيخليني أراجع في الأتوبيس. بفتح الدرس، أقرا الملخّص، وأحلّ ٥ أسئلة — ١٠ دقايق ومروّح <span class="hl hl-mint mark">مذاكر درس كامل</span>.</q>
+        <figcaption class="who">
+          <span class="av" aria-hidden="true">س</span>
+          <span><b>سلمى عادل</b><em>ثانية بكالوريا · أسيوط</em></span>
+        </figcaption>
+      </figure>
+
+      <figure class="slip" style="--rot:.6deg" data-anim="tilt">
+        <span class="sl-tape dot-berry" aria-hidden="true"></span>
+        <div class="stars" aria-label="٥ من ٥">★★★★★</div>
+        <q>بتفرّج على عرض الدرس قبل الحصة، فبدخل الفصل فاهم. المدرّس نفسه سألني بتذاكر منين.</q>
+        <figcaption class="who">
+          <span class="av" aria-hidden="true">ك</span>
+          <span><b>كريم أشرف</b><em>ثانية بكالوريا · بورسعيد</em></span>
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <blockquote class="pullquote" data-anim="unroll">
+      <span class="qmark" aria-hidden="true">”</span>
+      <q>العِلم اللي بتفتكره من غير ما تفتح الكتاب — هو بس اللي بيدخل معاك الامتحان.</q>
+      <small>— م. محمد ناجح · مؤسّس بن ناجح</small>
+      <svg class="brush" width="200" height="14" viewBox="0 0 230 13" fill="none" aria-hidden="true">
+        <path class="draw" style="--len:260" d="M3 8C30 2 44 11 72 6s36 6 64 0 34 7 62 1 26-3 26-3" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
+      </svg>
+    </blockquote>
+
+    <div class="stats" data-anim="rise">
+      <div><b>٤.٩</b><span>متوسّط التقييم</span></div>
+      <div><b>+٢٤٠٠</b><span>طالب على المنصّة</span></div>
+      <div><b>٩٣٪</b><span>بيكمّلوا الوحدة اللي بدأوها</span></div>
+      <div><b>+١٩٠</b><span>سؤال بإجابة نموذجية</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     ٥ · التطبيق
+     ═══════════════════════════════════════════════ -->
+<section class="band band-ink app" id="app">
+  <div class="tear" aria-hidden="true">
+    <svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path fill="#26304A" d="M0 34 V11.6 C32.6 5.6 48.1 15.3 77.5 14.8 C114.6 14.9 132.3 2.0 165.8 5.9 C204.3 2.0 222.7 5.0 257.5 6.0 C304.3 2.2 326.5 8.6 368.9 6.9 C418.2 5.4 441.6 20.3 486.2 13.7 C516.6 10.7 531.1 12.9 558.6 17.9 C590.4 22.3 605.6 5.2 634.5 9.6 C676.1 7.8 695.9 15.3 733.5 14.6 C764.3 10.5 778.9 8.4 806.7 5.9 C845.1 7.1 863.3 9.1 898.1 9.7 C933.8 12.5 950.7 13.3 983.0 16.9 C1024.5 22.2 1044.3 16.1 1081.8 12.9 C1117.2 7.5 1134.1 18.6 1166.2 19.7 C1180.4 19.5 1187.1 2.0 1200.0 7.3 V34 Z"/></svg>
+    <span class="thread"></span>
+  </div>
+  <span class="seam k-sun" aria-hidden="true"><b>٠٤</b><i>التطبيق</i></span>
+  <span class="tape stripe-sun" style="top:16px; inset-inline-start:9%; width:104px; transform:rotate(-4deg)" aria-hidden="true"></span>
+
+  <div class="wrap">
+    <div class="app-grid">
+
+      <div class="app-copy">
+        <span class="ghost ghost-5 par" style="--md:-.22; --rot:-2deg" aria-hidden="true">٥</span>
+
+        <span class="ribbon r-sun" data-anim="left"><i>٠٤</i> على كل شاشة</span>
+        <h2 class="h2" data-anim="rise" style="--d:.1s">
+          نفس المنصّة، <span class="pop on-ink">في جيبك</span>.
+        </h2>
+        <p class="lede" data-anim="rise" style="--d:.18s">
+          موبايل، تابلت، أو لاب — نفس المذكّرة بالظبط، متقسّمة على جلسات قصيرة تنفع في المواصلات وبين الحصص. جرّب الجهاز اللي جنبك.
+        </p>
+
+        <ul class="applist">
+          <li data-anim="right" style="--d:.04s">
+            <span class="k" aria-hidden="true">◆</span>
+            <span><b>الدرس مقسّم لجلسات</b><em>كل جلسة ٧ – ١٠ دقايق، تقف وترجع من نفس المكان.</em></span>
+          </li>
+          <li data-anim="right" style="--d:.11s">
+            <span class="k" aria-hidden="true">⬇</span>
+            <span><b>مذاكرة أوفلاين</b><em>نزّل الوحدة وذاكر من غير إنترنت خالص.</em></span>
+          </li>
+          <li data-anim="right" style="--d:.18s">
+            <span class="k" aria-hidden="true">◷</span>
+            <span><b>تنبيه المراجعة</b><em>يفكّرك بالدرس قبل ما تنساه بالظبط.</em></span>
+          </li>
+          <li data-anim="right" style="--d:.25s">
+            <span class="k" aria-hidden="true">◈</span>
+            <span><b>تقدّمك متزامن</b><em>ابدأ على الموبايل وكمّل على اللاب من نفس النقطة.</em></span>
+          </li>
+        </ul>
+
+        <div class="app-cta" data-anim="rise" style="--d:.3s">
+          <a class="store" href="#">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.2 2.6c-.3.3-.5.8-.5 1.4v16c0 .6.2 1.1.5 1.4l.1.1 9-9v-.2l-9-9-.1.1Zm10.6 6.3-2.4-2.4-6.8-3.8c-.3-.2-.6-.2-.8-.1l10 6.3Zm0 6.2-10 6.3c.2.1.5.1.8-.1l6.8-3.8 2.4-2.4ZM19.7 11l-3.5-2-2.6 2.6 2.6 2.6 3.5-2c.7-.4.7-1.4 0-1.8Z"/></svg>
+            <span><small>حمّله من</small><b>Google Play</b></span>
+          </a>
+          <a class="store" href="#">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-2.9-.8-1.5 0-2.9.9-3.6 2.2-1.6 2.7-.4 6.7 1.1 8.9.7 1.1 1.6 2.3 2.8 2.2 1.1 0 1.5-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 1.9-1.1 2.7-2.1.8-1.2 1.2-2.4 1.2-2.5-.1 0-2.3-.9-2.4-3.6ZM14.2 5.9c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2Z"/></svg>
+            <span><small>حمّله من</small><b>App Store</b></span>
+          </a>
+          <a class="btn btn-line on-ink" href="https://wa.me/201114840373" target="_blank" rel="noopener">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1a13 13 0 0 1-5.6-4.6c-.4-.6-1-1.5-1-2.9s.7-2 1-2.3c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2 0 .4-.1.5l-.4.5c-.1.2-.3.3-.1.6.2.4.8 1.3 1.6 2 1 .9 1.9 1.2 2.2 1.3.2.1.4.1.5-.1l.8-1c.2-.2.3-.2.5-.1l2 1c.2.1.3.2.4.3v.5Z"/></svg>
+            اسأل على واتساب
+          </a>
+        </div>
+      </div>
+
+      <div class="tabstage">
+        <div class="tablet" id="tablet" data-anim="scale" style="--d:.2s">
+          <span class="tab-cam" aria-hidden="true"></span>
+          <div class="tab-screen">
+            <div class="tab-chrome">
+              <span class="tab-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <div class="tab-tabs" role="tablist" aria-label="محتوى التابلت">
+                <button type="button" class="ttab on" data-src="lesson-1-1.html">المذكّرة</button>
+                <button type="button" class="ttab" data-src="presentation-1-1.html">العرض</button>
+                <button type="button" class="ttab" data-src="questions-1-1.html">الأسئلة</button>
+              </div>
+              <button type="button" class="tab-full" id="tabFull" aria-label="افتح على الشاشة كاملة">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 15v5h-5"/></svg>
+              </button>
+            </div>
+            <div class="tab-view">
+              <div class="tab-load"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+              <iframe id="tabFrame" title="معاينة حيّة من منصّة بن ناجح" loading="lazy" scrolling="yes"></iframe>
+            </div>
+            <span class="tab-glare" aria-hidden="true"></span>
+          </div>
+          <span class="tab-home" aria-hidden="true"></span>
+        </div>
+        <div class="tab-base" aria-hidden="true"></div>
+        <p class="tab-hint">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V6.5a1.5 1.5 0 0 1 3 0V11m0-2v-.5a1.5 1.5 0 0 1 3 0V11m0-1a1.5 1.5 0 0 1 3 0v4a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6v-1a1.5 1.5 0 0 1 3 0"/></svg>
+        تابلت شغّال — قلّب فيه بإيدك زي ما هو
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ الفوتر ═══ -->
+<footer class="foot">
+  <div class="tear" aria-hidden="true">
+    <svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path fill="#FBF5E4" d="M0 34 V11.6 C32.6 5.6 48.1 15.3 77.5 14.8 C114.6 14.9 132.3 2.0 165.8 5.9 C204.3 2.0 222.7 5.0 257.5 6.0 C304.3 2.2 326.5 8.6 368.9 6.9 C418.2 5.4 441.6 20.3 486.2 13.7 C516.6 10.7 531.1 12.9 558.6 17.9 C590.4 22.3 605.6 5.2 634.5 9.6 C676.1 7.8 695.9 15.3 733.5 14.6 C764.3 10.5 778.9 8.4 806.7 5.9 C845.1 7.1 863.3 9.1 898.1 9.7 C933.8 12.5 950.7 13.3 983.0 16.9 C1024.5 22.2 1044.3 16.1 1081.8 12.9 C1117.2 7.5 1134.1 18.6 1166.2 19.7 C1180.4 19.5 1187.1 2.0 1200.0 7.3 V34 Z"/></svg>
+  </div>
+
+  <div class="wrap">
+    <div class="fbar">
+      <div class="fbook">
+        <b>بــن نــاجــح</b>
+        <span>البرمجة والذكاء الاصطناعي · ثانية بكالوريا</span>
+      </div>
+      <span class="fsep" aria-hidden="true"></span>
+      <span class="favatar" aria-hidden="true"></span>
+      <div class="fbrand">
+        <div class="fmarkrow">
+          <span class="fstar" aria-hidden="true">✦</span>
+          <span class="lockup">بــن نــاجــح</span>
+          <span class="fstar" aria-hidden="true">✦</span>
+        </div>
+        <div class="flinks">
+          <a class="yt" href="#"><span class="ico" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 7.5v9l7.5-4.5L9 7.5Z"/></svg></span>يوتيوب · محمد ناجح</a>
+          <a class="fb" href="#"><span class="ico" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6c-.3 0-1.3-.1-2.45-.1-2.4 0-4.05 1.5-4.05 4.2v2.2H7.5V13h2.7v8h3.3Z"/></svg></span>فيسبوك · محمد ناجح</a>
+          <a class="wa" href="https://wa.me/201114840373" target="_blank" rel="noopener"><span class="ico" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.3A10 10 0 1 0 12 2Z"/></svg></span>واتساب · 01114840373</a>
+        </div>
+      </div>
+      <span class="fsep" aria-hidden="true"></span>
+      <div class="fpage">
+        <b>٢٦</b>
+        <span>سبتمبر</span>
+      </div>
+    </div>
+
+    <div class="foot-nav">
+      <span class="fl">
+        <a href="curriculum-map.html">خريطة المنهج</a>
+        <a href="lesson-1-1.html">مذكّرة ١-١</a>
+        <a href="lesson-1-2.html">مذكّرة ١-٢</a>
+        <a href="questions-1-1.html">بنك الأسئلة</a>
+        <a href="Lesson-1-1.pdf">PDF الدرس ١-١</a>
+        <a href="Ben-Nagah-Bakalorya.pdf">PDF المذكّرة</a>
+        <a href="Programming-ArtificialIntelligence-Ar-EB-part1.pdf">PDF الكتاب المدرسي</a>
+      </span>
+      <span>© ٢٠٢٦ بن ناجح — كل الحقوق محفوظة.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ الدوك السفلي — موبايل ═══ -->
+<nav class="dock" id="dock" aria-label="تنقّل سريع">
+  <ul>
+    <li><a href="#how" data-spy="how">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5V5.5Z"/></svg>
+      إزاي بتشتغل</a></li>
+    <li><a href="#courses" data-spy="courses">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M8 9h8M8 13h5"/></svg>
+      الوحدات</a></li>
+    <li><a href="#reviews" data-spy="reviews">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.8 2.5 5.1 5.6.8-4 3.9 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4-3.9 5.6-.8L12 3.8Z"/></svg>
+      الآراء</a></li>
+    <li><a class="d-cta" href="#app">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v11"/><path d="m7.5 10 4.5 4.5L16.5 10"/><path d="M4.5 19.5h15"/></svg>
+      التطبيق</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ القارئ: بيفتح أي درس جوّه المنصّة من غير ما تسيب الصفحة ═══ -->
+<div class="reader" id="reader" hidden>
+  <div class="reader-scrim" data-rclose></div>
+  <div class="reader-shell" role="dialog" aria-modal="true" aria-labelledby="readerTitle">
+    <header class="reader-bar">
+      <span class="reader-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <h2 class="reader-title" id="readerTitle">…</h2>
+      <div class="reader-tabs" id="readerTabs" role="tablist" aria-label="محتوى الوحدة"></div>
+      <button class="reader-close" type="button" data-rclose aria-label="اقفل القارئ">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </header>
+
+    <div class="reader-body">
+      <div class="reader-load" id="readerLoad">
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>بنفتح الدرس…</span>
+      </div>
+      <iframe id="readerFrame" title="محتوى الدرس" loading="lazy"></iframe>
+    </div>
+
+    <div class="reader-foot">
+      <span>بتقرا جوّه منصّة بن ناجح</span>
+      <a id="readerNewTab" href="#" target="_blank" rel="noopener">افتح في تبويب منفصل ↗</a>
+    </div>
+  </div>
+</div>
+
+<script src="assets/app.js" defer></script>
+
+</body>
+</html>

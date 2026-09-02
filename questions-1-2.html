@@ -1,0 +1,3490 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>كتاب الأسئلة · الدرس ١-١</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Rakkas&family=Marhey:wght@300..700&family=Tajawal:wght@300;400;500;700;800&family=Aref+Ruqaa:wght@400;700&display=swap">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   مذكرة البكالوريا المصرية — الوحدة التمهيدية
+   لوحة الألوان: ورق عاجي دافئ + حبر نيلي + ٥ ألوان أقلام فسفورية
+   ═══════════════════════════════════════════════════════════ */
+
+:root{
+  /* الورق والحبر */
+  --paper:      #FFFCF2;
+  --paper-2:    #FBF5E4;
+  --rule:       #DCE6F2;
+  --ink:        #1E2A46;
+  --ink-soft:   #5C6683;
+  --ink-faint:  #98A0B6;
+  --desk:       #C9C4B4;
+  --desk-2:     #B7B2A1;
+
+  /* أقلام التحديد */
+  --sun:        #FFC93C;
+  --sun-ink:    #6B4B00;
+  --berry:      #FF4D6D;
+  --berry-ink:  #7A0C24;
+  --mint:       #00C2A8;
+  --mint-ink:   #005247;
+  --violet:     #7A5CFF;
+  --violet-ink: #2E1C7A;
+  --sky:        #2FA8FF;
+  --sky-ink:    #0A4C7D;
+
+  --shadow: 0 1px 2px rgba(30,42,70,.06), 0 12px 28px rgba(30,42,70,.10);
+
+  /* ┌──────────────────────────────────────────────────┐
+     │  صورتك هنا 👇                                     │
+     │  حطّ صورتك جنب الملف باسم my-photo.jpg            │
+     │  أو غيّر الاسم في السطر اللي تحت وخلاص.           │
+     └──────────────────────────────────────────────────┘ */
+  --photo: url("my-photo.jpg");
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; }
+
+body{
+  margin:0;
+  background:var(--desk);
+  color:var(--ink);
+  font-family:"Tajawal","Segoe UI",Tahoma,sans-serif;
+}
+
+/* ── المكتب: خلفية كتان خفيفة تحت الورق ───────────────────── */
+.desk{
+  direction:rtl;
+  min-height:100%;
+  padding:34px 16px 60px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.16) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(0deg,  rgba(0,0,0,.035) 0 1px, transparent 1px 4px),
+    linear-gradient(160deg, var(--desk) 0%, var(--desk-2) 100%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:34px;
+}
+
+/* ═══ الورقة ═══════════════════════════════════════════════ */
+.sheet{
+  position:relative;
+  width:210mm;
+  min-height:297mm;
+  max-width:100%;
+  background:
+    /* شبكة نقطية باهتة */
+    radial-gradient(circle at 1px 1px, rgba(30,42,70,.055) 1px, transparent 1.6px) 0 0/5mm 5mm,
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+  box-shadow:var(--shadow);
+  border-radius:2px;
+  padding:15mm 24mm 13mm 16mm;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+/* حافة مثنية خفيفة تدي إحساس الورق المطبوع */
+.sheet::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(30,42,70,.07), inset 0 22px 34px -30px rgba(30,42,70,.35);
+  border-radius:2px;
+}
+
+/* خط الهامش الأحمر + خرم الأجندة على اليمين */
+.sheet::before{
+  content:"";
+  position:absolute;
+  top:0; bottom:0; right:19mm;
+  width:1.4px;
+  background:linear-gradient(180deg, transparent 0, rgba(255,77,109,.55) 6%, rgba(255,77,109,.55) 94%, transparent 100%);
+}
+.holes{
+  position:absolute; top:0; bottom:0; right:6mm;
+  width:8mm;
+  display:flex; flex-direction:column; justify-content:center; gap:42mm;
+  z-index:2;
+}
+.holes i{
+  display:block; width:6mm; height:6mm; border-radius:50%;
+  background:var(--desk-2);
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.28), 0 1px 0 rgba(255,255,255,.7);
+}
+
+/* ═══ شرائط الواشي تيب ═════════════════════════════════════ */
+.tape{
+  position:absolute;
+  height:13mm;
+  opacity:.92;
+  z-index:3;
+  box-shadow:0 2px 5px rgba(30,42,70,.16);
+  mask-image:linear-gradient(90deg, transparent 0 2px, #000 2px calc(100% - 2px), transparent calc(100% - 2px));
+}
+.tape::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,0) 55%);
+}
+.tape.stripe-sun{
+  background:repeating-linear-gradient(-58deg, var(--sun) 0 7px, #FFE49A 7px 14px);
+}
+.tape.stripe-mint{
+  background:repeating-linear-gradient(-58deg, var(--mint) 0 6px, #9DF0E4 6px 12px);
+}
+.tape.dot-berry{
+  background:radial-gradient(circle at 4px 4px, rgba(255,255,255,.85) 1.8px, transparent 2px) 0 0/9px 9px, var(--berry);
+}
+.tape.plain-sky{ background:var(--sky); }
+
+.t-a{ top:-4mm;  right:26mm; width:46mm; transform:rotate(-3.2deg); }
+.t-b{ top:-5mm;  left:18mm;  width:34mm; transform:rotate(4.6deg); }
+.t-c{ bottom:8mm;left:-6mm;  width:38mm; transform:rotate(-6deg); }
+.sheet:not(.sheet--cover) .t-c{ bottom:36mm; }
+.t-d{ top:112mm; left:-9mm;  width:30mm; transform:rotate(8deg); }
+
+/* ═══ الترويسة ═════════════════════════════════════════════ */
+.eyebrow{
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:"Marhey",sans-serif; font-weight:600;
+  font-size:10.5pt; letter-spacing:.045em;
+  color:var(--violet-ink);
+  background:#EFEAFF;
+  border:1.6px solid var(--violet);
+  border-radius:999px;
+  padding:3px 13px;
+  transform:rotate(-1deg);
+}
+.eyebrow b{ color:var(--violet); font-weight:700; }
+
+.masthead{ position:relative; z-index:4; margin-bottom:5.5mm; }
+
+.title{
+  font-family:"Lalezar",cursive,sans-serif;
+  font-size:34pt;
+  line-height:1.05;
+  margin:7px 0 0;
+  color:var(--ink);
+  text-wrap:balance;
+  letter-spacing:-.005em;
+}
+.title .pop{
+  color:var(--berry);
+  position:relative;
+  display:inline-block;
+  text-shadow:2.5px 2.5px 0 var(--sun);
+}
+.subtitle{
+  font-family:"Marhey",sans-serif;
+  font-weight:400;
+  font-size:11pt;
+  color:var(--ink-soft);
+  margin:5px 0 0;
+}
+.rule-doodle{ display:block; margin:7px 0 0; color:var(--sky); }
+
+/* ═══════════════════════════════════════════════════════════
+   الصفحات الداخلية — نظام تحريري مرسوم، مش كروت
+   ═══════════════════════════════════════════════════════════ */
+section{ position:relative; z-index:4; margin-bottom:3mm; }
+
+p{ margin:0 0 5px; font-size:9.6pt; line-height:1.5; color:var(--ink); max-width:66ch; }
+strong,b{ font-weight:800; }
+
+/* ── الترويسة: رقم شبح ضخم ورا العنوان ─────────────────── */
+.masthead{ position:relative; z-index:4; margin-bottom:4.5mm; }
+.ghost{
+  position:absolute; z-index:-1;
+  top:-4mm; left:1mm; right:auto;
+  font-family:"Rakkas","Lalezar",serif;
+  font-size:88pt; line-height:1;
+  color:transparent;
+  -webkit-text-stroke:2.4px rgba(122,92,255,.24);
+  pointer-events:none; user-select:none;
+}
+.title{
+  font-family:"Rakkas","Lalezar",cursive,serif; font-weight:400;
+  font-size:33pt; line-height:1.04; margin:6px 0 0;
+  color:var(--ink); text-wrap:balance;
+}
+.title .pop{
+  color:var(--berry);
+  text-shadow:3px 3px 0 var(--sun);
+}
+.subtitle{
+  font-family:"Marhey",sans-serif; font-weight:400;
+  font-size:10.5pt; color:var(--ink-soft); margin:5px 0 0;
+}
+.swash{ display:block; margin:5px 0 0; color:var(--sky); }
+
+/* ── عنوان القسم: شريط منشور بأطراف مشقوقة ─────────────── */
+.ribbon{
+  display:inline-flex; align-items:center; gap:9px;
+  margin:0 0 8px;
+  padding:4px 22px 5px 26px;
+  clip-path:polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%, 13px 50%);
+  font-family:"Lalezar",cursive,sans-serif; font-weight:400;
+  font-size:14pt; line-height:1.3;
+  color:#fff;
+  transform:rotate(-.9deg);
+}
+.ribbon i{
+  font-family:"Marhey",sans-serif; font-style:normal; font-weight:700;
+  font-size:11pt; opacity:.72;
+}
+.r-sun{    background:var(--sun);    color:var(--sun-ink); }
+.r-violet{ background:var(--violet); }
+.r-berry{  background:var(--berry); }
+.r-sky{    background:var(--sky); }
+.r-mint{   background:var(--mint);   color:#03332C; }
+
+/* ── الفقرة الافتتاحية ─────────────────────────────────── */
+.lede{
+  font-family:"Marhey",sans-serif; font-weight:500;
+  font-size:10.8pt; line-height:1.52;
+  color:var(--ink); max-width:60ch;
+  margin:0 0 6px;
+}
+
+/* ── التحديد بالقلم الفسفوري ───────────────────────────── */
+.hl{
+  background-repeat:no-repeat;
+  background-size:100% .78em;
+  background-position:0 .62em;
+  padding:0 .18em;
+  -webkit-box-decoration-break:clone; box-decoration-break:clone;
+  font-weight:700;
+}
+.hl-sun{   background-image:linear-gradient(100deg, rgba(255,201,60,0) 0 1%, rgba(255,201,60,.85) 1% 99%, rgba(255,201,60,0) 99%); }
+.hl-mint{  background-image:linear-gradient(100deg, rgba(0,194,168,0) 0 1%,  rgba(0,194,168,.42) 1% 99%, rgba(0,194,168,0) 99%); }
+.hl-berry{ background-image:linear-gradient(100deg, rgba(255,77,109,0) 0 1%, rgba(255,77,109,.34) 1% 99%, rgba(255,77,109,0) 99%); }
+.hl-sky{   background-image:linear-gradient(100deg, rgba(47,168,255,0) 0 1%, rgba(47,168,255,.34) 1% 99%, rgba(47,168,255,0) 99%); }
+.circled{ position:relative; padding:0 .3em; font-weight:800; white-space:nowrap; }
+.circled::before{
+  content:""; position:absolute; inset:-5px -4px -6px -4px;
+  border:2.2px solid var(--berry);
+  border-radius:52% 48% 45% 55% / 58% 42% 58% 42%;
+  transform:rotate(-1.6deg); opacity:.85;
+}
+
+/* ── الملاحظة: حقل لون بحافة غير منتظمة + شارة بارزة ───── */
+.callout{
+  position:relative;
+  margin:7px 0 7px 0;
+  padding:8px 44px 8px 14px;
+  border-radius:26px 8px 24px 10px / 20px 26px 10px 22px;
+  transform:rotate(-.5deg);
+}
+.callout p{ margin:0; font-size:9.2pt; line-height:1.48; max-width:none; }
+.callout .badge{
+  position:absolute; top:50%; right:-13px; left:auto;
+  transform:translateY(-50%) rotate(-8deg);
+  width:34px; height:34px;
+  display:grid; place-items:center;
+  border-radius:50%;
+  font-size:15pt; line-height:1;
+  box-shadow:2px 3px 0 rgba(30,42,70,.18);
+}
+.callout .lbl{
+  display:block;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:9pt;
+  margin-bottom:1px;
+}
+.c-sky{   background:#E8F4FF; } .c-sky .badge{   background:var(--sky);    color:#fff; }  .c-sky .lbl{   color:var(--sky-ink); }
+.c-mint{  background:#E4FAF6; } .c-mint .badge{  background:var(--mint);   color:#03332C; }.c-mint .lbl{  color:var(--mint-ink); }
+.c-berry{ background:#FFECF0; } .c-berry .badge{ background:var(--berry);  color:#fff; }  .c-berry .lbl{ color:var(--berry-ink); }
+
+/* ملاحظة هامش صغيرة بخط اليد */
+.aside-note{
+  font-family:"Marhey",sans-serif; font-size:8.2pt; line-height:1.45;
+  color:var(--ink-soft);
+  padding-right:16px; position:relative;
+  margin:5px 0 0; max-width:none;
+}
+.aside-note::before{
+  content:"✳"; position:absolute; right:0; top:0; color:var(--berry); font-size:9pt;
+}
+
+/* ── المواجهة: نصفين بحدّ ممزّق ─────────────────────────── */
+.versus{
+  position:relative;
+  display:grid; grid-template-columns:1fr 1fr;
+  margin-top:7px;
+  min-height:40mm;
+}
+.vside{ padding:10px 14px 10px; }
+.vside h4{
+  margin:0 0 7px;
+  font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:12.5pt;
+}
+.vside ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:5px; }
+.vside li{ font-size:9pt; line-height:1.4; padding-right:17px; position:relative; }
+.vside li::before{
+  position:absolute; right:0; top:1px; font-size:9pt; font-weight:800;
+}
+.v-old{
+  background:
+    repeating-linear-gradient(-45deg, rgba(92,102,131,.07) 0 5px, transparent 5px 10px),
+    #F2F1EC;
+  clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%, 4% 74%, 0 52%, 4% 28%);
+  color:var(--ink-soft);
+}
+.v-old h4{ color:var(--ink-soft); }
+.v-old li::before{ content:"✕"; color:var(--ink-faint); }
+.v-new{
+  background:linear-gradient(150deg, #6B4BFF 0%, var(--violet) 55%, #9B85FF 100%);
+  color:#fff;
+  clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%, 3% 72%, 7% 50%, 3% 26%);
+  box-shadow:5px 6px 0 rgba(46,28,122,.22);
+}
+.v-new h4{ color:#fff; }
+.v-new li::before{ content:"✔"; color:#FFE07A; }
+.vmark{
+  position:absolute; z-index:3;
+  top:50%; left:50%; transform:translate(-50%,-50%) rotate(-8deg);
+  width:34px; height:34px;
+  display:grid; place-items:center;
+  border-radius:50%;
+  background:var(--ink); color:var(--sun);
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:10.5pt;
+  box-shadow:0 0 0 4px var(--paper), 3px 4px 0 4px rgba(30,42,70,.18);
+}
+
+/* ── تقاطع الطرق: أربع ميداليات ────────────────────────── */
+.crossroads{ position:relative; margin-top:9px; }
+.roads{ position:absolute; inset:0; width:100%; height:100%; z-index:1; }
+.hub{
+  position:absolute; z-index:3;
+  top:50%; left:50%; transform:translate(-50%,-50%) rotate(-4deg);
+  width:22mm; height:22mm;
+  display:grid; place-items:center; text-align:center;
+  border-radius:50%;
+  background:var(--paper);
+  border:2.4px dashed var(--ink);
+  font-family:"Lalezar",cursive,sans-serif; font-size:11.5pt; color:var(--ink);
+  line-height:1.15;
+}
+.meds{
+  position:relative; z-index:2;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:6mm 26mm;
+}
+.med{ margin:0; display:flex; flex-direction:column; align-items:center; text-align:center; }
+.med .disc{
+  width:25mm; height:25mm;
+  display:grid; place-items:center;
+  border-radius:50%;
+  box-shadow:4px 5px 0 rgba(30,42,70,.16);
+}
+.med .disc svg{ width:15.5mm; height:15.5mm; }
+.med figcaption{
+  margin-top:-6px; position:relative; z-index:2;
+  padding:3px 15px 4px;
+  clip-path:polygon(0 0, 100% 0, calc(100% - 9px) 50%, 100% 100%, 0 100%, 9px 50%);
+  font-family:"Lalezar",cursive,sans-serif; font-size:11.5pt; color:#fff;
+  transform:rotate(-1.2deg);
+}
+.med p{ margin:4px 0 0; font-size:8.2pt; line-height:1.4; max-width:44mm; color:var(--ink-soft); }
+.m1 .disc{ background:#FFE1E7; } .m1 figcaption{ background:var(--berry); }
+.m2 .disc{ background:#DCEEFF; } .m2 figcaption{ background:var(--sky); }
+.m3 .disc{ background:#D6F7F1; } .m3 figcaption{ background:var(--mint); color:#03332C; }
+.m4 .disc{ background:#E9E2FF; } .m4 figcaption{ background:var(--violet); }
+
+/* ── طبقات المواد ──────────────────────────────────────── */
+.strata{ margin-top:8px; display:flex; flex-direction:column; }
+.stratum + .stratum{ margin-top:-14px; }
+.stratum{
+  position:relative;
+  min-height:14mm;
+  display:flex; align-items:center; gap:11px;
+  padding:9px 16px 7px 14px;
+}
+.stratum .wave{ position:absolute; inset:0; width:100%; height:100%; z-index:0; }
+.stratum > *{ position:relative; z-index:1; }
+.stratum .tier{
+  flex:0 0 auto;
+  font-family:"Rakkas",serif; font-size:19pt; line-height:1;
+  opacity:.55;
+}
+.stratum h5{
+  margin:0 0 2px;
+  font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:11.5pt;
+}
+.stratum span{ display:block; font-size:8.6pt; line-height:1.42; }
+.st1 .tier,.st1 h5{ color:var(--sun-ink); }   .st1 span{ color:#7A5E14; }
+.st2 .tier,.st2 h5{ color:#fff; }             .st2 span{ color:rgba(255,255,255,.9); }
+.st3 .tier,.st3 h5{ color:var(--mint-ink); }  .st3 span{ color:#0B5D53; }
+
+/* ── مسار المحاولتين ───────────────────────────────────── */
+.attempts{ position:relative; margin-top:7px; padding-top:8mm; }
+.track-svg{ position:absolute; top:0; left:0; width:100%; height:13mm; z-index:1; }
+.stops{ position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr); gap:11px; }
+.stop{ text-align:center; }
+.stop .pin{
+  width:27px; height:27px; margin:0 auto 6px;
+  display:grid; place-items:center;
+  border-radius:50%;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:11pt;
+  color:#fff;
+  box-shadow:0 0 0 4px var(--paper);
+}
+.stop h5{ margin:0 0 3px; font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:12pt; color:var(--ink); }
+.stop p{ margin:0; font-size:8.2pt; line-height:1.4; color:var(--ink-soft); max-width:none; }
+.stop:nth-child(1) .pin{ background:var(--sky); }
+.stop:nth-child(2) .pin{ background:var(--sun); color:var(--sun-ink); }
+.stop:nth-child(3) .pin{ background:var(--mint); color:#03332C; }
+
+/* ── القصاصة الممزّقة: التشيك ليست ─────────────────────── */
+.slip{
+  position:relative;
+  margin-top:10px;
+  padding:11px 16px 13px 14px;
+  background:linear-gradient(180deg,#FFFDF4 0%, #FDF6DF 100%);
+  box-shadow:3px 6px 16px rgba(30,42,70,.18);
+  transform:rotate(-.8deg);
+  clip-path:polygon(0 0, 100% 0, 100% 96%, 92% 100%, 84% 96%, 76% 100%, 68% 96%, 60% 100%,
+                    52% 96%, 44% 100%, 36% 96%, 28% 100%, 20% 96%, 12% 100%, 4% 96%, 0 100%);
+}
+.slip::before{                       /* خط الهامش الأحمر */
+  content:""; position:absolute; top:0; bottom:0; right:9mm;
+  width:1.2px; background:rgba(255,77,109,.5);
+}
+.clip-art{ position:absolute; top:-9px; left:24px; z-index:5; color:var(--ink-faint); transform:rotate(6deg); }
+.slip h5{
+  margin:0 0 8px;
+  font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:12pt; color:var(--ink);
+}
+.todo{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px; }
+.todo li{
+  display:grid; grid-template-columns:auto 1fr; gap:9px; align-items:start;
+  font-size:9pt; line-height:1.4; color:var(--ink);
+}
+.todo li svg{ margin-top:2px; flex:0 0 auto; color:var(--ink); }
+
+/* ── الاقتباس الختامي ──────────────────────────────────── */
+.pullquote{
+  position:relative;
+  margin:4px 0 0;
+  padding:0 34px 0;
+  text-align:center;
+}
+.pullquote .qmark{
+  position:absolute; top:-14px; right:6px;
+  font-family:"Rakkas",serif; font-size:52pt; line-height:1;
+  color:rgba(255,201,60,.55);
+  pointer-events:none;
+}
+.pullquote q{
+  font-family:"Aref Ruqaa",serif; font-size:12pt; line-height:1.62;
+  color:var(--violet-ink); quotes:none;
+}
+.pullquote small{
+  display:block; margin-top:6px;
+  font-family:"Marhey",sans-serif; font-size:8.6pt; color:var(--ink-faint);
+}
+.brush{ display:block; margin:2px auto 0; color:var(--sun); }
+
+/* ── خربشات الهامش ─────────────────────────────────────── */
+.marg{ position:absolute; z-index:4; pointer-events:none; }
+
+
+/* ═══ ترقيم الصفحة ═════════════════════════════════════════ */
+.pagenum{
+  position:absolute;
+  bottom:9mm; left:16mm;
+  z-index:5;
+  display:flex; align-items:center; gap:9px;
+}
+.pagenum .stamp{
+  width:34px; height:34px;
+  display:grid; place-items:center;
+  font-family:"Lalezar",cursive,sans-serif; font-size:17pt;
+  color:var(--berry);
+  border:2.4px solid var(--berry);
+  border-radius:49% 51% 55% 45% / 53% 47% 53% 47%;
+  transform:rotate(-7deg);
+  background:rgba(255,255,255,.7);
+}
+.pagenum .of{
+  font-family:"Marhey",sans-serif; font-size:9.5pt; color:var(--ink-faint); letter-spacing:.04em;
+}
+.footnote{
+  position:absolute; bottom:11mm; right:24mm; z-index:5;
+  font-family:"Marhey",sans-serif; font-size:9pt; color:var(--ink-faint);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   الغــلاف — بوستر تايبوجرافي
+   ═══════════════════════════════════════════════════════════ */
+.sheet--cover{
+  padding:0;
+  display:flex; flex-direction:column;
+}
+.sheet--cover::before{ display:none; }   /* الغلاف من غير خط هامش */
+
+/* إطار الهوية: خطّان + مربعات على الأركان */
+.frame{
+  position:absolute; inset:9mm; z-index:2; pointer-events:none;
+  border:2.4px solid var(--ink);
+  border-radius:3px;
+}
+.frame::before{
+  content:"";
+  position:absolute; inset:3.4mm;
+  border:1.1px solid rgba(30,42,70,.42);
+  border-radius:2px;
+}
+.corner{
+  position:absolute; z-index:3;
+  width:6.4mm; height:6.4mm;
+  border:2.2px solid var(--ink);
+  background:var(--sun);
+  transform:rotate(45deg);
+}
+.c-tr{ top:6mm;    right:6mm; }
+.c-tl{ top:6mm;    left:6mm; }
+.c-br{ bottom:6mm; right:6mm; }
+.c-bl{ bottom:6mm; left:6mm; }
+
+/* أثر كوباية شاي باهت */
+.stain{
+  position:absolute; z-index:1; pointer-events:none;
+  width:40mm; height:40mm; border-radius:50%;
+  bottom:24mm; left:15mm;
+  transform:rotate(12deg) scale(1.04,.93);
+  background:radial-gradient(circle,
+     rgba(146,102,44,0) 55%,
+     rgba(146,102,44,.18) 59%,
+     rgba(146,102,44,.09) 68%,
+     rgba(146,102,44,0) 73%);
+}
+
+/* ── جسم البوستر ─────────────────────────────────────────── */
+.poster{
+  position:relative; z-index:4;
+  flex:1;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:22mm 18mm 20mm;
+  text-align:center;
+}
+
+/* الدايرة المقصوصة اللي ورا الاسم */
+.stage{
+  position:relative;
+  width:139mm; max-width:100%;
+  aspect-ratio:1;
+  display:grid; place-items:center;
+}
+.burst{
+  position:absolute; inset:0;
+  border-radius:48% 52% 51% 49% / 51% 48% 52% 49%;
+  background:radial-gradient(circle at 42% 34%, #FFE9A6 0%, var(--sun) 58%, #FFAA10 100%);
+  border:2.8px solid var(--ink);
+  box-shadow:10px 11px 0 var(--berry), 10px 11px 0 2.8px var(--ink);
+  transform:rotate(-5deg);
+}
+/* نقط هافتون خفيفة على طرف الدايرة */
+.burst::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:inherit;
+  background:radial-gradient(circle at 1.5px 1.5px, rgba(30,42,70,.16) 1.4px, transparent 1.8px) 0 0/6px 6px;
+  -webkit-mask-image:radial-gradient(circle at 50% 50%, transparent 58%, #000 92%);
+  mask-image:radial-gradient(circle at 50% 50%, transparent 58%, #000 92%);
+  opacity:.85;
+}
+
+/* ── لوك-أب الاسم ────────────────────────────────────────── */
+.lockup{
+  position:relative; z-index:2;
+  margin:0;
+  display:flex; flex-direction:column; align-items:center;
+  line-height:.86;
+  transform:rotate(-2deg);
+  font-family:"Rakkas","Lalezar",cursive,serif;
+  font-weight:400;
+}
+.w-top{
+  font-size:86pt;
+  color:transparent;
+  -webkit-text-stroke:4px var(--ink);
+  text-shadow:7px 7px 0 rgba(255,255,255,.95);
+  margin-bottom:1mm;
+}
+.w-main{
+  font-size:150pt;
+  color:var(--ink);
+  text-shadow:
+     5px  5px 0 #fff,
+    17px 17px 0 var(--berry);
+}
+
+/* فاصل مرسوم */
+.ornament{ display:block; margin:10mm 0 0; color:var(--ink); }
+
+/* ── الصورة الدائرية ─────────────────────────────────────── */
+.avatar-tape{
+  position:relative; z-index:5;
+  width:29mm; height:8mm;
+  margin:9mm 0 -4mm;
+  transform:rotate(-7deg);
+  background:repeating-linear-gradient(-58deg, var(--mint) 0 6px, #9DF0E4 6px 12px);
+  box-shadow:0 2px 5px rgba(30,42,70,.18);
+  opacity:.94;
+}
+.avatar{
+  position:relative;
+  width:41mm; height:41mm;
+  border-radius:50%;
+  border:3px solid var(--ink);
+  box-shadow:7px 7px 0 var(--sky);
+  overflow:hidden;
+  background:#F4F1E7;
+}
+.avatar::before{            /* بيبان لو الصورة لسه مش موجودة */
+  content:"صورتك هنا";
+  position:absolute; inset:0;
+  display:grid; place-items:center; text-align:center; padding:8px;
+  font-family:"Marhey",sans-serif; font-size:9pt; line-height:1.7;
+  color:var(--ink-faint);
+}
+.avatar::after{             /* الصورة نفسها */
+  content:"";
+  position:absolute; inset:0;
+  background:var(--photo) center 24% / cover no-repeat;
+}
+
+/* ── التوقيع: المهندس + الفون ────────────────────────────── */
+.role{
+  display:flex; align-items:center; gap:11px;
+  margin:7mm 0 0;
+  font-family:"Marhey",sans-serif; font-weight:600; font-size:10pt;
+  color:var(--ink-soft);
+  max-width:none;
+}
+.role::before,.role::after{
+  content:""; width:24px; height:2px; background:var(--ink-faint);
+}
+.who{
+  margin:2mm 0 0;
+  font-family:"Rakkas","Lalezar",cursive,serif; font-weight:400;
+  font-size:30pt; line-height:1.2; color:var(--ink);
+}
+.phone{
+  display:inline-flex; align-items:center; gap:10px;
+  margin-top:6mm;
+  background:var(--ink); color:var(--paper);
+  border-radius:999px;
+  padding:8px 22px;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:13pt;
+  transform:rotate(-1deg);
+  box-shadow:4px 4px 0 rgba(30,42,70,.24);
+}
+.phone .wa{
+  width:23px; height:23px; flex:0 0 auto;
+  display:grid; place-items:center;
+  border-radius:50%; background:#25D366; color:#08351A;
+}
+.phone b{ font-variant-numeric:tabular-nums; letter-spacing:.14em; font-weight:700; }
+
+
+/* ═══ الطباعة ══════════════════════════════════════════════ */
+@page{ size:A4; margin:0; }
+@media print{
+  *,*::before,*::after{
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+  html,body{ background:#fff; }
+  .desk{ padding:0; gap:0; background:#fff; }
+  .sheet{
+    box-shadow:none; border-radius:0;
+    width:210mm; height:296.8mm; min-height:0;
+    break-after:page; page-break-after:always;
+    break-inside:avoid; page-break-inside:avoid;
+  }
+  .sheet:last-child{ break-after:auto; page-break-after:auto; }
+  .holes i{ background:#EDEDED; box-shadow:inset 0 0 0 1px #CFCFCF; }
+}
+
+/* ═══ الشاشات الصغيرة ══════════════════════════════════════ */
+@media screen and (max-width:820px){
+  .sheet{ width:100%; min-height:0; padding:16mm 14mm 20mm 10mm; }
+  .sheet::before{ right:11mm; }
+  .holes{ right:3mm; gap:26mm; }
+  .title{ font-size:32pt; }
+  .compare,.tracks,.steps{ grid-template-columns:1fr; }
+  .t-d{ display:none; }
+  .pagenum{ left:10mm; }
+  .footnote{ display:none; }
+
+  /* الغلاف على الموبايل */
+  .sheet--cover{ padding:0; }
+  .poster{ padding:16mm 10mm 14mm; }
+  .stage{ width:min(84vw,139mm); }
+  .w-top{ font-size:50pt; -webkit-text-stroke-width:2.6px; }
+  .w-main{ font-size:94pt; text-shadow:5px 5px 0 #fff, 10px 10px 0 var(--berry); }
+  .frame{ inset:6mm; }
+  .stain{ display:none; }
+}
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; }
+}
+/* ═══════════════════════════════════════════════════════════
+   مكوّنات خاصة بكتاب الأسئلة
+   ═══════════════════════════════════════════════════════════ */
+.title.long{ font-size:26.5pt; line-height:1.1; }
+.kicker-lesson{
+  display:inline-block;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:9pt;
+  color:#fff; background:var(--ink);
+  padding:3px 14px; border-radius:999px;
+  transform:rotate(-1deg);
+}
+
+/* ── لوحة التعليمات ──────────────────────────────────────── */
+.howto{
+  position:relative; margin:9px 0 0; padding:11px 46px 11px 16px;
+  background:linear-gradient(140deg,#FFF1BF 0%, #FFDE84 100%);
+  border-radius:26px 8px 24px 10px / 20px 26px 10px 22px;
+  transform:rotate(-.5deg);
+}
+.howto .pen{
+  position:absolute; top:50%; right:-14px; transform:translateY(-50%) rotate(-9deg);
+  width:36px; height:36px; display:grid; place-items:center;
+  border-radius:50%; background:var(--ink); color:var(--sun); font-size:15pt;
+  box-shadow:2px 3px 0 rgba(30,42,70,.22);
+}
+.howto .lbl{
+  display:block; font-family:"Marhey",sans-serif; font-weight:700;
+  font-size:8.6pt; color:var(--sun-ink); margin-bottom:3px;
+}
+.howto ol{ margin:0; padding:0 16px 0 0; }
+.howto li{ font-size:9pt; line-height:1.5; margin-bottom:1px; }
+
+/* ── فهرس أنواع الأسئلة ─────────────────────────────────── */
+.spread{ display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-top:9px; }
+.spread div{ border-radius:12px; padding:6px 9px 7px; text-align:center; }
+.spread b{ display:block; font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:9.5pt; margin-bottom:1px; }
+.spread span{ font-family:"Marhey",sans-serif; font-size:7.6pt; line-height:1.35; }
+.spread div:nth-child(6n+1){ background:#FFE1E7; color:var(--berry-ink); }
+.spread div:nth-child(6n+2){ background:#DCEEFF; color:var(--sky-ink); }
+.spread div:nth-child(6n+3){ background:#FFF0C4; color:var(--sun-ink); }
+.spread div:nth-child(6n+4){ background:#D6F7F1; color:var(--mint-ink); }
+.spread div:nth-child(6n+5){ background:#E9E2FF; color:var(--violet-ink); }
+.spread div:nth-child(6n+6){ background:var(--ink); color:var(--sun); }
+
+/* ── السؤال ─────────────────────────────────────────────── */
+.qlist{ margin-top:6px; }
+.q{
+  position:relative;
+  display:grid; grid-template-columns:auto 1fr; gap:9px;
+  align-items:start; margin-bottom:6px; padding-bottom:2px;
+}
+.q .num{
+  width:24px; height:24px; margin-top:1px;
+  display:grid; place-items:center;
+  border-radius:50% 48% 52% 50% / 50% 52% 48% 50%;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:9pt;
+  color:#fff; background:var(--ink);
+  box-shadow:2px 2px 0 rgba(30,42,70,.16);
+}
+.q .num.wide{ width:auto; min-width:24px; padding:0 7px; border-radius:999px; }
+.q .ask{ margin:0; font-size:9.4pt; line-height:1.5; max-width:none; }
+.q .ask .tag{
+  display:inline-block; margin-left:6px;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:7.6pt;
+  padding:1.5px 9px; border-radius:999px; vertical-align:middle;
+  border:1.5px solid;
+}
+.tag-why{ border-color:var(--berry);  color:var(--berry-ink);  background:#FFECF0; }
+.tag-def{ border-color:var(--sky);    color:var(--sky-ink);    background:#E8F4FF; }
+.tag-cmp{ border-color:var(--mint);   color:var(--mint-ink);   background:#E4FAF6; }
+.tag-app{ border-color:var(--violet); color:var(--violet-ink); background:#EFEAFF; }
+.tag-mk{  border-color:var(--sun);    color:var(--sun-ink);    background:#FFF0C4; }
+
+.g-berry  .q .num{ background:var(--berry); }
+.g-sun    .q .num{ background:var(--sun);   color:var(--sun-ink); }
+.g-mint   .q .num{ background:var(--mint);  color:#03332C; }
+.g-sky    .q .num{ background:var(--sky); }
+.g-violet .q .num{ background:var(--violet); }
+.g-ink    .q .num{ background:var(--ink); }
+
+/* ── سطور إجابة الطالب ──────────────────────────────────── */
+.ans{
+  --n:2; grid-column:2 / -1; margin:4px 0 0;
+  height:calc(var(--n) * 6.4mm);
+  background-image:repeating-linear-gradient(
+      to bottom, transparent 0 calc(6.4mm - 1.3px), var(--rule) calc(6.4mm - 1.3px) 6.4mm);
+}
+
+/* ── فراغ داخل الجملة (أكمل) ────────────────────────────── */
+.blank{
+  display:inline-block; min-width:74px;
+  border-bottom:1.7px dotted var(--ink-faint);
+  margin:0 4px; vertical-align:-2px;
+}
+.blank.sm{ min-width:48px; }
+.blank.lg{ min-width:104px; }
+
+/* ── اختيار من متعدد ────────────────────────────────────── */
+.pick{ grid-column:2 / -1; list-style:none; margin:5px 0 0; padding:0;
+       display:flex; flex-direction:column; gap:3px; }
+.pick li{
+  font-size:8.8pt; line-height:1.45;
+  padding:3.5px 30px 3.5px 9px; position:relative; border-radius:8px;
+  background:#fff; box-shadow:inset 0 0 0 1.4px rgba(30,42,70,.12);
+}
+.pick li b{
+  position:absolute; right:8px; top:3.5px;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:8.4pt; color:var(--ink-faint);
+}
+
+/* شريط «الإجابة: ▭» */
+.inline-ans{
+  grid-column:2 / -1; display:flex; align-items:center; gap:8px; margin-top:5px;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:8.4pt; color:var(--ink-soft);
+}
+.inline-ans i{
+  font-style:normal; display:inline-block;
+  min-width:26mm; height:7mm; border-radius:8px;
+  border:1.8px dashed var(--ink-faint); background:rgba(255,255,255,.6);
+}
+.inline-ans i.wide{ min-width:52mm; }
+
+/* ── صح وخطأ ────────────────────────────────────────────── */
+.tf{ grid-column:2 / -1; list-style:none; margin:5px 0 0; padding:0;
+     display:flex; flex-direction:column; gap:4px; }
+.tf li{
+  display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center;
+  font-size:8.8pt; line-height:1.45;
+  padding:4px 10px 5px; border-radius:9px;
+  background:#fff; box-shadow:inset 0 0 0 1.4px rgba(30,42,70,.12);
+}
+.tf li b{ font-family:"Marhey",sans-serif; font-weight:700; color:var(--ink-faint); margin-left:5px; }
+.tfbox{
+  width:13mm; height:6.4mm; border-radius:7px;
+  border:1.8px dashed var(--ink-faint); background:var(--paper);
+}
+.tf-key{
+  grid-column:2 / -1; margin:5px 0 0;
+  font-family:"Marhey",sans-serif; font-size:8pt; color:var(--ink-faint);
+}
+
+/* ── فقرة للقراءة ──────────────────────────────────────── */
+.para{
+  grid-column:2 / -1; margin:5px 0 0; padding:8px 13px 9px;
+  border-radius:13px 5px 13px 5px; background:#FFFDF6;
+  box-shadow:inset 0 0 0 1.6px rgba(30,42,70,.12);
+  font-size:8.9pt; line-height:1.75; color:var(--ink);
+}
+
+/* ── صندوق ○/× داخل الجملة ─────────────────────────────── */
+.ask .tfbox{
+  display:inline-block; width:13mm; height:5.4mm;
+  vertical-align:-1.6mm; margin-right:8px;
+}
+
+/* ── مطابقة وتصنيف ─────────────────────────────────────── */
+.match{ grid-column:2 / -1; margin-top:5px; }
+.match ol{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px; }
+.match ol li{
+  display:grid; grid-template-columns:auto 1fr auto; gap:9px; align-items:center;
+  font-size:8.8pt; line-height:1.45;
+  padding:4px 10px 5px; border-radius:9px;
+  background:#fff; box-shadow:inset 0 0 0 1.4px rgba(30,42,70,.12);
+}
+.match ol li em{
+  font-style:normal; font-family:"Marhey",sans-serif; font-weight:700;
+  font-size:8.4pt; color:var(--ink-faint);
+}
+.match .mbox{
+  width:11mm; height:6.4mm; border-radius:7px;
+  border:1.8px dashed var(--ink-faint); background:var(--paper);
+}
+.chips{ display:flex; flex-wrap:wrap; gap:5px; margin-top:6px; }
+.chips span{
+  padding:2.5px 11px; border-radius:999px;
+  font-family:"Marhey",sans-serif; font-weight:600; font-size:8.2pt;
+  border:1.8px solid; background:#fff;
+}
+.chips span:nth-child(5n+1){ border-color:var(--berry);  color:var(--berry-ink);  transform:rotate(-1.1deg); }
+.chips span:nth-child(5n+2){ border-color:var(--sky);    color:var(--sky-ink);    transform:rotate(.8deg); }
+.chips span:nth-child(5n+3){ border-color:var(--mint);   color:var(--mint-ink);   transform:rotate(-.6deg); }
+.chips span:nth-child(5n+4){ border-color:var(--violet); color:var(--violet-ink); transform:rotate(1deg); }
+.chips span:nth-child(5n+5){ border-color:var(--sun);    color:var(--sun-ink);    transform:rotate(-.8deg); }
+
+/* ── جدول للحل ─────────────────────────────────────────── */
+.gridtab{
+  grid-column:2 / -1; width:100%; margin-top:6px;
+  border-collapse:separate; border-spacing:0;
+  font-size:8.6pt;
+}
+.gridtab th{
+  font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:10pt;
+  padding:4px 8px 5px; text-align:right; color:var(--ink);
+  background:#FFF0C4; border:1.6px solid rgba(30,42,70,.18);
+}
+.gridtab td{
+  height:8.5mm; padding:2px 8px;
+  border:1.6px solid rgba(30,42,70,.14);
+  background:#fff;
+}
+.gridtab td.lead{
+  background:#F7F5EE; font-family:"Marhey",sans-serif; font-weight:600;
+  font-size:8.2pt; color:var(--ink-soft); width:38%;
+}
+
+/* ── الأسئلة المنقولة من الكتاب المدرسي ─────────────────── */
+.bookbar{
+  position:relative; margin:8px 0 2px; padding:9px 46px 10px 15px;
+  background:linear-gradient(140deg,#EDE7FF 0%, #DCD2FF 100%);
+  border-radius:24px 8px 22px 10px / 18px 24px 10px 20px;
+  transform:rotate(-.4deg);
+}
+.bookbar .seal{
+  position:absolute; top:50%; right:-14px; transform:translateY(-50%) rotate(-8deg);
+  width:36px; height:36px; display:grid; place-items:center;
+  border-radius:50%; background:var(--violet); color:#fff; font-size:15pt;
+  box-shadow:2px 3px 0 rgba(46,28,122,.24);
+}
+.bookbar .lbl{
+  display:block; font-family:"Marhey",sans-serif; font-weight:700;
+  font-size:8.6pt; color:var(--violet-ink); margin-bottom:2px;
+}
+.bookbar p{ margin:0; font-size:9pt; line-height:1.5; max-width:none; color:var(--ink); }
+
+.q.book{
+  padding:9px 12px 10px 11px; margin-bottom:7px;
+  border-radius:15px 6px 15px 6px;
+  background:#FBF8FF;
+  box-shadow:inset 0 0 0 1.8px rgba(122,92,255,.30);
+}
+.q.book .num{ background:var(--violet); color:#fff; }
+.q.book .src{
+  display:inline-block; margin-right:7px;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:7.4pt;
+  color:var(--violet-ink); background:#fff;
+  border:1.4px solid var(--violet); border-radius:999px; padding:1.5px 8px;
+  vertical-align:middle;
+}
+.q.book .pick li, .q.book .tf li, .q.book .match ol li{ background:#fff; }
+
+/* أسئلة فرعية مرقّمة */
+.subq{ grid-column:2 / -1; margin:5px 0 0; padding:0 16px 0 0; list-style-type:arabic-indic; }
+.subq li::marker{ font-family:"Marhey",sans-serif; font-weight:700; color:var(--ink-faint); font-size:8.4pt; }
+.subq li{ font-size:8.9pt; line-height:1.5; margin-bottom:2px; }
+.subq li .ans{ grid-column:auto; margin-top:3px; }
+
+/* ── بطاقة رصد الدرجة ───────────────────────────────────── */
+.score{
+  margin-top:10px; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center;
+  padding:10px 15px 11px; border-radius:16px; background:#fff;
+  box-shadow:inset 0 0 0 2px var(--ink), 4px 5px 0 rgba(30,42,70,.13);
+}
+.score h5{ margin:0 0 3px; font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:12pt; color:var(--ink); }
+.score p{ margin:0; font-size:8.4pt; line-height:1.45; color:var(--ink-soft); max-width:none; }
+.score .box{
+  width:30mm; height:17mm; display:grid; place-items:center;
+  border:2.4px dashed var(--ink); border-radius:12px 5px 12px 5px;
+  font-family:"Rakkas",serif; font-size:15pt; color:var(--ink-faint); background:var(--paper);
+}
+.score .box em{ font-style:normal; font-family:"Marhey",sans-serif; font-size:9.5pt; }
+
+/* ── شريط «تابع» ───────────────────────────────────────── */
+.contd{
+  display:inline-block; margin:0 0 6px;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:8.4pt;
+  color:var(--ink-faint); padding:2px 12px; border-radius:999px;
+  border:1.6px dashed var(--ink-faint);
+}
+
+@media screen and (max-width:820px){
+  .spread{ grid-template-columns:1fr 1fr; }
+  .score{ grid-template-columns:1fr; }
+  .score .box{ width:100%; }
+  .tf li{ grid-template-columns:1fr; }
+  .tfbox{ width:100%; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   شريط الفوتر المتكامل — بديل ترقيم الصفحة والفوتنوت والعلامة المائية
+   [ كتاب الأسئلة ]‏ ⋮ ‏[ بـــن نـــاجـــح + الحسابات ]‏ ⋮ ‏[ الصفحة ]
+   ═══════════════════════════════════════════════════════════ */
+.fbar{
+  position:absolute; right:24mm; left:16mm; bottom:7mm; z-index:6;
+  display:flex; align-items:stretch;
+  border-radius:15px 6px 15px 6px;
+  background:linear-gradient(178deg, #33426A 0%, var(--ink) 58%);
+  color:var(--paper);
+  box-shadow:4px 5px 0 rgba(30,42,70,.20);
+  transform:rotate(-.3deg);
+  overflow:hidden;
+}
+/* خط ذهبي رفيع على وش الشريط */
+.fbar::before{
+  content:""; position:absolute; top:0; right:0; left:0; height:2px;
+  background:linear-gradient(90deg, var(--berry), var(--sun) 38%, var(--mint) 68%, var(--sky));
+  opacity:.85;
+}
+
+/* الخلية اليمنى: اسم الكتاب */
+.fbar .fbook{
+  flex:0 0 auto; padding:6px 13px 6px 12px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.fbar .fbook b{
+  font-family:"Lalezar",cursive,sans-serif; font-weight:400;
+  font-size:11pt; line-height:1.15; color:var(--sun);
+}
+.fbar .fbook span{
+  font-family:"Marhey",sans-serif; font-weight:600; font-size:6.6pt;
+  line-height:1.3; color:rgba(255,252,242,.62); letter-spacing:.02em;
+}
+
+/* الخلية الوسطى: الاسم الممطوط + الحسابات */
+.fbar .fbrand{
+  flex:1 1 auto; min-width:0;
+  padding:4px 10px 5px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.1mm;
+  background:repeating-linear-gradient(-38deg, rgba(255,252,242,.05) 0 1.4px, transparent 1.4px 8px);
+}
+.fmarkrow{ display:flex; align-items:center; gap:18px; }
+.fmarkrow .fstar{
+  font-size:8pt; line-height:1; color:rgba(255,201,60,.72);
+}
+/* المطّ: كشيدة عربية أصلية (بتاخد عرض حقيقي) + شدّ أفقي خفيف */
+.fmark{
+  display:inline-block;
+  font-family:"Rakkas","Lalezar",serif; font-weight:400;
+  font-size:19pt; line-height:1.8;
+  letter-spacing:.03em;
+  color:var(--sun);
+  text-shadow:1.6px 1.6px 0 rgba(255,77,109,.55);
+  transform:scaleX(1.12);
+  transform-origin:center;
+  white-space:nowrap;
+}
+
+.flinks{ display:flex; align-items:center; gap:7px; white-space:nowrap; }
+.flinks .chip{
+  display:inline-flex; align-items:center; gap:4px;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:6.6pt;
+  color:rgba(255,252,242,.92);
+}
+.flinks .chip .ico{
+  width:12px; height:12px; flex:0 0 auto;
+  display:grid; place-items:center; border-radius:4px; color:#fff;
+}
+.flinks .yt .ico{ background:#FF0033; border-radius:4px; }
+.flinks .fb .ico{ background:#1877F2; border-radius:50%; }
+.flinks .wa .ico{ background:#25D366; border-radius:50%; color:#08351A; }
+.flinks .fdot{ width:2.6px; height:2.6px; border-radius:50%; background:rgba(255,252,242,.40); }
+
+/* الخلية اليسرى: رقم الصفحة */
+.fbar .fpage{
+  flex:0 0 auto; padding:5px 15px 6px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:var(--sun); color:var(--sun-ink);
+}
+.fbar .fpage b{
+  font-family:"Lalezar",cursive,sans-serif; font-weight:400;
+  font-size:18pt; line-height:1; color:#4A3200;
+}
+.fbar .fpage span{
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:6.4pt;
+  line-height:1.3; color:rgba(74,50,0,.72); letter-spacing:.05em;
+}
+
+/* فواصل مخرّمة زي التذكرة */
+.fsep{
+  flex:0 0 auto; width:1.8px; align-self:stretch;
+  background:repeating-linear-gradient(180deg, rgba(255,252,242,.42) 0 3px, transparent 3px 7px);
+}
+
+/* ── الغلاف: شرائح الحسابات جوّه البوستر ─────────────────── */
+.social-inline{
+  position:relative; z-index:5;
+  display:flex; align-items:center; gap:7px; margin-top:4mm;
+}
+.social-inline .chip{
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:8.4pt;
+  color:var(--ink); background:#fff;
+  border:1.8px solid var(--ink); border-radius:999px;
+  padding:3px 12px 4px;
+  box-shadow:2px 2px 0 rgba(30,42,70,.18);
+}
+.social-inline .chip .ico{
+  width:15px; height:15px; flex:0 0 auto;
+  display:grid; place-items:center; border-radius:5px; color:#fff;
+}
+.social-inline .yt .ico{ background:#FF0033; }
+.social-inline .fb .ico{ background:#1877F2; border-radius:50%; }
+
+/* شارة الهوية فوق الغلاف */
+.brandpill{
+  display:inline-flex; align-items:center; gap:8px;
+  margin-bottom:4mm;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:10pt;
+  letter-spacing:.14em;
+  color:var(--sun); background:var(--ink);
+  padding:4px 18px 5px; border-radius:999px;
+  transform:rotate(-1.2deg);
+  box-shadow:3px 3px 0 rgba(30,42,70,.22);
+}
+
+/* ── إعادة ضبط مقاسات الغلاف عشان يفضل جوه الـA4 ────────── */
+.sheet--cover .poster{ padding:14mm 16mm 12mm; }
+.stage{ width:116mm; }
+.w-top{ font-size:58pt; -webkit-text-stroke-width:3px; }
+.w-main{ font-size:76pt; text-shadow:4px 4px 0 #fff, 12px 12px 0 var(--berry); }
+.ornament{ margin-top:6mm; }
+.avatar-tape{ margin:6mm 0 -4mm; }
+.avatar{ width:36mm; height:36mm; }
+.role{ margin-top:5mm; }
+.who{ font-size:26pt; }
+.phone{ margin-top:4mm; }
+
+@media screen and (max-width:820px){
+  /* على الشاشات الضيقة الورقة بتقصر (min-height:0)، فلازم الشريط يبقى في التدفّق
+     بدل absolute وإلا هيركب على المحتوى */
+  .fbar{ position:static; transform:none; margin:9mm 0 0; flex-wrap:wrap; }
+  .fbar .fbrand{ order:3; flex:1 0 100%; }
+  .fsep{ display:none; }
+  .fmark{ font-size:17pt; transform:none; }
+  .flinks{ flex-wrap:wrap; justify-content:center; white-space:normal; }
+  .social-inline{ flex-wrap:wrap; justify-content:center; }
+}
+</style>
+</head>
+<body>
+
+<div class="desk" dir="rtl" lang="ar">
+
+<!-- ══════════════════ الغـــلاف ══════════════════ -->
+<article class="sheet sheet--cover">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape dot-berry t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <div class="frame" aria-hidden="true"></div>
+  <span class="corner c-tr" aria-hidden="true"></span>
+  <span class="corner c-tl" aria-hidden="true"></span>
+  <span class="corner c-br" aria-hidden="true"></span>
+  <span class="corner c-bl" aria-hidden="true"></span>
+
+  <div class="poster">
+    <span class="brandpill">✦ &nbsp;بــن نـاجـح&nbsp; ✦</span>
+    <div class="stage">
+      <span class="burst" aria-hidden="true"></span>
+      <h1 class="lockup">
+        <span class="w-top">كتاب</span>
+        <span class="w-main">الأسئلة</span>
+      </h1>
+    </div>
+
+    <svg class="ornament" width="196" height="18" viewBox="0 0 150 16" fill="none" aria-hidden="true">
+      <path d="M4 11c14-7 26 5 40-1s26 6 40 0 22 4 32 0" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+      <circle cx="75" cy="4" r="2.6" fill="currentColor"/>
+    </svg>
+
+    <span class="eyebrow" style="margin-top:6mm">الدرس ١-٢ &nbsp;<b>•</b>&nbsp; ١٠٠ سؤال بأنواعها &nbsp;<b>+</b>&nbsp; أسئلة الكتاب المدرسي</span>
+
+    <span class="avatar-tape" aria-hidden="true"></span>
+    <div class="avatar" role="img" aria-label="صورة المهندس محمد ناجح"></div>
+
+    <p class="role">مـهـنـدس</p>
+    <h2 class="who">محمد ناجح</h2>
+
+    <span class="phone">
+      <span class="wa" aria-hidden="true"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.18-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.14-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.91-2.21-.25-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.7.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.08-.12-.27-.2-.57-.34M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span>
+      <b>01114840373</b>
+    </span>
+    <div class="social-inline">
+      <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+      <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+    </div>
+  </div>
+</article>
+
+<!-- ══════════ صفحة ١ — أسئلة من كتاب المدرسة ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape dot-berry t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٥٠</span>
+    <span class="kicker-lesson">الأسئلة الرسمية &nbsp;•&nbsp; زي ما هي في الكتاب</span>
+    <h1 class="title long">أسئلة <span class="pop">من الكتاب</span></h1>
+    <p class="subtitle">منقولة حرفيًّا من كتاب المدرسة — الدرس ١-٢</p>
+    <svg class="swash" width="230" height="13" viewBox="0 0 230 13" fill="none" aria-hidden="true">
+      <path d="M3 8C30 2 44 11 72 6s36 6 64 0 34 7 62 1 26-3 26-3" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </header>
+
+  <section>
+    <div class="howto">
+      <span class="pen" aria-hidden="true">✎</span>
+      <span class="lbl">إزاي تستخدم الكتاب ده</span>
+      <ol>
+        <li>ذاكر الدرس من <strong>كتاب الشرح</strong> الأول، وبعدين افتح الكتاب ده وقلم في إيدك.</li>
+        <li>الأسئلة مقسّمة <strong>بأنواعها</strong> زي ما هي في الكتاب المدرسي: أكمل · صح وخطأ · اختيار · مطابقة · علّل · قارن · مقالي · اختبار.</li>
+        <li>القسم اللي عليه علامة <strong>📕</strong> ده <strong>منقول حرفيًّا من كتاب المدرسة</strong> — دي بالظبط الأسئلة اللي المنهج بيسألها.</li>
+      </ol>
+    </div>
+
+    <div class="spread">
+      <div><b>📕 الكتاب</b><span>ك١ – ك١٢</span></div>
+      <div><b>أكمل</b><span>١ – ١٤</span></div>
+      <div><b>صح وخطأ</b><span>١٥ – ٣٠</span></div>
+      <div><b>اختيار</b><span>٣١ – ٥٠</span></div>
+      <div><b>مطابقة</b><span>٥١ – ٥٨</span></div>
+      <div><b>عرّف</b><span>٥٩ – ٦٨</span></div>
+      <div><b>علّل</b><span>٦٩ – ٧٨</span></div>
+      <div><b>قارن</b><span>٧٩ – ٨٤</span></div>
+      <div><b>مقالي</b><span>٨٥ – ٩٢</span></div>
+      <div><b>مواقف</b><span>٩٣ – ٩٦</span></div>
+      <div><b>اختبار</b><span>٩٧ – ١٠٠</span></div>
+      <div><b>الإجمالي</b><span>١٠٠ + الكتاب</span></div>
+    </div>
+  </section>
+
+  <section class="g-violet">
+    <h2 class="ribbon r-violet"><i>★</i> أسئلة من كتاب المدرسة</h2>
+    <div class="bookbar">
+      <span class="seal" aria-hidden="true">📕</span>
+      <span class="lbl">مصدر الأسئلة</span>
+      <p>الأسئلة اللي في القسم ده <strong>منقولة حرفيًّا من كتاب المدرسة</strong> (البرمجة والذكاء الاصطناعي — الدرس ١-٢): المثال المحلول، والمطابقة، وتدرّب، وفكّر كمهندس، وطبّق ما تعلّمته، والتمارين، وسؤال نمط الامتحان. حلّها الأول — دي أهم حاجة.</p>
+    </div>
+
+    <div class="qlist">
+
+      <div class="q book"><span class="num wide">ك١</span>
+        <p class="ask">ضع أمام كل عبارة (أ – د) علامة ○ إذا كانت صحيحة أو × إذا كانت خاطئة.</p>
+        <ul class="tf">
+          <li><span><b>أ</b> التعلّم الآلي هو إحدى التقنيات التي تجعل الذكاء الاصطناعي يعمل.</span><span class="tfbox"></span></li>
+          <li><span><b>ب</b> التعلم العميق تقنية مختلفة تمامًا عن التعلّم الآلي.</span><span class="tfbox"></span></li>
+          <li><span><b>جـ</b> الذكاء الاصطناعي التوليدي تقنية تستخدم التعلم العميق لتوليد بيانات جديدة.</span><span class="tfbox"></span></li>
+          <li><span><b>د</b> الذكاء الاصطناعي والتعلّم الآلي لهما المعنى نفسه.</span><span class="tfbox"></span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>١</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٢ — أسئلة من كتاب المدرسة ══════════ -->
+<article class="sheet">
+  <span class="tape plain-sky t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٠٢</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; أسئلة من كتاب المدرسة</span>
+    <h1 class="title">أسئلة <span class="pop">من الكتاب</span></h1>
+    <p class="subtitle">منقولة حرفيًّا من كتاب المدرسة — الدرس ١-٢</p>
+  </header>
+
+  <section class="g-violet">
+    <span class="contd">تابع · أسئلة من كتاب المدرسة</span>
+    <div class="qlist">
+
+      <div class="q book"><span class="num wide">ك٢</span>
+        <p class="ask">طابق كل وصف (١ – ٣) مع المصطلح الأنسب من الخيارات أدناه (أ – جـ).</p>
+        <div class="match">
+          <ol>
+            <li><em>١</em><span>تقنية تتعلم الأنماط من البيانات لإجراء التنبؤات وإصدار الأحكام.</span><span class="mbox"></span></li>
+            <li><em>٢</em><span>تقنية تستخدم الشبكات العصبية لتعلّم أنماط معقدة.</span><span class="mbox"></span></li>
+            <li><em>٣</em><span>تقنية ذكاء اصطناعي تولّد بيانات جديدة مثل النصوص والصور.</span><span class="mbox"></span></li>
+          </ol>
+          <div class="chips">
+            <span>أ التعلّم الآلي</span>
+            <span>ب التعلم العميق</span>
+            <span>جـ الذكاء الاصطناعي التوليدي</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="q book"><span class="num wide">ك٣</span>
+        <p class="ask"><span class="src">📕 تدرّب ١</span> أجب عن الأسئلة التالية.</p>
+        <ol class="subq">
+          <li>ما المصطلح العام للأنظمة الحاسوبية القادرة على أداء مهام مثل التعلم والتعرف والتنبؤ وتوليد المحتوى؟<div class="ans" style="--n:1"></div></li>
+          <li>ما المصطلح الذي يصف فرع الذكاء الاصطناعي الذي تتعلم فيه النماذج أنماطًا من البيانات؟<div class="ans" style="--n:1"></div></li>
+          <li>ما المصطلح الذي يصف أسلوب التعلّم الآلي المعتمد على شبكات عصبية متعددة الطبقات؟<div class="ans" style="--n:1"></div></li>
+          <li>ما المصطلح الذي يصف أنظمة الذكاء الاصطناعي التي تنشئ محتوى جديدًا؟<div class="ans" style="--n:1"></div></li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٢</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٣ — أسئلة من كتاب المدرسة ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-mint t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٠٣</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; أسئلة من كتاب المدرسة</span>
+    <h1 class="title">أسئلة <span class="pop">من الكتاب</span></h1>
+    <p class="subtitle">منقولة حرفيًّا من كتاب المدرسة — الدرس ١-٢</p>
+  </header>
+
+  <section class="g-violet">
+    <span class="contd">تابع · أسئلة من كتاب المدرسة</span>
+    <div class="qlist">
+
+      <div class="q book"><span class="num wide">ك٤</span>
+        <p class="ask">من بين الخيارات التالية (أ – د)، اختر الخيار الذي يصف بشكل صحيح العلاقة بين الذكاء الاصطناعي والتعلّم الآلي والتعلم العميق والذكاء الاصطناعي التوليدي.</p>
+        <ul class="pick">
+          <li><b>أ</b> الذكاء الاصطناعي &gt; التعلم العميق &gt; التعلّم الآلي &gt; الذكاء الاصطناعي التوليدي</li>
+          <li><b>ب</b> التعلّم الآلي &gt; الذكاء الاصطناعي &gt; الذكاء الاصطناعي التوليدي &gt; التعلم العميق</li>
+          <li><b>جـ</b> الذكاء الاصطناعي &gt; التعلّم الآلي &gt; التعلم العميق &gt; الذكاء الاصطناعي التوليدي</li>
+          <li><b>د</b> الذكاء الاصطناعي التوليدي &gt; التعلم العميق &gt; التعلّم الآلي &gt; الذكاء الاصطناعي</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class="wide"></i></div>
+      </div>
+
+      <div class="q book"><span class="num wide">ك٥</span>
+        <p class="ask">من بين الخيارات التالية (أ – د)، اختر الخيار الذي <strong>لا يُعد</strong> مثالًا مناسبًا على الذكاء الاصطناعي التوليدي.</p>
+        <ul class="pick">
+          <li><b>أ</b> ChatGPT</li>
+          <li><b>ب</b> الذكاء الاصطناعي لتوليد الصور</li>
+          <li><b>جـ</b> مرشّح الرسائل المزعجة</li>
+          <li><b>د</b> الذكاء الاصطناعي لتوليد الصوت</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٣</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٤ — أسئلة من كتاب المدرسة ══════════ -->
+<article class="sheet">
+  <span class="tape dot-berry t-a"></span>
+  <span class="tape stripe-mint t-b"></span>
+  <span class="tape stripe-sun t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٠٤</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; أسئلة من كتاب المدرسة</span>
+    <h1 class="title">أسئلة <span class="pop">من الكتاب</span></h1>
+    <p class="subtitle">منقولة حرفيًّا من كتاب المدرسة — الدرس ١-٢</p>
+  </header>
+
+  <section class="g-violet">
+    <span class="contd">تابع · أسئلة من كتاب المدرسة</span>
+    <div class="qlist">
+
+      <div class="q book"><span class="num wide">ك٦</span>
+        <p class="ask"><span class="src">📕 فكّر كمهندس</span> ابحث ثم قرِّر.</p>
+        <ol class="subq">
+          <li><strong>استقصِ.</strong> ابحث عن مثال موثَّق واحد قدّم فيه ذكاء اصطناعي توليدي إجابة بدت صحيحة لكنها كانت خاطئة في الواقع («هلوسة»). سجّل مصدره واذكر أين وجدته.<div class="ans" style="--n:3"></div></li>
+          <li><strong>قيّم الأمر.</strong> اذكر فائدة واحدة ومخاطرة واحدة لاستخدام الذكاء الاصطناعي التوليدي في كتابة تقرير مدرسي — للطالب وللمعلّم.<div class="ans" style="--n:3"></div></li>
+          <li><strong>اتخذ قرارًا.</strong> هل ينبغي السماح باستخدام الذكاء الاصطناعي التوليدي في الواجبات المدرسية بمدرستك؟ أوصِ بقاعدة واحدة واذكر سببين.<div class="ans" style="--n:3"></div></li>
+        </ol>
+      </div>
+
+      <div class="q book"><span class="num wide">ك٧</span>
+        <p class="ask"><span class="src">📕 طبّق ما تعلّمته</span> يريد مزارع استخدام نظام ذكاء اصطناعي للتمييز بين صور المحاصيل السليمة والمصابة بالأمراض. اشرح نوع البيانات التي يحتاجها النظام للتدريب، وحدّد عاملًا واحدًا قد يجعل تنبؤه خاطئًا.</p>
+        <div class="ans" style="--n:5"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٤</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٥ — أسئلة من كتاب المدرسة ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape plain-sky t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٠٥</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; أسئلة من كتاب المدرسة</span>
+    <h1 class="title">أسئلة <span class="pop">من الكتاب</span></h1>
+    <p class="subtitle">منقولة حرفيًّا من كتاب المدرسة — الدرس ١-٢</p>
+  </header>
+
+  <section class="g-violet">
+    <span class="contd">تابع · أسئلة من كتاب المدرسة</span>
+    <div class="qlist">
+
+      <div class="q book"><span class="num wide">ك٨</span>
+        <p class="ask"><span class="src">📕 تمارين ٢</span> اقرأ الفقرة التالية وأجب: املأ الفراغات (١) – (٤).</p>
+        <div class="para">المجال العام الذي يضم أنظمة حاسوبية تنفّذ مهام مثل التعلم والتنبؤ والتعرف هو (١) <span class="blank lg"></span>. والفرع الذي تتعلم فيه النماذج أنماطًا من البيانات هو (٢) <span class="blank lg"></span>. ومن أساليبه المعتمدة على شبكات عصبية متعددة الطبقات (٣) <span class="blank lg"></span>. أما الأنظمة التي تنشئ محتوى جديدًا اعتمادًا على الأنماط المتعلَّمة فتسمى (٤) <span class="blank lg"></span>.</div>
+        <ol class="subq">
+          <li>املأ الفراغات (١) – (٤).<div class="ans" style="--n:1"></div></li>
+        </ol>
+      </div>
+
+      <div class="q book"><span class="num wide">ك٩</span>
+        <p class="ask"><span class="src">📕 تمارين ٣</span> صنّف كل مثال (١ – ٤) ضمن الفئة الأنسب: <strong>أ</strong> التعلّم الآلي · <strong>ب</strong> التعلم العميق · <strong>جـ</strong> الذكاء الاصطناعي التوليدي. ثم فسّر اختيارًا واحدًا.</p>
+        <ol class="subq">
+          <li>تصنيف الرسائل المزعجة تلقائيًّا<div class="ans" style="--n:1"></div></li>
+          <li>التعرّف على المشاة على الطريق في القيادة الذاتية<div class="ans" style="--n:1"></div></li>
+          <li>توليد صور جديدة تلقائيًّا من نص<div class="ans" style="--n:1"></div></li>
+          <li>التوصية بمنتجات بناءً على سجل مشتريات المستخدم<div class="ans" style="--n:1"></div></li>
+          <li><strong>فسّر اختيارك في واحد منها:</strong><div class="ans" style="--n:2"></div></li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٥</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٦ — أسئلة من كتاب المدرسة ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape dot-berry t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٠٦</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; أسئلة من كتاب المدرسة</span>
+    <h1 class="title">أسئلة <span class="pop">من الكتاب</span></h1>
+    <p class="subtitle">منقولة حرفيًّا من كتاب المدرسة — الدرس ١-٢</p>
+  </header>
+
+  <section class="g-violet">
+    <span class="contd">تابع · أسئلة من كتاب المدرسة</span>
+    <div class="qlist">
+
+      <div class="q book"><span class="num wide">ك١٠</span>
+        <p class="ask">من بين الخيارات التالية (أ – د)، اختر الخيار الذي يصف بشكل أنسب العلاقة بين المفاهيم الأربعة.</p>
+        <ul class="pick">
+          <li><b>أ</b> التعلّم الآلي نوع من الذكاء الاصطناعي، والتعلم العميق نوع من التعلّم الآلي.</li>
+          <li><b>ب</b> الذكاء الاصطناعي نوع من التعلّم الآلي، والذكاء الاصطناعي التوليدي نوع من الذكاء الاصطناعي.</li>
+          <li><b>جـ</b> التعلم العميق والتعلّم الآلي تقنيتان مختلفتان تمامًا.</li>
+          <li><b>د</b> الذكاء الاصطناعي التوليدي تقنية تولّد بيانات دون استخدام التعلّم الآلي.</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class="wide"></i></div>
+      </div>
+
+      <div class="q book"><span class="num wide">ك١١</span>
+        <p class="ask"><span class="src">📕 سؤال على نمط الامتحان</span> حلّل العلاقة بين الذكاء الاصطناعي والتعلّم الآلي والتعلم العميق والذكاء الاصطناعي التوليدي. في إجابتك: استخدم فكرة الفئات المتداخلة، واذكر مثالًا واحدًا على كل منها. <span class="tag tag-mk">٦ درجات</span></p>
+        <div class="ans" style="--n:6"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٦</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٧ — أسئلة من كتاب المدرسة ══════════ -->
+<article class="sheet">
+  <span class="tape plain-sky t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٠٧</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; أسئلة من كتاب المدرسة</span>
+    <h1 class="title">أسئلة <span class="pop">من الكتاب</span></h1>
+    <p class="subtitle">منقولة حرفيًّا من كتاب المدرسة — الدرس ١-٢</p>
+  </header>
+
+  <section class="g-violet">
+    <span class="contd">تابع · أسئلة من كتاب المدرسة</span>
+    <div class="qlist">
+
+      <div class="q book"><span class="num wide">ك١٢</span>
+        <p class="ask"><span class="src">📕 إجابة السؤال الرئيسي</span> ما هو الذكاء الاصطناعي، وكيف يرتبط التعلّم الآلي والتعلم العميق والذكاء الاصطناعي التوليدي ببعضهم البعض؟ أجب بكلماتك أنت.</p>
+        <div class="ans" style="--n:6"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="g-sun">
+    <h2 class="ribbon r-sun"><i>أولًا</i> أكمل بما هو مناسب</h2>
+    <div class="qlist">
+
+      <div class="q"><span class="num">١</span>
+        <p class="ask">المجال الذي يضم أنظمة حاسوبية تنفّذ مهام مثل التعلم والتنبؤ والتعرّف وتوليد المحتوى هو <span class="blank lg"></span>.</p>
+      </div>
+
+      <div class="q"><span class="num">٢</span>
+        <p class="ask">فرع الذكاء الاصطناعي الذي تتعلم فيه النماذج أنماطًا من البيانات هو <span class="blank lg"></span>.</p>
+      </div>
+
+      <div class="q"><span class="num">٣</span>
+        <p class="ask">أسلوب التعلّم الآلي المعتمد على شبكات عصبية متعددة الطبقات هو <span class="blank lg"></span>.</p>
+      </div>
+
+      <div class="q"><span class="num">٤</span>
+        <p class="ask">الأنظمة التي تنشئ محتوى جديدًا اعتمادًا على الأنماط المتعلَّمة تسمى <span class="blank lg"></span>.</p>
+      </div>
+
+      <div class="q"><span class="num">٥</span>
+        <p class="ask">النموذج الحاسوبي المستوحى بصورة مبسّطة من ترابط العصبونات يسمى <span class="blank lg"></span>.</p>
+      </div>
+
+      <div class="q"><span class="num">٦</span>
+        <p class="ask">إنتاج نص يبدو معقولًا لكنه غير صحيح واقعيًّا يسمى <span class="blank lg"></span>.</p>
+      </div>
+
+      <div class="q"><span class="num">٧</span>
+        <p class="ask">في الشبكة العصبية تتغيّر <span class="blank"></span> أثناء <span class="blank"></span> لتتعلّم أنماطًا من البيانات.</p>
+      </div>
+
+      <div class="q"><span class="num">٨</span>
+        <p class="ask">من أمثلة الذكاء الاصطناعي في الحياة اليومية: <span class="blank"></span> و<span class="blank"></span> و<span class="blank"></span>.</p>
+      </div>
+
+      <div class="q"><span class="num">٩</span>
+        <p class="ask">من أمثلة التعلّم الآلي: <span class="blank"></span> و<span class="blank"></span>.</p>
+      </div>
+
+      <div class="q"><span class="num">١٠</span>
+        <p class="ask">من أمثلة التعلم العميق: <span class="blank"></span> و<span class="blank"></span>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٧</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٨ — أكمل بما هو مناسب ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-mint t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٠٨</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; أكمل بما هو مناسب</span>
+    <h1 class="title">أكمل <span class="pop">الناقص</span></h1>
+    <p class="subtitle">المصطلحات والعلاقات اللي بتتسأل بالنص</p>
+  </header>
+
+  <section class="g-sun">
+    <span class="contd">تابع · أكمل بما هو مناسب</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">١١</span>
+        <p class="ask">من أمثلة الذكاء الاصطناعي التوليدي: <span class="blank"></span> و<span class="blank"></span>.</p>
+      </div>
+
+      <div class="q"><span class="num">١٢</span>
+        <p class="ask">معظم أنظمة الذكاء الاصطناعي الحالية <span class="blank"></span> النطاق، وتُصمَّم لأداء مهمة محددة أو مجموعة محدودة من المهام.</p>
+      </div>
+
+      <div class="q"><span class="num">١٣</span>
+        <p class="ask">ترتيب المفاهيم من الأوسع إلى الأكثر تخصّصًا: <span class="blank sm"></span> ← <span class="blank sm"></span> ← <span class="blank sm"></span> ← <span class="blank sm"></span>.</p>
+      </div>
+
+      <div class="q"><span class="num">١٤</span>
+        <p class="ask">كثيرًا ما يعتمد التعلم العميق على بيانات <span class="blank"></span> نسبيًّا كي يتعلّم أنماطًا موثوقة.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="g-berry">
+    <h2 class="ribbon r-berry"><i>ثانيًا</i> صح وخطأ ○ ×</h2>
+    <div class="qlist">
+
+      <p class="aside-note">ضع <strong>○</strong> أمام العبارة الصحيحة و<strong>×</strong> أمام الخاطئة، ثم <strong>صوّب الخطأ</strong> في السطر اللي تحتها.</p>
+
+      <div class="q"><span class="num">١٥</span>
+        <p class="ask">التعلّم الآلي هو إحدى التقنيات التي تجعل الذكاء الاصطناعي يعمل. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">١٦</span>
+        <p class="ask">التعلم العميق تقنية مختلفة تمامًا عن التعلّم الآلي. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">١٧</span>
+        <p class="ask">الذكاء الاصطناعي والتعلّم الآلي لهما المعنى نفسه. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">١٨</span>
+        <p class="ask">الذكاء الاصطناعي التوليدي تقنية تستخدم التعلم العميق لتوليد بيانات جديدة. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">١٩</span>
+        <p class="ask">التعلم العميق أسلوب من أساليب التعلّم الآلي يعتمد على شبكات عصبية متعددة الطبقات. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">٢٠</span>
+        <p class="ask">الشبكة العصبية نموذج حاسوبي تتغيّر أوزانه أثناء التدريب. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">٢١</span>
+        <p class="ask">مرشّح الرسائل المزعجة مثال على الذكاء الاصطناعي التوليدي. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٨</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٩ — صح وخطأ ○ × ══════════ -->
+<article class="sheet">
+  <span class="tape dot-berry t-a"></span>
+  <span class="tape stripe-mint t-b"></span>
+  <span class="tape stripe-sun t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٠٩</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; صح وخطأ ○ ×</span>
+    <h1 class="title">صح <span class="pop">وخطأ</span></h1>
+    <p class="subtitle">ضع ○ أو × ثم صوّب الخطأ</p>
+  </header>
+
+  <section class="g-berry">
+    <span class="contd">تابع · صح وخطأ ○ ×</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٢٢</span>
+        <p class="ask">التوصية بالمنتجات مثال على التعلّم الآلي. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">٢٣</span>
+        <p class="ask">في التعلّم الآلي يبرمج الإنسان كل قاعدة صراحةً بدلًا من أن يتعلّم النموذج من البيانات. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">٢٤</span>
+        <p class="ask">معظم أنظمة الذكاء الاصطناعي الحالية عامة النطاق وتصلح لأي مهمة. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">٢٥</span>
+        <p class="ask">العلاقة بين المفاهيم الأربعة علاقة تعليمية مبسّطة، وليست تسلسل احتواء صارم في كل حالة. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">٢٦</span>
+        <p class="ask">الهلوسة تعني أن مخرجات الذكاء الاصطناعي التوليدي تبدو معقولة لكنها قد تكون غير صحيحة واقعيًّا. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">٢٧</span>
+        <p class="ask">يمكن الاعتماد على مخرجات الذكاء الاصطناعي التوليدي في تقرير مدرسي دون التحقّق من مصادرها. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">٢٨</span>
+        <p class="ask">غالبية أنظمة الذكاء الاصطناعي التوليدي الحديثة تعتمد على نماذج التعلم العميق. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">٢٩</span>
+        <p class="ask">التعرّف على الكلام والصور والترجمة من أمثلة تطبيقات الذكاء الاصطناعي. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+      <div class="q"><span class="num">٣٠</span>
+        <p class="ask">قد يواجه نظام الذكاء الاصطناعي صعوبة مع شيء نادرًا ما رآه في بيانات تدريبه. <span class="tfbox"></span></p>
+        <div class="ans" style="--n:1"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٩</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ١٠ — اختيار من متعدد ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape plain-sky t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">١٠</span>
+    <span class="kicker-lesson">النوع الثالث &nbsp;•&nbsp; اختيار من متعدد</span>
+    <h1 class="title">اختيار <span class="pop">من متعدد</span></h1>
+    <p class="subtitle">اختر الإجابة الصحيحة واكتب حرفها</p>
+  </header>
+
+  <section class="g-sky">
+    <h2 class="ribbon r-sky"><i>ثالثًا</i> اختيار من متعدد</h2>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٣١</span>
+        <p class="ask">المجال الواسع الذي يضم باقي المفاهيم هو:</p>
+        <ul class="pick">
+          <li><b>أ</b> التعلّم الآلي</li>
+          <li><b>ب</b> الذكاء الاصطناعي</li>
+          <li><b>جـ</b> التعلم العميق</li>
+          <li><b>د</b> الذكاء الاصطناعي التوليدي</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٣٢</span>
+        <p class="ask">فرع من الذكاء الاصطناعي تتعلم فيه النماذج أنماطًا من البيانات:</p>
+        <ul class="pick">
+          <li><b>أ</b> التعلّم الآلي</li>
+          <li><b>ب</b> الشبكة العصبية</li>
+          <li><b>جـ</b> الهلوسة</li>
+          <li><b>د</b> الحوسبة السحابية</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٣٣</span>
+        <p class="ask">الأسلوب المعتمد على شبكات عصبية <strong>متعددة الطبقات</strong>:</p>
+        <ul class="pick">
+          <li><b>أ</b> التعلّم الآلي</li>
+          <li><b>ب</b> التعلم العميق</li>
+          <li><b>جـ</b> الذكاء الاصطناعي التوليدي</li>
+          <li><b>د</b> التعرّف على الكلام</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>١٠</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ١١ — اختيار من متعدد ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape dot-berry t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">١١</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; اختيار من متعدد</span>
+    <h1 class="title">اختيار <span class="pop">من متعدد</span></h1>
+    <p class="subtitle">اختر الإجابة الصحيحة واكتب حرفها</p>
+  </header>
+
+  <section class="g-sky">
+    <span class="contd">تابع · اختيار من متعدد</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٣٤</span>
+        <p class="ask">أي مما يلي يُعد مثالًا على الذكاء الاصطناعي التوليدي؟</p>
+        <ul class="pick">
+          <li><b>أ</b> تصنيف الرسائل المزعجة</li>
+          <li><b>ب</b> التوصية بمنتجات</li>
+          <li><b>جـ</b> أدوات توليد الصور</li>
+          <li><b>د</b> التعرّف على المشاة</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٣٥</span>
+        <p class="ask">أي مما يلي <strong>ليس</strong> من مهام الذكاء الاصطناعي المذكورة في الدرس؟</p>
+        <ul class="pick">
+          <li><b>أ</b> التعلم من البيانات</li>
+          <li><b>ب</b> التنبؤ والتعرّف</li>
+          <li><b>جـ</b> توليد المحتوى</li>
+          <li><b>د</b> تصنيع العتاد الإلكتروني</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٣٦</span>
+        <p class="ask">النموذج الحاسوبي المستوحى من ترابط العصبونات هو:</p>
+        <ul class="pick">
+          <li><b>أ</b> الشبكة العصبية الاصطناعية</li>
+          <li><b>ب</b> الحوسبة الطرفية</li>
+          <li><b>جـ</b> الذكاء التوليدي</li>
+          <li><b>د</b> التعلّم الآلي</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٣٧</span>
+        <p class="ask">«إنتاج نص يبدو معقولًا لكنه غير صحيح واقعيًّا» هو تعريف:</p>
+        <ul class="pick">
+          <li><b>أ</b> التدريب</li>
+          <li><b>ب</b> الهلوسة</li>
+          <li><b>جـ</b> التصنيف</li>
+          <li><b>د</b> التراكب</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>١١</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ١٢ — اختيار من متعدد ══════════ -->
+<article class="sheet">
+  <span class="tape plain-sky t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">١٢</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; اختيار من متعدد</span>
+    <h1 class="title">اختيار <span class="pop">من متعدد</span></h1>
+    <p class="subtitle">اختر الإجابة الصحيحة واكتب حرفها</p>
+  </header>
+
+  <section class="g-sky">
+    <span class="contd">تابع · اختيار من متعدد</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٣٨</span>
+        <p class="ask">تصنيف الرسائل المزعجة تلقائيًّا مثال على:</p>
+        <ul class="pick">
+          <li><b>أ</b> التعلّم الآلي</li>
+          <li><b>ب</b> الذكاء الاصطناعي التوليدي</li>
+          <li><b>جـ</b> الشبكة العصبية فقط</li>
+          <li><b>د</b> الهلوسة</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٣٩</span>
+        <p class="ask">التعرّف على المشاة في القيادة الذاتية يُصنَّف بدقّة على أنه:</p>
+        <ul class="pick">
+          <li><b>أ</b> التعلم العميق</li>
+          <li><b>ب</b> الذكاء التوليدي</li>
+          <li><b>جـ</b> برمجة تقليدية</li>
+          <li><b>د</b> الهلوسة</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٤٠</span>
+        <p class="ask">الفرق الجوهري بين البرمجة التقليدية والتعلّم الآلي هو:</p>
+        <ul class="pick">
+          <li><b>أ</b> سرعة الجهاز</li>
+          <li><b>ب</b> قواعد مبرمَجة صراحةً مقابل أنماط متعلَّمة من البيانات</li>
+          <li><b>جـ</b> حجم الشاشة</li>
+          <li><b>د</b> لغة البرمجة المستخدمة</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class="wide"></i></div>
+      </div>
+
+      <div class="q"><span class="num">٤١</span>
+        <p class="ask">العبارة الصحيحة عن العلاقة بين المفاهيم:</p>
+        <ul class="pick">
+          <li><b>أ</b> التعلم العميق يضم الذكاء الاصطناعي</li>
+          <li><b>ب</b> الذكاء الاصطناعي يضم التعلّم الآلي</li>
+          <li><b>جـ</b> التعلّم الآلي يضم الذكاء الاصطناعي</li>
+          <li><b>د</b> الأربعة منفصلة تمامًا</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class="wide"></i></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>١٢</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ١٣ — اختيار من متعدد ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-mint t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">١٣</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; اختيار من متعدد</span>
+    <h1 class="title">اختيار <span class="pop">من متعدد</span></h1>
+    <p class="subtitle">اختر الإجابة الصحيحة واكتب حرفها</p>
+  </header>
+
+  <section class="g-sky">
+    <span class="contd">تابع · اختيار من متعدد</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٤٢</span>
+        <p class="ask">غالبية أنظمة الذكاء الاصطناعي التوليدي الحديثة تعتمد على:</p>
+        <ul class="pick">
+          <li><b>أ</b> قواعد مبرمَجة يدويًّا</li>
+          <li><b>ب</b> نماذج التعلم العميق</li>
+          <li><b>جـ</b> الحوسبة الكمومية</li>
+          <li><b>د</b> جداول البيانات</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٤٣</span>
+        <p class="ask">معظم أنظمة الذكاء الاصطناعي الحالية توصف بأنها:</p>
+        <ul class="pick">
+          <li><b>أ</b> عامة النطاق</li>
+          <li><b>ب</b> ضيقة النطاق</li>
+          <li><b>جـ</b> بديلة للإنسان تمامًا</li>
+          <li><b>د</b> لا تحتاج بيانات</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٤٤</span>
+        <p class="ask">أي مما يلي من أمثلة الذكاء الاصطناعي في حياتك اليومية؟</p>
+        <ul class="pick">
+          <li><b>أ</b> التعرّف على الكلام</li>
+          <li><b>ب</b> طباعة ورقة</li>
+          <li><b>جـ</b> توصيل كابل الشبكة</li>
+          <li><b>د</b> شحن البطارية</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٤٥</span>
+        <p class="ask">لماذا قد يخطئ نظام ذكاء اصطناعي في التعرّف على حالة نادرة؟</p>
+        <ul class="pick">
+          <li><b>أ</b> لأن معالجه بطيء</li>
+          <li><b>ب</b> لأنه نادرًا ما رآها في بيانات التدريب</li>
+          <li><b>جـ</b> لأن الشاشة صغيرة</li>
+          <li><b>د</b> لأنه غير متصل بالإنترنت</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class="wide"></i></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>١٣</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ١٤ — اختيار من متعدد ══════════ -->
+<article class="sheet">
+  <span class="tape dot-berry t-a"></span>
+  <span class="tape stripe-mint t-b"></span>
+  <span class="tape stripe-sun t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">١٤</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; اختيار من متعدد</span>
+    <h1 class="title">اختيار <span class="pop">من متعدد</span></h1>
+    <p class="subtitle">اختر الإجابة الصحيحة واكتب حرفها</p>
+  </header>
+
+  <section class="g-sky">
+    <span class="contd">تابع · اختيار من متعدد</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٤٦</span>
+        <p class="ask">أنسب إجراء بعد الحصول على ناتج من أداة ذكاء اصطناعي توليدي هو:</p>
+        <ul class="pick">
+          <li><b>أ</b> استخدامه كما هو</li>
+          <li><b>ب</b> التحقّق من صحّته ومن مصادره</li>
+          <li><b>جـ</b> حذفه فورًا</li>
+          <li><b>د</b> مشاركته دون قراءة</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class="wide"></i></div>
+      </div>
+
+      <div class="q"><span class="num">٤٧</span>
+        <p class="ask">«أنظمة تُنشئ محتوى جديدًا مثل النصوص والصور والصوت» تعريف لـ:</p>
+        <ul class="pick">
+          <li><b>أ</b> الذكاء الاصطناعي التوليدي</li>
+          <li><b>ب</b> التعلّم الآلي</li>
+          <li><b>جـ</b> الشبكة العصبية</li>
+          <li><b>د</b> بيانات التدريب</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٤٨</span>
+        <p class="ask">أيٌّ من العبارات الآتية <strong>خاطئ</strong>؟</p>
+        <ul class="pick">
+          <li><b>أ</b> التعلم العميق نوع من التعلّم الآلي</li>
+          <li><b>ب</b> التعلّم الآلي فرع من الذكاء الاصطناعي</li>
+          <li><b>جـ</b> الذكاء الاصطناعي التوليدي لا علاقة له بالتعلم العميق</li>
+          <li><b>د</b> الشبكة العصبية تتعلم من البيانات</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class="wide"></i></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>١٤</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ١٥ — اختيار من متعدد ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape plain-sky t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">١٥</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; اختيار من متعدد</span>
+    <h1 class="title">اختيار <span class="pop">من متعدد</span></h1>
+    <p class="subtitle">اختر الإجابة الصحيحة واكتب حرفها</p>
+  </header>
+
+  <section class="g-sky">
+    <span class="contd">تابع · اختيار من متعدد</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٤٩</span>
+        <p class="ask">«تحليل الصور والتعرّف على الكلام» أمثلة مذكورة في الدرس على:</p>
+        <ul class="pick">
+          <li><b>أ</b> التعلم العميق</li>
+          <li><b>ب</b> الحوسبة السحابية</li>
+          <li><b>جـ</b> الهلوسة</li>
+          <li><b>د</b> التجارة الإلكترونية</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+      <div class="q"><span class="num">٥٠</span>
+        <p class="ask">ترتيب المفاهيم من الأوسع إلى الأكثر تخصّصًا:</p>
+        <ul class="pick">
+          <li><b>أ</b> GenAI ← DL ← ML ← AI</li>
+          <li><b>ب</b> AI ← ML ← DL ← GenAI</li>
+          <li><b>جـ</b> ML ← AI ← DL ← GenAI</li>
+          <li><b>د</b> DL ← ML ← AI ← GenAI</li>
+        </ul>
+        <div class="inline-ans">الإجابة: <i class=""></i></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="g-mint">
+    <h2 class="ribbon r-mint"><i>رابعًا</i> مطابقة وتصنيف وترتيب</h2>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٥١</span>
+        <p class="ask">طابق كل مصطلح (١ – ٤) مع تعريفه الصحيح من الخيارات أدناه.</p>
+        <div class="match">
+          <ol>
+            <li><em>١</em><span>الذكاء الاصطناعي</span><span class="mbox"></span></li>
+            <li><em>٢</em><span>التعلّم الآلي</span><span class="mbox"></span></li>
+            <li><em>٣</em><span>التعلم العميق</span><span class="mbox"></span></li>
+            <li><em>٤</em><span>الذكاء الاصطناعي التوليدي</span><span class="mbox"></span></li>
+          </ol>
+          <div class="chips">
+            <span>أ يعتمد على شبكات عصبية متعددة الطبقات</span>
+            <span>ب مجال يضم أنظمة تنفّذ مهام ذكية</span>
+            <span>جـ ينشئ محتوى جديدًا من الأنماط المتعلَّمة</span>
+            <span>د يتعلم أنماطًا من البيانات</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>١٥</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ١٦ — مطابقة وتصنيف وترتيب ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape dot-berry t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">١٦</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; مطابقة وتصنيف وترتيب</span>
+    <h1 class="title">مطابقة <span class="pop">وتصنيف</span></h1>
+    <p class="subtitle">وصّل · صنّف · رتّب</p>
+  </header>
+
+  <section class="g-mint">
+    <span class="contd">تابع · مطابقة وتصنيف وترتيب</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٥٢</span>
+        <p class="ask">طابق كل مثال (١ – ٤) مع الفئة الأنسب.</p>
+        <div class="match">
+          <ol>
+            <li><em>١</em><span>ChatGPT</span><span class="mbox"></span></li>
+            <li><em>٢</em><span>مرشّح الرسائل المزعجة</span><span class="mbox"></span></li>
+            <li><em>٣</em><span>تحليل الصور الطبية</span><span class="mbox"></span></li>
+            <li><em>٤</em><span>التوصية بمنتجات</span><span class="mbox"></span></li>
+          </ol>
+          <div class="chips">
+            <span>أ التعلّم الآلي</span>
+            <span>ب التعلم العميق</span>
+            <span>جـ الذكاء الاصطناعي التوليدي</span>
+            <span>د التعلّم الآلي</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="q"><span class="num">٥٣</span>
+        <p class="ask">صنّف كل مثال (١ – ٤): هل هو <strong>تصنيف/تنبؤ</strong> أم <strong>توليد</strong>؟</p>
+        <div class="match">
+          <ol>
+            <li><em>١</em><span>توليد صورة من وصف نصّي</span><span class="mbox"></span></li>
+            <li><em>٢</em><span>التنبؤ بسعر منتج</span><span class="mbox"></span></li>
+            <li><em>٣</em><span>كتابة مقال بواسطة أداة ذكاء اصطناعي</span><span class="mbox"></span></li>
+            <li><em>٤</em><span>تحديد ما إذا كانت الرسالة مزعجة</span><span class="mbox"></span></li>
+          </ol>
+          <div class="chips">
+            <span>أ تصنيف/تنبؤ</span>
+            <span>ب توليد</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="q"><span class="num">٥٤</span>
+        <p class="ask">رتّب المفاهيم الآتية من <strong>الأوسع</strong> إلى <strong>الأكثر تخصّصًا</strong> بكتابة الأرقام ١ – ٤.</p>
+        <div class="match">
+          <ol>
+            <li><em>١</em><span>التعلم العميق</span><span class="mbox"></span></li>
+            <li><em>٢</em><span>الذكاء الاصطناعي التوليدي</span><span class="mbox"></span></li>
+            <li><em>٣</em><span>الذكاء الاصطناعي</span><span class="mbox"></span></li>
+            <li><em>٤</em><span>التعلّم الآلي</span><span class="mbox"></span></li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>١٦</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ١٧ — مطابقة وتصنيف وترتيب ══════════ -->
+<article class="sheet">
+  <span class="tape plain-sky t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">١٧</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; مطابقة وتصنيف وترتيب</span>
+    <h1 class="title">مطابقة <span class="pop">وتصنيف</span></h1>
+    <p class="subtitle">وصّل · صنّف · رتّب</p>
+  </header>
+
+  <section class="g-mint">
+    <span class="contd">تابع · مطابقة وتصنيف وترتيب</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٥٥</span>
+        <p class="ask">طابق كل مصطلح (١ – ٣) مع الكلمة المفتاحية التي تميّزه.</p>
+        <div class="match">
+          <ol>
+            <li><em>١</em><span>التعلّم الآلي</span><span class="mbox"></span></li>
+            <li><em>٢</em><span>التعلم العميق</span><span class="mbox"></span></li>
+            <li><em>٣</em><span>الشبكة العصبية</span><span class="mbox"></span></li>
+          </ol>
+          <div class="chips">
+            <span>أ الأوزان تتغيّر أثناء التدريب</span>
+            <span>ب أنماط من البيانات</span>
+            <span>جـ طبقات متعددة</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="q"><span class="num">٥٦</span>
+        <p class="ask">صنّف كل عبارة (١ – ٤): <strong>أ</strong> برمجة تقليدية · <strong>ب</strong> تعلّم آلي.</p>
+        <div class="match">
+          <ol>
+            <li><em>١</em><span>الإنسان يكتب كل قاعدة صراحةً</span><span class="mbox"></span></li>
+            <li><em>٢</em><span>النموذج يستنتج الأنماط بنفسه</span><span class="mbox"></span></li>
+            <li><em>٣</em><span>تُحدَّد الخطوات مسبقًا خطوة بخطوة</span><span class="mbox"></span></li>
+            <li><em>٤</em><span>يحتاج بيانات كثيرة للتدريب</span><span class="mbox"></span></li>
+          </ol>
+          <div class="chips">
+            <span>أ برمجة تقليدية</span>
+            <span>ب تعلّم آلي</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="q"><span class="num">٥٧</span>
+        <p class="ask">رتّب خطوات «فكّر كمهندس» بالترتيب الصحيح بكتابة ١ – ٣.</p>
+        <div class="match">
+          <ol>
+            <li><em>١</em><span>اتخذ قرارًا وأوصِ بقاعدة</span><span class="mbox"></span></li>
+            <li><em>٢</em><span>استقصِ وابحث عن مثال موثَّق</span><span class="mbox"></span></li>
+            <li><em>٣</em><span>قيّم الفائدة والمخاطرة</span><span class="mbox"></span></li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>١٧</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ١٨ — مطابقة وتصنيف وترتيب ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-mint t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">١٨</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; مطابقة وتصنيف وترتيب</span>
+    <h1 class="title">مطابقة <span class="pop">وتصنيف</span></h1>
+    <p class="subtitle">وصّل · صنّف · رتّب</p>
+  </header>
+
+  <section class="g-mint">
+    <span class="contd">تابع · مطابقة وتصنيف وترتيب</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٥٨</span>
+        <p class="ask">طابق كل مثال (١ – ٣) مع نوع البيانات اللازمة لتدريبه.</p>
+        <div class="match">
+          <ol>
+            <li><em>١</em><span>نظام يميّز المحاصيل السليمة من المصابة</span><span class="mbox"></span></li>
+            <li><em>٢</em><span>نظام يترجم النصوص</span><span class="mbox"></span></li>
+            <li><em>٣</em><span>نظام يتعرّف على الكلام</span><span class="mbox"></span></li>
+          </ol>
+          <div class="chips">
+            <span>أ تسجيلات صوتية مصنَّفة</span>
+            <span>ب صور مصنَّفة للمحاصيل</span>
+            <span>جـ نصوص بلغتين</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="g-violet">
+    <h2 class="ribbon r-violet"><i>خامسًا</i> عرّف · ما المقصود</h2>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٥٩</span>
+        <p class="ask">عرّف <strong>الذكاء الاصطناعي</strong> (AI). <span class="tag tag-def">تعريف</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٦٠</span>
+        <p class="ask">عرّف <strong>التعلّم الآلي</strong> (Machine Learning). <span class="tag tag-def">تعريف</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٦١</span>
+        <p class="ask">عرّف <strong>التعلم العميق</strong> (Deep Learning). <span class="tag tag-def">تعريف</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٦٢</span>
+        <p class="ask">عرّف <strong>الشبكة العصبية الاصطناعية</strong> (ANN). <span class="tag tag-def">تعريف</span></p>
+        <div class="ans" style="--n:3"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>١٨</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ١٩ — عرّف · ما المقصود ══════════ -->
+<article class="sheet">
+  <span class="tape dot-berry t-a"></span>
+  <span class="tape stripe-mint t-b"></span>
+  <span class="tape stripe-sun t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">١٩</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; عرّف · ما المقصود</span>
+    <h1 class="title">عرّف <span class="pop">بدقّة</span></h1>
+    <p class="subtitle">التعريفات اللي بتتكتب بالنص</p>
+  </header>
+
+  <section class="g-violet">
+    <span class="contd">تابع · عرّف · ما المقصود</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٦٣</span>
+        <p class="ask">عرّف <strong>الذكاء الاصطناعي التوليدي</strong> (GenAI). <span class="tag tag-def">تعريف</span></p>
+        <div class="ans" style="--n:3"></div>
+      </div>
+
+      <div class="q"><span class="num">٦٤</span>
+        <p class="ask">ما المقصود بـ<strong>الهلوسة</strong> في مخرجات الذكاء الاصطناعي التوليدي؟ <span class="tag tag-def">تعريف</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٦٥</span>
+        <p class="ask">ما المقصود بأن معظم أنظمة الذكاء الاصطناعي الحالية <strong>ضيقة النطاق</strong>؟ <span class="tag tag-def">تعريف</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٦٦</span>
+        <p class="ask">ما المقصود بـ<strong>بيانات التدريب</strong>؟ ولماذا يحتاجها النموذج؟ <span class="tag tag-def">تعريف</span></p>
+        <div class="ans" style="--n:3"></div>
+      </div>
+
+      <div class="q"><span class="num">٦٧</span>
+        <p class="ask">ما المقصود بأن العلاقة بين المفاهيم الأربعة <strong>علاقة تعليمية مبسّطة</strong>؟ <span class="tag tag-def">تعريف</span></p>
+        <div class="ans" style="--n:3"></div>
+      </div>
+
+      <div class="q"><span class="num">٦٨</span>
+        <p class="ask">اذكر ثلاثة أمثلة يومية على الذكاء الاصطناعي كما وردت في الدرس. <span class="tag tag-def">تعريف</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>١٩</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٢٠ — علّل لما يأتي ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape plain-sky t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٢٠</span>
+    <span class="kicker-lesson">النوع السادس &nbsp;•&nbsp; علّل</span>
+    <h1 class="title">علّل <span class="pop">لما يأتي</span></h1>
+    <p class="subtitle">اكتب السبب، مش الوصف</p>
+  </header>
+
+  <section class="g-berry">
+    <h2 class="ribbon r-berry"><i>سادسًا</i> علّل لما يأتي</h2>
+    <div class="qlist">
+
+      <p class="aside-note">اكتب <strong>السبب</strong>، مش وصف الحاجة تاني.</p>
+
+      <div class="q"><span class="num">٦٩</span>
+        <p class="ask">علّل: يُعد التعلم العميق <strong>نوعًا من</strong> التعلّم الآلي وليس تقنية مختلفة عنه. <span class="tag tag-why">علّل</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٧٠</span>
+        <p class="ask">علّل: الذكاء الاصطناعي والتعلّم الآلي <strong>ليس</strong> لهما المعنى نفسه. <span class="tag tag-why">علّل</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٧١</span>
+        <p class="ask">علّل: يُعد مرشّح الرسائل المزعجة تعلّمًا آليًّا وليس ذكاءً اصطناعيًّا توليديًّا. <span class="tag tag-why">علّل</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٧٢</span>
+        <p class="ask">علّل: كثيرًا ما يحتاج التعلم العميق إلى بيانات كبيرة نسبيًّا. <span class="tag tag-why">علّل</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٧٣</span>
+        <p class="ask">علّل: قد يواجه نظام ذكاء اصطناعي صعوبة مع شيء نادرًا ما رآه في بياناته. <span class="tag tag-why">علّل</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٧٤</span>
+        <p class="ask">علّل: من الخطر استخدام ناتج أداة ذكاء اصطناعي توليدي كإجابة لتقرير مدرسي كما هو. <span class="tag tag-why">علّل</span></p>
+        <div class="ans" style="--n:3"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٢٠</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٢١ — علّل لما يأتي ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape dot-berry t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٢١</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; علّل لما يأتي</span>
+    <h1 class="title">علّل <span class="pop">لما يأتي</span></h1>
+    <p class="subtitle">اكتب السبب، مش الوصف</p>
+  </header>
+
+  <section class="g-berry">
+    <span class="contd">تابع · علّل لما يأتي</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٧٥</span>
+        <p class="ask">علّل: توصف أنظمة الذكاء الاصطناعي الحالية بأنها <strong>ضيقة النطاق</strong>. <span class="tag tag-why">علّل</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٧٦</span>
+        <p class="ask">علّل: تُعد الشبكة العصبية أساس التعلم العميق. <span class="tag tag-why">علّل</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٧٧</span>
+        <p class="ask">علّل: يُقال إن الذكاء الاصطناعي التوليدي <strong>مبني على</strong> التعلم العميق. <span class="tag tag-why">علّل</span></p>
+        <div class="ans" style="--n:2"></div>
+      </div>
+
+      <div class="q"><span class="num">٧٨</span>
+        <p class="ask">علّل: التعلّم الآلي أفضل من البرمجة التقليدية في تصنيف الرسائل المزعجة. <span class="tag tag-why">علّل</span></p>
+        <div class="ans" style="--n:3"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="g-mint">
+    <h2 class="ribbon r-mint"><i>سابعًا</i> قارن بين</h2>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٧٩</span>
+        <p class="ask">قارن بين <strong>البرمجة التقليدية</strong> و<strong>التعلّم الآلي</strong> من حيث: مصدر القواعد · دور الإنسان. <span class="tag tag-cmp">قارن</span></p>
+        <div class="ans" style="--n:4"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٢١</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٢٢ — قارن بين ══════════ -->
+<article class="sheet">
+  <span class="tape plain-sky t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٢٢</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; قارن بين</span>
+    <h1 class="title">قارن <span class="pop">بين</span></h1>
+    <p class="subtitle">وجه الشبه ووجه الاختلاف</p>
+  </header>
+
+  <section class="g-mint">
+    <span class="contd">تابع · قارن بين</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٨٠</span>
+        <p class="ask">قارن بين <strong>التعلّم الآلي</strong> و<strong>التعلم العميق</strong> من حيث: الأسلوب · الأمثلة. <span class="tag tag-cmp">قارن</span></p>
+        <div class="ans" style="--n:4"></div>
+      </div>
+
+      <div class="q"><span class="num">٨١</span>
+        <p class="ask">قارن بين <strong>الذكاء الاصطناعي التوليدي</strong> و<strong>التعلّم الآلي</strong> من حيث نوع المخرجات. <span class="tag tag-cmp">قارن</span></p>
+        <div class="ans" style="--n:4"></div>
+      </div>
+
+      <div class="q"><span class="num">٨٢</span>
+        <p class="ask">قارن بين <strong>الذكاء الاصطناعي</strong> و<strong>التعلم العميق</strong> من حيث الاتساع والتخصّص. <span class="tag tag-cmp">قارن</span></p>
+        <div class="ans" style="--n:3"></div>
+      </div>
+
+      <div class="q"><span class="num">٨٣</span>
+        <p class="ask">قارن بين مهمة <strong>التصنيف</strong> ومهمة <strong>التوليد</strong> مع مثال لكل منهما. <span class="tag tag-cmp">قارن</span></p>
+        <div class="ans" style="--n:4"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٢٢</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٢٣ — قارن بين ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-mint t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٢٣</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; قارن بين</span>
+    <h1 class="title">قارن <span class="pop">بين</span></h1>
+    <p class="subtitle">وجه الشبه ووجه الاختلاف</p>
+  </header>
+
+  <section class="g-mint">
+    <span class="contd">تابع · قارن بين</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٨٤</span>
+        <p class="ask">قارن بين ناتج صحيح وناتج <strong>مهلوَس</strong> من أداة توليدية، وكيف تفرّق بينهما؟ <span class="tag tag-cmp">قارن</span></p>
+        <div class="ans" style="--n:4"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="g-sky">
+    <h2 class="ribbon r-sky"><i>ثامنًا</i> اشرح وحلّل — أسئلة مقالية</h2>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٨٥</span>
+        <p class="ask">اشرح العلاقة بين الذكاء الاصطناعي والتعلّم الآلي والتعلم العميق والذكاء الاصطناعي التوليدي، مستخدمًا فكرة <strong>الفئات المتداخلة</strong>، مع مثال على كل منها. <span class="tag tag-app">تحليل</span></p>
+        <div class="ans" style="--n:6"></div>
+      </div>
+
+      <div class="q"><span class="num">٨٦</span>
+        <p class="ask">اشرح كيف يتعلّم نموذج التعلّم الآلي الأنماط من البيانات بدلًا من برمجة كل قاعدة صراحةً. <span class="tag tag-app">تحليل</span></p>
+        <div class="ans" style="--n:5"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٢٣</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٢٤ — اشرح وحلّل — أسئلة مقالية ══════════ -->
+<article class="sheet">
+  <span class="tape dot-berry t-a"></span>
+  <span class="tape stripe-mint t-b"></span>
+  <span class="tape stripe-sun t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٢٤</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; اشرح وحلّل — أسئلة مقالية</span>
+    <h1 class="title">اشرح <span class="pop">وحلّل</span></h1>
+    <p class="subtitle">الأسئلة المقالية الطويلة</p>
+  </header>
+
+  <section class="g-sky">
+    <span class="contd">تابع · اشرح وحلّل — أسئلة مقالية</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٨٧</span>
+        <p class="ask">اشرح مكوّنات الشبكة العصبية الاصطناعية وكيف تتعلّم أثناء التدريب. <span class="tag tag-app">تحليل</span></p>
+        <div class="ans" style="--n:5"></div>
+      </div>
+
+      <div class="q"><span class="num">٨٨</span>
+        <p class="ask">حلّل خطر <strong>الهلوسة</strong> في الذكاء الاصطناعي التوليدي، وحدّد إجراءً مناسبًا للتحقّق من المخرجات. <span class="tag tag-app">تحليل</span></p>
+        <div class="ans" style="--n:5"></div>
+      </div>
+
+      <div class="q"><span class="num">٨٩</span>
+        <p class="ask">اذكر أربعة أمثلة على تطبيقات الذكاء الاصطناعي في حياتك اليومية، وصنّف كل مثال إلى فئته. <span class="tag tag-app">تحليل</span></p>
+        <div class="ans" style="--n:5"></div>
+      </div>
+
+      <div class="q"><span class="num">٩٠</span>
+        <p class="ask">اشرح لماذا لا ينبغي فهم العلاقة بين المفاهيم الأربعة على أنها تسلسل احتواء صارم في كل حالة. <span class="tag tag-app">تحليل</span></p>
+        <div class="ans" style="--n:4"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٢٤</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٢٥ — اشرح وحلّل — أسئلة مقالية ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape plain-sky t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٢٥</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; اشرح وحلّل — أسئلة مقالية</span>
+    <h1 class="title">اشرح <span class="pop">وحلّل</span></h1>
+    <p class="subtitle">الأسئلة المقالية الطويلة</p>
+  </header>
+
+  <section class="g-sky">
+    <span class="contd">تابع · اشرح وحلّل — أسئلة مقالية</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٩١</span>
+        <p class="ask">حلّل الفرق بين مهام <strong>التصنيف والتنبؤ</strong> ومهام <strong>التوليد</strong>، مع مثالين لكل نوع. <span class="tag tag-app">تحليل</span></p>
+        <div class="ans" style="--n:5"></div>
+      </div>
+
+      <div class="q"><span class="num">٩٢</span>
+        <p class="ask">اشرح لماذا يحتاج التعلم العميق إلى بيانات كبيرة نسبيًّا، وما أثر قلّة البيانات على دقّة النموذج. <span class="tag tag-app">تحليل</span></p>
+        <div class="ans" style="--n:5"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="g-violet">
+    <h2 class="ribbon r-violet"><i>تاسعًا</i> مواقف تطبيقية</h2>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٩٣</span>
+        <p class="ask">مستشفى يريد نظامًا يحلّل صور الأشعة لاكتشاف حالات مرضية. حدّد الفئة الأنسب (تعلّم آلي / تعلم عميق / توليدي)، واذكر نوع البيانات اللازمة للتدريب، وعاملًا قد يجعل التنبؤ خاطئًا. <span class="tag tag-app">تبرير</span></p>
+        <div class="ans" style="--n:5"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٢٥</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٢٦ — مواقف تطبيقية ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape dot-berry t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٢٦</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; مواقف تطبيقية</span>
+    <h1 class="title">مواقف <span class="pop">تطبيقية</span></h1>
+    <p class="subtitle">فكّر كمهندس واتخذ قرارًا مستندًا إلى دليل</p>
+  </header>
+
+  <section class="g-violet">
+    <span class="contd">تابع · مواقف تطبيقية</span>
+    <div class="qlist">
+
+      <div class="q"><span class="num">٩٤</span>
+        <p class="ask">طالب استخدم أداة توليدية لكتابة بحث، فذكرت الأداة مرجعًا غير موجود. سمِّ المشكلة، واذكر خطوتين كان يجب أن يفعلهما قبل التسليم. <span class="tag tag-app">تطبيق</span></p>
+        <div class="ans" style="--n:5"></div>
+      </div>
+
+      <div class="q"><span class="num">٩٥</span>
+        <p class="ask">متجر إلكتروني يريد (١) اقتراح منتجات للعملاء و(٢) كتابة وصف تسويقي للمنتجات تلقائيًّا. حدّد التقنية المناسبة لكل مهمة وبرّر اختيارك. <span class="tag tag-app">تبرير</span></p>
+        <div class="ans" style="--n:5"></div>
+      </div>
+
+      <div class="q"><span class="num">٩٦</span>
+        <p class="ask">مدرستك تناقش السماح باستخدام الذكاء الاصطناعي التوليدي في الواجبات. أوصِ بقاعدة واحدة واذكر <strong>سببين</strong> يدعمانها. <span class="tag tag-app">تبرير</span></p>
+        <div class="ans" style="--n:5"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٢٦</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٢٧ — اختبار الدرس ══════════ -->
+<article class="sheet">
+  <span class="tape plain-sky t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٢٧</span>
+    <span class="kicker-lesson">اختبار الدرس &nbsp;•&nbsp; على نمط الكتاب</span>
+    <h1 class="title">اختبار <span class="pop">الدرس ١-٢</span></h1>
+    <p class="subtitle">الزمن: ٣٠ دقيقة &nbsp;·&nbsp; الدرجة: ٣٠</p>
+  </header>
+
+  <section class="g-ink">
+    <h2 class="ribbon r-berry"><i>عاشرًا</i> اختبار الدرس</h2>
+    <div class="qlist">
+
+      <div class="q exam"><span class="num">٩٧</span>
+        <p class="ask">حلّل العلاقة بين الذكاء الاصطناعي والتعلّم الآلي والتعلم العميق والذكاء الاصطناعي التوليدي، مستخدمًا فكرة الفئات المتداخلة، مع مثال واحد على كل منها. <span class="tag tag-mk">٦ درجات</span></p>
+        <div class="ans" style="--n:6"></div>
+      </div>
+
+      <div class="q exam"><span class="num">٩٨</span>
+        <p class="ask">عرّف الذكاء الاصطناعي، وميّز بين التعلّم الآلي والتعلم العميق والذكاء الاصطناعي التوليدي. <span class="tag tag-mk">٨ درجات</span></p>
+        <div class="ans" style="--n:7"></div>
+      </div>
+
+      <div class="q exam"><span class="num">٩٩</span>
+        <p class="ask">قيّم خطر الهلوسة في مخرجات الذكاء الاصطناعي التوليدي، وحدّد إجراءً مناسبًا للتحقّق منها. <span class="tag tag-mk">٨ درجات</span></p>
+        <div class="ans" style="--n:7"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٢٧</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+<!-- ══════════ صفحة ٢٨ — اختبار الدرس ══════════ -->
+<article class="sheet">
+  <span class="tape stripe-mint t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="ghost" aria-hidden="true">٢٨</span>
+    <span class="kicker-lesson">تابع &nbsp;•&nbsp; اختبار الدرس</span>
+    <h1 class="title">اختبار <span class="pop">الدرس ١-٢</span></h1>
+    <p class="subtitle">الزمن: ٣٠ دقيقة &nbsp;·&nbsp; الدرجة: ٣٠</p>
+  </header>
+
+  <section class="g-ink">
+    <span class="contd">تابع · اختبار الدرس</span>
+    <div class="qlist">
+
+      <div class="q exam"><span class="num">١٠٠</span>
+        <p class="ask">أجب بكلماتك أنت عن السؤال الرئيسي للدرس: ما هو الذكاء الاصطناعي، وكيف يرتبط التعلّم الآلي والتعلم العميق والذكاء الاصطناعي التوليدي ببعضهم البعض؟ <span class="tag tag-mk">٨ درجات</span></p>
+        <div class="ans" style="--n:8"></div>
+      </div>
+
+    </div>
+    <div class="score">
+      <div>
+        <h5>رصد الدرجة</h5>
+        <p>صحّح إجابتك مع مدرّسك أو من كتاب الشرح، واكتب درجتك هنا. أقل من ٢٠؟ ارجع لصفحة حلقات الاحتواء في كتاب الشرح وذاكرها تاني.</p>
+      </div>
+      <div class="box"><em>الدرجة</em>&nbsp; /٣٠</div>
+    </div>
+  </section>
+
+  <footer class="fbar">
+    <div class="fbook">
+      <b>كتاب الأسئلة</b>
+      <span>الدرس ١-٢ · الفصل الأول</span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fbrand">
+      <span class="fmarkrow">
+        <span class="fstar" aria-hidden="true">✦</span>
+        <span class="fmark">بــــــن نــــــاجــــــح</span>
+        <span class="fstar" aria-hidden="true">✦</span>
+      </span>
+      <span class="flinks">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="fdot" aria-hidden="true"></span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> واتساب: 01114840373</span>
+      </span>
+    </div>
+    <span class="fsep" aria-hidden="true"></span>
+    <div class="fpage">
+      <b>٢٨</b>
+      <span>من ٢٨</span>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+</body>
+</html>

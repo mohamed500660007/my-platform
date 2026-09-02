@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#14181F">
+<title>عرض الدرس ١-١ · تطوّر تكنولوجيا المعلومات · بن ناجح</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Rakkas&family=Marhey:wght@300..700&family=Tajawal:wght@300;400;500;700;800&family=Aref+Ruqaa:wght@400;700&display=swap">
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   عرض تقديمي · الدرس ١-١ — بن ناجح
+   نفس نظام تصميم المذكّرة بالحرف، مكبَّر على مسرح ١٩٢٠×١٠٨٠
+   ─────────────────────────────────────────────────────────────────
+   صورتك:  غيّر --photo تحت لاسم صورتك جنب الملف
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* ── الورق والحبر (نفس توكنز المذكّرة) ── */
+  --paper:      #FFFCF2;
+  --paper-2:    #FBF5E4;
+  --rule:       #DCE6F2;
+  --ink:        #1E2A46;
+  --ink-soft:   #5C6683;
+  --ink-faint:  #98A0B6;
+  --desk:       #C9C4B4;
+  --desk-2:     #B7B2A1;
+
+  /* ── أقلام التحديد ── */
+  --sun:        #FFC93C;  --sun-ink:    #6B4B00;
+  --berry:      #FF4D6D;  --berry-ink:  #7A0C24;
+  --mint:       #00C2A8;  --mint-ink:   #005247;
+  --violet:     #7A5CFF;  --violet-ink: #2E1C7A;
+  --sky:        #2FA8FF;  --sky-ink:    #0A4C7D;
+
+  /* ┌────────────────────────────────────────────────┐
+     │  صورتك هنا 👇  حطّها جنب الملف وغيّر الاسم بس   │
+     └────────────────────────────────────────────────┘ */
+  --photo: url("my-photo.jpg");
+
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-in:  cubic-bezier(.55,0,.65,1);
+  --ease-pop: cubic-bezier(.34,1.56,.64,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0; overflow:hidden;
+  background:#14181F;
+  color:var(--ink);
+  font-family:"Tajawal","Segoe UI",Tahoma,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ═══ المسرح: ١٩٢٠×١٠٨٠ يتحجّم ليملأ الشاشة ═══════════════════════ */
+#viewport{
+  position:fixed; inset:0; overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #1E2532 0%, #14181F 60%, #0E1116 100%);
+  perspective:2400px;
+}
+/* المسرح متمركز بإحداثيات صريحة — توسيط الـgrid كان بيفشل لما الشاشة
+   أضيق من ١٩٢٠px فالشريحة كانت بتطلع بره الشاشة على الموبايل */
+#stage{
+  position:absolute; top:50%; left:50%;
+  width:1920px; height:1080px;
+  transform:translate(-50%,-50%);
+  transform-origin:50% 50%;
+  transform-style:preserve-3d;
+  box-shadow:0 60px 140px -40px rgba(0,0,0,.85);
+}
+
+/* ═══ الشريحة ═════════════════════════════════════════════════════ */
+.slide{
+  position:absolute; inset:0;
+  padding:78px 116px 104px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 1.5px 1.5px, rgba(30,42,70,.055) 1.4px, transparent 2.1px) 0 0/26px 26px,
+    linear-gradient(168deg, var(--paper) 0%, var(--paper-2) 100%);
+  opacity:0; visibility:hidden; pointer-events:none;
+  backface-visibility:hidden;
+}
+.slide.is-active{ opacity:1; visibility:visible; pointer-events:auto; z-index:3; }
+.slide.is-leaving{ visibility:visible; z-index:2; }
+
+/* حافة مطبوعة + خط هامش أحمر خفيف */
+.slide::after{
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:40;
+  box-shadow:inset 0 0 0 1px rgba(30,42,70,.07), inset 0 40px 70px -60px rgba(30,42,70,.4);
+}
+.slide::before{
+  content:""; position:absolute; top:0; bottom:0; right:64px; width:2px; z-index:0;
+  background:linear-gradient(180deg, transparent 0, rgba(255,77,109,.4) 8%, rgba(255,77,109,.4) 92%, transparent 100%);
+}
+.slide.no-rule::before{ display:none; }
+
+/* ═══ انتقالات الشرائح ════════════════════════════════════════════ */
+.slide.in-fwd { animation: inFwd  .78s var(--ease-out) both; }
+.slide.out-fwd{ animation: outFwd .62s var(--ease-in)  both; }
+.slide.in-bwd { animation: inBwd  .78s var(--ease-out) both; }
+.slide.out-bwd{ animation: outBwd .62s var(--ease-in)  both; }
+
+/* في RTL: الجاي بييجي من الشمال، والرايح بيخرج ناحية اليمين */
+@keyframes inFwd{
+  from{ opacity:0; transform:translate3d(-13%,0,-420px) rotateY(11deg) scale(.94); filter:blur(9px); }
+  60% { opacity:1; }
+  to  { opacity:1; transform:none; filter:blur(0); }
+}
+@keyframes outFwd{
+  from{ opacity:1; transform:none; filter:blur(0); }
+  to  { opacity:0; transform:translate3d(11%,0,-520px) rotateY(-9deg) scale(.92); filter:blur(11px); }
+}
+@keyframes inBwd{
+  from{ opacity:0; transform:translate3d(13%,0,-420px) rotateY(-11deg) scale(.94); filter:blur(9px); }
+  60% { opacity:1; }
+  to  { opacity:1; transform:none; filter:blur(0); }
+}
+@keyframes outBwd{
+  from{ opacity:1; transform:none; filter:blur(0); }
+  to  { opacity:0; transform:translate3d(-11%,0,-520px) rotateY(9deg) scale(.92); filter:blur(11px); }
+}
+
+/* ═══ محرّك حركة العناصر ══════════════════════════════════════════ */
+[data-anim]{ opacity:0; will-change:transform,opacity; }
+.is-active [data-anim]{
+  animation-duration:.78s;
+  animation-timing-function:var(--ease-out);
+  animation-fill-mode:both;
+  animation-delay:var(--d,0s);
+}
+.is-active [data-anim="rise"] { animation-name:aRise; }
+.is-active [data-anim="drop"] { animation-name:aDrop; }
+.is-active [data-anim="left"] { animation-name:aLeft; }
+.is-active [data-anim="right"]{ animation-name:aRight; }
+.is-active [data-anim="pop"]  { animation-name:aPop; animation-timing-function:var(--ease-pop); }
+.is-active [data-anim="tilt"] { animation-name:aTilt; animation-timing-function:var(--ease-pop); }
+.is-active [data-anim="wipe"] { animation-name:aWipe; animation-duration:.95s; }
+.is-active [data-anim="fade"] { animation-name:aFade; }
+.is-active [data-anim="stamp"]{ animation-name:aStamp; animation-duration:.62s; animation-timing-function:var(--ease-pop); }
+.is-active [data-anim="unroll"]{ animation-name:aUnroll; animation-duration:.85s; }
+
+@keyframes aRise { from{opacity:0; transform:translateY(46px) scale(.985)} to{opacity:1; transform:none} }
+@keyframes aDrop { from{opacity:0; transform:translateY(-40px)} to{opacity:1; transform:none} }
+@keyframes aLeft { from{opacity:0; transform:translateX(-64px)} to{opacity:1; transform:none} }
+@keyframes aRight{ from{opacity:0; transform:translateX(64px)}  to{opacity:1; transform:none} }
+@keyframes aPop  { from{opacity:0; transform:scale(.7) rotate(-4deg)} to{opacity:1; transform:none} }
+@keyframes aTilt { from{opacity:0; transform:translateY(38px) rotate(-6deg) scale(.92)} to{opacity:1; transform:none} }
+@keyframes aFade { from{opacity:0} to{opacity:1} }
+@keyframes aWipe {
+  from{ opacity:1; clip-path:inset(0 0 0 100%); }
+  to  { opacity:1; clip-path:inset(0 0 0 0); }
+}
+@keyframes aUnroll{
+  from{ opacity:1; clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%); transform:rotate(-.9deg) }
+  to  { opacity:1; clip-path:polygon(0 0,100% 0,100% 100%,0 100%);       transform:rotate(-.9deg) }
+}
+@keyframes aStamp{
+  0%  { opacity:0; transform:scale(1.55) rotate(-9deg); filter:blur(6px); }
+  55% { opacity:1; transform:scale(.965) rotate(1.2deg); filter:blur(0); }
+  75% { transform:scale(1.02) rotate(-.6deg); }
+  100%{ opacity:1; transform:none; }
+}
+
+/* قلم التحديد بيتمرّ */
+.hl{
+  background-repeat:no-repeat; background-size:0% .82em; background-position:0 .6em;
+  padding:0 .2em; font-weight:700;
+  -webkit-box-decoration-break:clone; box-decoration-break:clone;
+}
+.is-active .hl{ animation:aMark 1.05s var(--ease-out) both; animation-delay:var(--d,.5s); }
+@keyframes aMark{ from{background-size:0% .82em} to{background-size:100% .82em} }
+.hl-sun  { background-image:linear-gradient(100deg, rgba(255,201,60,0) 0 1%, rgba(255,201,60,.9) 1% 99%, rgba(255,201,60,0) 99%); }
+.hl-mint { background-image:linear-gradient(100deg, rgba(0,194,168,0) 0 1%,  rgba(0,194,168,.45) 1% 99%, rgba(0,194,168,0) 99%); }
+.hl-berry{ background-image:linear-gradient(100deg, rgba(255,77,109,0) 0 1%, rgba(255,77,109,.38) 1% 99%, rgba(255,77,109,0) 99%); }
+.hl-sky  { background-image:linear-gradient(100deg, rgba(47,168,255,0) 0 1%, rgba(47,168,255,.38) 1% 99%, rgba(47,168,255,0) 99%); }
+
+/* رسم مسارات SVG */
+.draw{ stroke-dasharray:var(--len,1400); stroke-dashoffset:var(--len,1400); }
+.is-active .draw{ animation:aDraw 1.9s var(--ease-out) both; animation-delay:var(--d,.3s); }
+@keyframes aDraw{ to{ stroke-dashoffset:0; } }
+
+/* الأجزاء المتتابعة داخل الشريحة */
+.frag{ opacity:0; transform:translateY(30px) scale(.985); transition:opacity .55s var(--ease-out), transform .55s var(--ease-out); }
+.frag.on{ opacity:1; transform:none; }
+.frag.pop{ transform:scale(.8) rotate(-4deg); }
+.frag.pop.on{ transform:none; }
+
+@media (prefers-reduced-motion:reduce){
+  .slide.in-fwd,.slide.out-fwd,.slide.in-bwd,.slide.out-bwd{ animation-duration:.01ms !important; }
+  .is-active [data-anim], .is-active .hl, .is-active .draw{ animation-duration:.01ms !important; animation-delay:0s !important; }
+  .frag{ transition-duration:.01ms; }
+}
+
+/* ═══ شرائط الواشي تيب ════════════════════════════════════════════ */
+.tape{
+  position:absolute; height:38px; opacity:.93; z-index:6;
+  box-shadow:0 6px 14px rgba(30,42,70,.16);
+  mask-image:linear-gradient(90deg, transparent 0 4px, #000 4px calc(100% - 4px), transparent calc(100% - 4px));
+}
+.tape::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,0) 55%); }
+.tp-sun  { background:repeating-linear-gradient(-58deg, var(--sun) 0 20px, #FFE49A 20px 40px); }
+.tp-mint { background:repeating-linear-gradient(-58deg, var(--mint) 0 17px, #9DF0E4 17px 34px); }
+.tp-berry{ background:radial-gradient(circle at 11px 11px, rgba(255,255,255,.85) 5px, transparent 5.5px) 0 0/26px 26px, var(--berry); }
+.tp-sky  { background:var(--sky); }
+.t1{ top:-12px; right:210px; width:250px; transform:rotate(-3deg); }
+.t2{ top:-14px; left:150px;  width:190px; transform:rotate(4.4deg); }
+.t3{ bottom:56px; left:-40px; width:220px; transform:rotate(-6deg); }
+.t4{ top:430px; left:-52px;  width:170px; transform:rotate(8deg); }
+
+/* ═══ ترويسة الشريحة ══════════════════════════════════════════════ */
+.head{ position:relative; z-index:5; margin-bottom:34px; }
+.ghost{
+  position:absolute; z-index:-1; top:-58px; left:20px;
+  font-family:"Rakkas",serif; font-size:250px; line-height:1;
+  color:transparent; -webkit-text-stroke:5px rgba(122,92,255,.16);
+  user-select:none; pointer-events:none;
+}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:14px;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:25px;
+  color:#fff; background:var(--ink);
+  padding:8px 30px 10px; border-radius:999px;
+  transform:rotate(-1deg);
+  box-shadow:5px 5px 0 rgba(30,42,70,.18);
+}
+.eyebrow.v{ background:var(--violet); }
+.eyebrow.b{ background:var(--berry); }
+.eyebrow.m{ background:var(--mint); color:#03332C; }
+.eyebrow.s{ background:var(--sun); color:var(--sun-ink); }
+
+h1.t{ font-family:"Rakkas",serif; font-weight:400; font-size:100px; line-height:1.22; margin:28px 0 0; color:var(--ink); }
+h2.t{ font-family:"Rakkas",serif; font-weight:400; font-size:84px;  line-height:1.2;  margin:26px 0 0; color:var(--ink); }
+h2.t.sm{ font-size:70px; }
+.pop{ color:var(--berry); text-shadow:5px 5px 0 var(--sun); }
+.pop.v{ color:var(--violet); text-shadow:7px 7px 0 var(--sun); }
+.sub{ font-family:"Marhey",sans-serif; font-weight:400; font-size:30px; color:var(--ink-soft); margin:14px 0 0; }
+.swash{ display:block; margin:14px 0 0; color:var(--sky); }
+
+/* ═══ نصوص المحتوى ════════════════════════════════════════════════ */
+.body{ position:relative; z-index:5; }
+p.big{ font-family:"Marhey",sans-serif; font-weight:500; font-size:34px; line-height:1.55; color:var(--ink); margin:0 0 18px; max-width:1500px; }
+p.mid{ font-size:30px; line-height:1.6; margin:0 0 16px; max-width:1480px; }
+p.sml{ font-size:25px; line-height:1.55; color:var(--ink-soft); margin:0; }
+strong,b{ font-weight:800; }
+
+.aside{
+  position:relative; padding-right:38px; margin-top:22px;
+  font-family:"Marhey",sans-serif; font-size:24px; line-height:1.5; color:var(--ink-soft);
+}
+.aside::before{ content:"✳"; position:absolute; right:0; top:0; color:var(--berry); font-size:26px; }
+
+/* ═══ الريبون ═════════════════════════════════════════════════════ */
+.ribbon{
+  display:inline-flex; align-items:center; gap:18px;
+  padding:10px 54px 12px 62px;
+  clip-path:polygon(0 0, 100% 0, calc(100% - 30px) 50%, 100% 100%, 0 100%, 30px 50%);
+  font-family:"Lalezar",cursive,sans-serif; font-size:38px; line-height:1.3; color:#fff;
+  transform:rotate(-.9deg); margin:0 0 26px;
+}
+.ribbon i{ font-family:"Marhey",sans-serif; font-style:normal; font-weight:700; font-size:28px; opacity:.72; }
+.r-sun{ background:var(--sun); color:var(--sun-ink); }
+.r-violet{ background:var(--violet); }
+.r-berry{ background:var(--berry); }
+.r-sky{ background:var(--sky); }
+.r-mint{ background:var(--mint); color:#03332C; }
+
+/* ═══ الملاحظات الملوّنة ══════════════════════════════════════════ */
+.callout{
+  position:relative; padding:26px 108px 28px 40px;
+  border-radius:64px 20px 58px 26px / 48px 62px 26px 54px;
+  transform:rotate(-.5deg);
+}
+.callout .badge{
+  position:absolute; top:50%; right:-34px; transform:translateY(-50%) rotate(-8deg);
+  width:86px; height:86px; display:grid; place-items:center;
+  border-radius:50%; font-size:40px; box-shadow:5px 7px 0 rgba(30,42,70,.18);
+}
+.callout .lbl{ display:block; font-family:"Marhey",sans-serif; font-weight:700; font-size:25px; margin-bottom:6px; }
+.callout p{ margin:0; font-size:28px; line-height:1.5; }
+.c-sky{ background:#E8F4FF; }  .c-sky .badge{ background:var(--sky); color:#fff; }   .c-sky .lbl{ color:var(--sky-ink); }
+.c-mint{ background:#E4FAF6; } .c-mint .badge{ background:var(--mint); color:#03332C; }.c-mint .lbl{ color:var(--mint-ink); }
+.c-berry{ background:#FFECF0; }.c-berry .badge{ background:var(--berry); color:#fff; }.c-berry .lbl{ color:var(--berry-ink); }
+.c-sun{ background:#FFF4D6; }  .c-sun .badge{ background:var(--sun); color:var(--sun-ink); } .c-sun .lbl{ color:var(--sun-ink); }
+
+/* ═══ الشبكات ═════════════════════════════════════════════════════ */
+.g2{ display:grid; grid-template-columns:1fr 1fr; gap:34px; }
+.g3{ display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+.g5{ display:grid; grid-template-columns:repeat(5,1fr); gap:24px; }
+.split{ display:grid; grid-template-columns:1.15fr .85fr; gap:52px; align-items:start; }
+
+/* ═══ الأهداف ═════════════════════════════════════════════════════ */
+.goal{ display:grid; grid-template-columns:auto 1fr; gap:26px; align-items:start; margin-bottom:26px; }
+.goal .n{
+  width:74px; height:74px; display:grid; place-items:center; border-radius:50%;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:32px; color:#fff;
+  box-shadow:5px 6px 0 rgba(30,42,70,.16);
+}
+.goal:nth-child(1) .n{ background:var(--berry); }
+.goal:nth-child(2) .n{ background:var(--sky); }
+.goal:nth-child(3) .n{ background:var(--mint); color:#03332C; }
+.goal p{ margin:0; font-size:31px; line-height:1.5; }
+
+/* ═══ الفكرة الكبرى ═══════════════════════════════════════════════ */
+.bigidea{
+  position:relative; padding:34px 128px 36px 44px;
+  background:var(--ink); color:var(--paper);
+  border-radius:54px 24px 48px 28px / 40px 54px 28px 44px;
+  transform:rotate(.4deg); box-shadow:10px 12px 0 rgba(30,42,70,.2);
+}
+.bigidea .lbl{ display:block; font-family:"Marhey",sans-serif; font-weight:700; font-size:25px; color:var(--sun); margin-bottom:8px; }
+.bigidea p{ margin:0; color:var(--paper); font-size:38px; line-height:1.5; font-family:"Marhey",sans-serif; font-weight:500; }
+.bigidea .bulb{
+  position:absolute; top:50%; right:-36px; transform:translateY(-50%) rotate(9deg);
+  width:92px; height:92px; display:grid; place-items:center; border-radius:50%;
+  background:var(--sun); font-size:44px; box-shadow:5px 7px 0 rgba(30,42,70,.25);
+}
+
+/* ═══ سحابة المصطلحات ═════════════════════════════════════════════ */
+.terms{ display:flex; flex-wrap:wrap; gap:16px; }
+.terms span{
+  padding:10px 30px 12px; border-radius:999px; background:#fff;
+  font-family:"Marhey",sans-serif; font-weight:600; font-size:27px; border:3px solid;
+}
+.terms span:nth-child(5n+1){ border-color:var(--berry);  color:var(--berry-ink);  transform:rotate(-1.2deg); }
+.terms span:nth-child(5n+2){ border-color:var(--sky);    color:var(--sky-ink);    transform:rotate(.9deg); }
+.terms span:nth-child(5n+3){ border-color:var(--mint);   color:var(--mint-ink);   transform:rotate(-.6deg); }
+.terms span:nth-child(5n+4){ border-color:var(--violet); color:var(--violet-ink); transform:rotate(1.1deg); }
+.terms span:nth-child(5n+5){ border-color:var(--sun);    color:var(--sun-ink);    transform:rotate(-.9deg); }
+
+/* ═══ بطاقات المصطلحات ════════════════════════════════════════════ */
+.gterm{
+  padding:24px 30px 26px; border-radius:34px 12px 34px 12px; background:#fff;
+  box-shadow:inset 0 0 0 4px rgba(30,42,70,.13);
+}
+.gterm b{ display:block; font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:34px; color:var(--ink); }
+.gterm em{ font-style:normal; font-family:"Marhey",sans-serif; font-size:21px; color:var(--ink-faint); }
+.gterm span{ display:block; margin-top:8px; font-size:25px; line-height:1.45; color:var(--ink-soft); }
+
+/* ═══ الخط الزمني ═════════════════════════════════════════════════ */
+.tl{ position:relative; padding-right:22px; }
+.tl .spine{
+  position:absolute; top:16px; bottom:16px; right:96px; width:8px; border-radius:6px;
+  background:linear-gradient(180deg, var(--berry), var(--sun), var(--mint), var(--sky), var(--violet));
+  transform-origin:top center;
+}
+.is-active .tl .spine{ animation:aSpine 1.25s var(--ease-out) both; animation-delay:.25s; }
+@keyframes aSpine{ from{ transform:scaleY(0) } to{ transform:scaleY(1) } }
+.era{ position:relative; z-index:2; display:grid; grid-template-columns:196px 1fr; gap:34px; align-items:start; margin-bottom:16px; }
+.era .yr{
+  display:grid; place-items:center; text-align:center; min-height:104px;
+  border-radius:50% 48% 52% 50% / 50% 52% 48% 50%;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:23px; line-height:1.3;
+  padding:14px 12px; border:5px solid; background:var(--paper);
+}
+.era h5{ margin:0 0 6px; display:flex; align-items:center; gap:16px; font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:38px; }
+.era p{ margin:0; font-size:26px; line-height:1.45; max-width:1180px; }
+.era .imp{ display:inline-block; margin-top:8px; font-family:"Marhey",sans-serif; font-weight:600; font-size:23px; padding:5px 20px; border-radius:999px; }
+.e1 .yr{ border-color:var(--berry);  color:var(--berry-ink); }  .e1 h5{ color:var(--berry-ink); }  .e1 .imp{ background:#FFE1E7; color:var(--berry-ink); }
+.e2 .yr{ border-color:var(--sun);    color:var(--sun-ink); }    .e2 h5{ color:var(--sun-ink); }    .e2 .imp{ background:#FFF0C4; color:var(--sun-ink); }
+.e3 .yr{ border-color:var(--mint);   color:var(--mint-ink); }   .e3 h5{ color:var(--mint-ink); }   .e3 .imp{ background:#D6F7F1; color:var(--mint-ink); }
+.e4 .yr{ border-color:var(--sky);    color:var(--sky-ink); }    .e4 h5{ color:var(--sky-ink); }    .e4 .imp{ background:#DCEEFF; color:var(--sky-ink); }
+.e5 .yr{ border-color:var(--violet); color:var(--violet-ink); } .e5 h5{ color:var(--violet-ink); } .e5 .imp{ background:#E9E2FF; color:var(--violet-ink); }
+
+/* ═══ سلسلة المكان (غرفة ← مكتب ← ...) ════════════════════════════ */
+.chain{ display:flex; align-items:center; justify-content:center; gap:22px; flex-wrap:wrap; }
+.chain .lnk{
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  padding:24px 30px 22px; border-radius:28px; background:#fff; min-width:210px;
+  box-shadow:inset 0 0 0 4px rgba(30,42,70,.12), 6px 8px 0 rgba(30,42,70,.10);
+}
+.chain .lnk i{ font-style:normal; font-size:52px; line-height:1; }
+.chain .lnk b{ font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:34px; }
+.chain .arw{ font-size:44px; color:var(--ink-faint); }
+.chain .lnk:nth-child(1) b{ color:var(--berry-ink); }
+.chain .lnk:nth-child(3) b{ color:var(--sun-ink); }
+.chain .lnk:nth-child(5) b{ color:var(--mint-ink); }
+.chain .lnk:nth-child(7) b{ color:var(--sky-ink); }
+.chain .lnk:nth-child(9) b{ color:var(--violet-ink); }
+
+/* ═══ التحوّلات الخمسة ════════════════════════════════════════════ */
+.shift{ text-align:center; }
+.shift .ico{
+  width:150px; height:150px; margin:0 auto 18px; display:grid; place-items:center;
+  border-radius:50%; box-shadow:8px 10px 0 rgba(30,42,70,.14);
+}
+.shift .ico svg{ width:82px; height:82px; }
+.shift b{ display:block; font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:32px; line-height:1.2; }
+.shift span{ display:block; margin-top:10px; font-size:24px; line-height:1.45; color:var(--ink-soft); }
+.s1 .ico{ background:#FFE1E7; } .s1 b{ color:var(--berry-ink); }
+.s2 .ico{ background:#DCEEFF; } .s2 b{ color:var(--sky-ink); }
+.s3 .ico{ background:#D6F7F1; } .s3 b{ color:var(--mint-ink); }
+.s4 .ico{ background:#E9E2FF; } .s4 b{ color:var(--violet-ink); }
+.s5 .ico{ background:#FFF0C4; } .s5 b{ color:var(--sun-ink); }
+
+/* ═══ الطرفية ولّا السحابية ═══════════════════════════════════════ */
+.edge{ display:grid; grid-template-columns:1fr auto 1fr; gap:34px; align-items:center; }
+.lane{ border-radius:38px; padding:32px 38px 34px; }
+.lane h6{ margin:0 0 10px; font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:44px; }
+.lane p{ margin:0; font-size:28px; line-height:1.5; }
+.lane .ms{ display:inline-block; margin-top:16px; font-family:"Marhey",sans-serif; font-weight:700; font-size:24px; padding:6px 24px; border-radius:999px; }
+.lane-a{ background:#E4FAF6; } .lane-a h6{ color:var(--mint-ink); } .lane-a .ms{ background:var(--mint); color:#03332C; }
+.lane-b{ background:#F2F1EC; } .lane-b h6{ color:var(--ink-soft); } .lane-b .ms{ background:#D8D6CE; color:var(--ink-soft); }
+.vs{
+  width:96px; height:96px; display:grid; place-items:center; border-radius:50%;
+  background:var(--ink); color:var(--sun);
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:30px; transform:rotate(-7deg);
+  box-shadow:6px 8px 0 rgba(30,42,70,.2);
+}
+
+/* ═══ التقنيات الناشئة ════════════════════════════════════════════ */
+.tech .scene{ height:250px; border-radius:44px 44px 14px 14px; display:grid; place-items:center; overflow:hidden; }
+.tech h5{ margin:20px 0 8px; font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:40px; }
+.tech p{ margin:0; font-size:25px; line-height:1.5; color:var(--ink-soft); }
+.t-1 .scene{ background:#E6F3FF; } .t-1 h5{ color:var(--sky-ink); }
+.t-2 .scene{ background:#FFEDF1; } .t-2 h5{ color:var(--berry-ink); }
+.t-3 .scene{ background:#EDE7FF; } .t-3 h5{ color:var(--violet-ink); }
+
+/* ═══ صندوق السؤال ════════════════════════════════════════════════ */
+.qbox{
+  border-radius:44px; padding:32px 42px 36px; background:#fff;
+  box-shadow:inset 0 0 0 6px var(--ink), 10px 12px 0 rgba(30,42,70,.13);
+}
+.qbox .qh{ display:flex; align-items:center; gap:20px; margin-bottom:18px; font-family:"Lalezar",cursive,sans-serif; font-size:38px; color:var(--ink); }
+.qbox .mk{ font-family:"Marhey",sans-serif; font-weight:700; font-size:22px; background:var(--berry); color:#fff; padding:5px 20px; border-radius:999px; }
+.qbox p{ margin:0 0 14px; font-size:29px; line-height:1.5; }
+.opts{ list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; }
+.opts li{ font-size:26px; line-height:1.45; padding:12px 74px 12px 22px; position:relative; border-radius:20px; background:#FCFAF3; }
+.opts li b{ position:absolute; right:22px; top:12px; font-family:"Marhey",sans-serif; font-weight:700; font-size:24px; color:var(--ink-faint); }
+.opts li.right{ background:#E4FAF6; box-shadow:inset 0 0 0 3px var(--mint); }
+.opts li.right b{ color:var(--mint-ink); }
+.answer{ margin-top:20px; padding:20px 30px; border-radius:26px; background:#E4FAF6; font-size:26px; line-height:1.5; }
+.answer strong{ color:var(--mint-ink); }
+
+/* ═══ تنبيه المعلّم ═══════════════════════════════════════════════ */
+.trap{
+  border-radius:44px 16px 44px 16px; overflow:hidden;
+  background:linear-gradient(180deg,#FFFDF6 0%, #FFF4D9 100%);
+  box-shadow:inset 0 0 0 6px var(--ink), 10px 12px 0 rgba(30,42,70,.15);
+  transform:rotate(-.3deg);
+}
+.trap .th{
+  display:flex; align-items:center; gap:20px; background:var(--ink); color:var(--sun);
+  padding:16px 36px 18px; font-family:"Lalezar",cursive,sans-serif; font-size:42px; line-height:1.25;
+}
+.trap .th i{ font-style:normal; font-size:40px; }
+.trap .th em{ margin-right:auto; font-style:normal; font-family:"Marhey",sans-serif; font-weight:700; font-size:24px; color:rgba(255,252,242,.66); }
+.trap .tb{ padding:26px 38px 30px; }
+.trap .tb p{ margin:0 0 14px; font-size:29px; line-height:1.5; }
+.trap .tb ol{ margin:0; padding:0 34px 0 0; }
+.trap .tb ol li{ font-size:28px; line-height:1.5; margin-bottom:10px; }
+.trap .tb ol li::marker{ font-family:"Marhey",sans-serif; font-weight:700; color:var(--berry); }
+.askform{ margin-top:18px; padding:22px 32px 24px; border-radius:30px 10px 30px 10px; background:#fff; box-shadow:inset 0 0 0 4px rgba(255,77,109,.38); }
+.askform b{ display:block; font-family:"Marhey",sans-serif; font-weight:700; font-size:23px; color:var(--berry-ink); margin-bottom:6px; }
+.askform q{ font-size:29px; line-height:1.5; quotes:none; color:var(--ink); font-weight:700; }
+.askform .mk{ display:inline-block; margin-right:16px; font-family:"Marhey",sans-serif; font-weight:700; font-size:21px; background:var(--sun); color:var(--sun-ink); padding:4px 20px; border-radius:999px; vertical-align:middle; }
+.trapline{ display:flex; gap:18px; align-items:flex-start; margin-top:18px; font-size:27px; line-height:1.5; color:var(--berry-ink); }
+.trapline b{ flex:0 0 auto; margin-top:3px; font-family:"Marhey",sans-serif; font-weight:700; font-size:22px; background:#FFE1E7; color:var(--berry-ink); padding:5px 22px; border-radius:999px; }
+.trapline.ok{ color:var(--mint-ink); } .trapline.ok b{ background:#D6F7F1; color:var(--mint-ink); }
+
+/* ═══ خريطة الفخاخ ════════════════════════════════════════════════ */
+.tmap{ width:100%; border-collapse:separate; border-spacing:0; font-size:24px; }
+.tmap th{ font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:30px; background:var(--ink); color:var(--sun); padding:14px 24px; text-align:right; }
+.tmap th:first-child{ border-radius:0 20px 0 0; } .tmap th:last-child{ border-radius:20px 0 0 0; }
+.tmap td{ padding:13px 24px; line-height:1.4; vertical-align:top; background:#fff; border-bottom:3px solid rgba(30,42,70,.10); }
+.tmap tr:nth-child(even) td{ background:#FFFCF2; }
+.tmap td.a{ width:24%; font-weight:800; color:var(--violet-ink); }
+.tmap td.c{ width:32%; color:var(--berry-ink); font-weight:600; }
+
+/* ═══ الخلاصة والاقتباس ═══════════════════════════════════════════ */
+.recap{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+.recap div{ border-radius:32px; padding:26px 24px 28px; text-align:center; }
+.recap b{ display:block; font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:38px; margin-bottom:8px; }
+.recap span{ font-size:24px; line-height:1.4; }
+.recap div:nth-child(1){ background:#FFE1E7; color:var(--berry-ink); }
+.recap div:nth-child(2){ background:#FFF0C4; color:var(--sun-ink); }
+.recap div:nth-child(3){ background:#D6F7F1; color:var(--mint-ink); }
+.recap div:nth-child(4){ background:#E9E2FF; color:var(--violet-ink); }
+.pq{ position:relative; text-align:center; padding:0 90px; }
+.pq .qm{ position:absolute; top:-52px; right:24px; font-family:"Rakkas",serif; font-size:170px; line-height:1; color:rgba(255,201,60,.5); }
+.pq q{ font-family:"Aref Ruqaa",serif; font-size:44px; line-height:1.6; color:var(--violet-ink); quotes:none; }
+
+/* ═══ صورتك: الإطار ═══════════════════════════════════════════════ */
+.photo{
+  position:relative; width:var(--ps,360px); height:var(--ps,360px);
+  border-radius:50%; overflow:hidden; background:#F4F1E7;
+  border:9px solid var(--ink); box-shadow:16px 18px 0 var(--sky);
+}
+.photo::before{
+  content:"صورتك هنا"; position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:26px;
+  font-family:"Marhey",sans-serif; font-size:26px; line-height:1.7; color:var(--ink-faint);
+}
+.photo::after{ content:""; position:absolute; inset:0; background:var(--photo) center 24% / cover no-repeat; }
+.photo-tape{
+  position:absolute; z-index:3; top:-16px; left:50%; transform:translateX(-50%) rotate(-7deg);
+  width:170px; height:44px; opacity:.94;
+  background:repeating-linear-gradient(-58deg, var(--mint) 0 17px, #9DF0E4 17px 34px);
+  box-shadow:0 5px 12px rgba(30,42,70,.18);
+}
+
+/* ═══ لوحة الغلاف ═════════════════════════════════════════════════ */
+.cover h1.t{ line-height:1.46; }
+.cover{ display:grid; grid-template-columns:1.08fr .92fr; gap:70px; align-items:center; height:100%; }
+.lockup{ display:flex; flex-direction:column; align-items:center; line-height:1.26; margin:0; font-family:"Rakkas",serif; font-weight:400; transform:rotate(-2deg); }
+.lockup .w1{ font-size:74px; color:transparent; -webkit-text-stroke:5px var(--ink); text-shadow:8px 8px 0 rgba(255,255,255,.9); }
+.lockup .w2{ font-size:150px; color:var(--ink); text-shadow:6px 6px 0 #fff, 13px 13px 0 var(--berry); }
+.burstwrap{ position:relative; display:grid; place-items:center; }
+.burst{
+  position:absolute; width:700px; height:700px;
+  border-radius:48% 52% 51% 49% / 51% 48% 52% 49%;
+  background:radial-gradient(circle at 42% 34%, #FFE9A6 0%, var(--sun) 58%, #FFAA10 100%);
+  border:8px solid var(--ink); box-shadow:22px 24px 0 var(--berry), 22px 24px 0 8px var(--ink);
+  transform:rotate(-5deg);
+}
+.who{ font-family:"Rakkas",serif; font-weight:400; font-size:62px; line-height:1.2; color:var(--ink); margin:26px 0 0; }
+.role{ display:flex; align-items:center; gap:20px; font-family:"Marhey",sans-serif; font-weight:600; font-size:27px; color:var(--ink-soft); margin:0; }
+.role::before,.role::after{ content:""; width:60px; height:4px; background:var(--ink-faint); }
+
+/* ═══ شرائح التواصل ═══════════════════════════════════════════════ */
+.links{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.links .chip{
+  display:inline-flex; align-items:center; gap:14px;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:26px;
+  color:var(--ink); background:#fff; border:4px solid var(--ink); border-radius:999px;
+  padding:10px 28px 12px; box-shadow:6px 6px 0 rgba(30,42,70,.18);
+}
+.links .ico{ width:34px; height:34px; display:grid; place-items:center; border-radius:10px; color:#fff; flex:0 0 auto; }
+.links .yt .ico{ background:#FF0033; }
+.links .fb .ico{ background:#1877F2; border-radius:50%; }
+.links .wa .ico{ background:#25D366; border-radius:50%; color:#08351A; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   واجهة العرض (شريط سفلي · تقدّم · شعار · صورة المحاضر · نظرة عامة)
+   ═══════════════════════════════════════════════════════════════════ */
+#hud{ position:absolute; inset:0; z-index:60; pointer-events:none; }
+
+/* شريط التقدّم بخط قلم */
+#bar{ position:absolute; right:0; left:0; bottom:0; height:10px; background:rgba(30,42,70,.10); }
+#bar i{ display:block; height:100%; width:0; background:linear-gradient(90deg,var(--berry),var(--sun) 38%,var(--mint) 68%,var(--sky)); transition:width .6s var(--ease-out); }
+
+/* شريط الهوية أسفل كل شريحة */
+#foot{
+  position:absolute; right:116px; left:116px; bottom:26px;
+  display:flex; align-items:stretch; border-radius:26px 10px 26px 10px; overflow:hidden;
+  background:linear-gradient(178deg,#33426A 0%, var(--ink) 58%);
+  color:var(--paper); box-shadow:7px 8px 0 rgba(30,42,70,.22);
+  transform:rotate(-.25deg);
+}
+#foot::before{ content:""; position:absolute; top:0; right:0; left:0; height:4px; background:linear-gradient(90deg,var(--berry),var(--sun) 38%,var(--mint) 68%,var(--sky)); opacity:.9; }
+#foot .fbook{ flex:0 0 auto; padding:12px 26px 13px 24px; display:flex; flex-direction:column; justify-content:center; }
+#foot .fbook b{ font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:27px; color:var(--sun); }
+#foot .fbook span{ font-family:"Marhey",sans-serif; font-weight:600; font-size:17px; color:rgba(255,252,242,.62); }
+#foot .fbrand{ flex:1 1 auto; min-width:0; padding:8px 20px 10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  background:repeating-linear-gradient(-38deg, rgba(255,252,242,.05) 0 3px, transparent 3px 20px); }
+#foot .mrow{ display:flex; align-items:center; gap:38px; }
+#foot .star{ font-size:20px; color:rgba(255,201,60,.72); }
+#foot .fmark{
+  display:inline-block; font-family:"Rakkas",serif; font-weight:400;
+  font-size:44px; line-height:1.7; letter-spacing:.03em; color:var(--sun);
+  text-shadow:3px 3px 0 rgba(255,77,109,.55); transform:scaleX(1.12); white-space:nowrap;
+}
+#foot .flinks{ display:flex; align-items:center; gap:16px; white-space:nowrap; }
+#foot .flinks span{ display:inline-flex; align-items:center; gap:9px; font-family:"Marhey",sans-serif; font-weight:700; font-size:17px; color:rgba(255,252,242,.92); }
+#foot .flinks .i{ width:24px; height:24px; display:grid; place-items:center; border-radius:7px; color:#fff; }
+#foot .flinks .yt .i{ background:#FF0033; } #foot .flinks .fb .i{ background:#1877F2; border-radius:50%; }
+#foot .flinks .wa .i{ background:#25D366; border-radius:50%; color:#08351A; }
+#foot .fdot{ width:6px; height:6px; border-radius:50%; background:rgba(255,252,242,.4); }
+#foot .fpage{ flex:0 0 auto; padding:10px 32px 12px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--sun); }
+#foot .fpage b{ font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:42px; line-height:1; color:#4A3200; }
+#foot .fpage span{ font-family:"Marhey",sans-serif; font-weight:700; font-size:16px; color:rgba(74,50,0,.72); }
+#foot .fsep{ flex:0 0 auto; width:4px; background:repeating-linear-gradient(180deg, rgba(255,252,242,.42) 0 7px, transparent 7px 16px); }
+body.hide-foot #foot{ opacity:0; }
+#foot{ transition:opacity .4s ease; }
+
+/* صورة المحاضر: جوّه شريط الهوية — مكان ثابت ما بيتعارضش مع أي محتوى */
+#foot .favatar{
+  flex:0 0 auto; align-self:center; margin:0 22px 0 4px;
+  width:58px; height:58px; border-radius:50%; overflow:hidden; position:relative;
+  border:3px solid var(--sun); background:#EFEADC;
+}
+#foot .favatar::after{ content:""; position:absolute; inset:0; background:var(--photo) center 24% / cover no-repeat; }
+body.no-pres #foot .favatar{ display:none; }
+
+/* منطقة الكاميرا لتسجيل OBS */
+#cam{
+  position:absolute; left:60px; bottom:130px; width:430px; height:430px; z-index:61;
+  border:5px dashed rgba(255,77,109,.75); border-radius:26px;
+  background:rgba(255,77,109,.06); display:none; place-items:center;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:24px; color:var(--berry-ink);
+}
+body.show-cam #cam{ display:grid; }
+
+
+/* أزرار التنقّل */
+#nav{ position:absolute; left:20px; top:50%; transform:translateY(-50%);
+      display:flex; flex-direction:column; gap:12px; pointer-events:auto; z-index:63; }
+#nav button{
+  width:56px; height:56px; border-radius:18px; border:4px solid var(--ink);
+  background:var(--paper); color:var(--ink); font-size:26px; cursor:pointer;
+  box-shadow:4px 5px 0 rgba(30,42,70,.2); transition:transform .15s ease;
+}
+#nav button:hover{ transform:translateY(-3px); }
+#nav button:active{ transform:translateY(1px); box-shadow:2px 2px 0 rgba(30,42,70,.2); }
+body.hide-ui #nav{ opacity:0; pointer-events:none; }
+#nav{ transition:opacity .35s ease; }
+
+/* ═══ نظرة عامة (شبكة الشرائح) ════════════════════════════════════ */
+#grid{
+  position:fixed; inset:0; z-index:200; display:none;
+  background:rgba(12,15,20,.94); overflow:auto; padding:44px;
+}
+body.grid-on #grid{ display:block; }
+#grid .gwrap{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; }
+#grid .gi{
+  position:relative; aspect-ratio:16/9; border-radius:14px; overflow:hidden; cursor:pointer;
+  background:linear-gradient(168deg,var(--paper),var(--paper-2));
+  border:4px solid transparent; transition:transform .2s ease, border-color .2s ease;
+  display:grid; place-items:center; text-align:center; padding:18px;
+}
+#grid .gi:hover{ transform:translateY(-5px); border-color:var(--sun); }
+#grid .gi.cur{ border-color:var(--berry); }
+#grid .gi b{ font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:26px; color:var(--ink); line-height:1.25; }
+#grid .gi i{ position:absolute; top:10px; right:12px; font-style:normal; font-family:"Marhey",sans-serif; font-weight:700; font-size:16px; color:var(--ink-faint); }
+#grid h3{ font-family:"Lalezar",cursive,sans-serif; color:var(--sun); font-size:34px; margin:0 0 22px; }
+
+/* ═══ لوحة الاختصارات ═════════════════════════════════════════════ */
+#help{
+  position:fixed; inset:0; z-index:210; display:none; place-items:center;
+  background:rgba(12,15,20,.92);
+}
+body.help-on #help{ display:grid; }
+#help .card{
+  background:var(--paper); border-radius:34px; padding:44px 54px; max-width:760px;
+  box-shadow:0 30px 90px rgba(0,0,0,.6); border:6px solid var(--ink);
+}
+#help h3{ font-family:"Lalezar",cursive,sans-serif; font-size:44px; margin:0 0 20px; color:var(--ink); }
+#help dl{ display:grid; grid-template-columns:auto 1fr; gap:14px 22px; margin:0; font-size:22px; }
+#help dt{ font-family:"Marhey",sans-serif; font-weight:700; background:var(--ink); color:var(--sun); padding:4px 16px; border-radius:10px; text-align:center; }
+#help dd{ margin:0; color:var(--ink-soft); align-self:center; }
+
+/* لافتة تدوير الموبايل */
+#rotate{
+  position:fixed; inset:0; z-index:400; display:none;
+  place-items:center; text-align:center; padding:24px;
+  background:linear-gradient(168deg,#1E2532,#0E1116); color:var(--paper);
+}
+body.portrait #rotate{ display:grid; }
+#rotate > div{ max-width:min(86vw,360px); margin:0 auto; }
+#rotate .ph{
+  width:96px; height:150px; border:6px solid var(--sun); border-radius:16px;
+  margin:0 auto 26px; position:relative;
+  animation:tilt 2.2s ease-in-out infinite;
+}
+#rotate .ph::after{ content:""; position:absolute; left:50%; bottom:9px; transform:translateX(-50%);
+  width:34px; height:5px; border-radius:3px; background:var(--sun); }
+@keyframes tilt{ 0%,40%{ transform:rotate(0) } 70%,100%{ transform:rotate(-90deg) } }
+#rotate b{ display:block; font-family:"Lalezar",cursive,sans-serif; font-size:34px; color:var(--sun); margin-bottom:10px; }
+#rotate span{ display:block; font-family:"Marhey",sans-serif; font-size:17px; line-height:1.75; color:rgba(255,252,242,.75); }
+#rotate i{ display:inline-block; margin-top:22px; font-style:normal; font-family:"Marhey",sans-serif;
+  font-size:16px; font-weight:700; color:var(--ink); background:var(--sun); padding:9px 22px; border-radius:999px; }
+
+/* على الشاشات الصغيرة: الأزرار أكبر عشان اللمس */
+@media (pointer:coarse){
+  #nav button{ width:74px; height:74px; font-size:32px; }
+}
+
+/* إخفاء المؤشر أثناء التسجيل */
+body.idle{ cursor:none; }
+</style>
+</head>
+<body>
+
+<div id="viewport">
+  <div id="stage">
+
+<!-- ══════════ ١ · الغلاف ══════════ -->
+<section class="slide no-rule" data-title="الغلاف" data-nofoot>
+  <span class="tape tp-sun t1"></span>
+  <span class="tape tp-berry t2"></span>
+  <span class="tape tp-mint t3"></span>
+  <div class="cover">
+    <div>
+      <span class="eyebrow" data-anim="drop">الفصل الأول &nbsp;•&nbsp; تكنولوجيا المعلومات والمجتمع</span>
+      <h1 class="t" data-anim="wipe" style="--d:.18s">تطوّر تكنولوجيا المعلومات<br><span class="pop">والتحوّل الاجتماعي</span></h1>
+      <p class="sub" data-anim="rise" style="--d:.55s">الدرس ١-١ &nbsp;·&nbsp; البرمجة والذكاء الاصطناعي &nbsp;·&nbsp; الصف الثاني بكالوريا</p>
+      <svg class="swash" width="470" height="26" viewBox="0 0 230 13" fill="none" aria-hidden="true" data-anim="fade" style="--d:.7s">
+        <path class="draw" style="--len:240" d="M3 8C30 2 44 11 72 6s36 6 64 0 34 7 62 1 26-3 26-3" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div style="margin-top:48px" data-anim="rise">
+        <p class="role">مـهـنـدس</p>
+        <h2 class="who">محمد ناجح</h2>
+      </div>
+      <div class="links" style="margin-top:24px" data-anim="rise">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> 01114840373</span>
+      </div>
+    </div>
+
+    <div class="burstwrap">
+      <span class="burst" data-anim="pop" style="--d:.1s"></span>
+      <div style="position:relative;z-index:2;display:grid;place-items:center;gap:58px">
+        <h2 class="lockup" data-anim="tilt" style="--d:.3s">
+          <span class="w1">بــن</span>
+          <span class="w2">ناجح</span>
+        </h2>
+        <div style="position:relative" data-anim="pop" style2="">
+          <span class="photo-tape"></span>
+          <div class="photo" style="--ps:250px" role="img" aria-label="صورة المهندس محمد ناجح"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ٢ · السؤال الرئيسي ══════════ -->
+<section class="slide" data-title="السؤال الرئيسي">
+  <span class="tape tp-sky t1"></span>
+  <span class="tape tp-sun t2"></span>
+  <header class="head">
+    <span class="ghost">؟</span>
+    <span class="eyebrow s" data-anim="drop">الدرس كله بيدور حوالين ده</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">السؤال <span class="pop">الرئيسي</span></h2>
+  </header>
+  <div class="body">
+    <div class="callout c-sun" style="padding:44px 120px 46px 52px" data-anim="unroll">
+      <span class="badge">❓</span>
+      <span class="lbl">السؤال الرئيسي للدرس</span>
+      <p style="font-family:Lalezar,cursive;font-size:50px;line-height:1.4">كيف تطوّرت تكنولوجيا المعلومات عبر مراحلها الرئيسية، وكيف غيّرت كل مرحلة المجتمع؟</p>
+    </div>
+    <p class="aside frag" style="margin-top:36px;font-size:29px">لو قدرت تجاوب عليه في آخر الحصة بكلامك إنت — تبقى فهمت الدرس.</p>
+
+    <div class="g3 frag" style="margin-top:44px">
+      <div class="callout c-berry" style="border-radius:38px 14px 34px 16px"><span class="badge">١</span><span class="lbl">المراحل</span><p>إيه اللي حصل؟</p></div>
+      <div class="callout c-sky"   style="border-radius:38px 14px 34px 16px"><span class="badge">٢</span><span class="lbl">الأثر</span><p>غيّر إيه فينا؟</p></div>
+      <div class="callout c-mint"  style="border-radius:38px 14px 34px 16px"><span class="badge">٣</span><span class="lbl">التحليل</span><p>وإيه رأيك إنت؟</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ٣ · أهداف التعلّم ══════════ -->
+<section class="slide" data-title="أهداف التعلّم">
+  <span class="tape tp-berry t1"></span>
+  <span class="tape tp-mint t2"></span>
+  <header class="head">
+    <span class="ghost">أ</span>
+    <span class="eyebrow b" data-anim="drop">في آخر الحصة هتكون قادر إنك…</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">أهداف <span class="pop">التعلّم</span></h2>
+  </header>
+  <div class="body" style="margin-top:30px">
+    <div class="goal frag"><span class="n">١</span><p>تشرح <strong>المراحل الرئيسية</strong> في تطوّر تكنولوجيا المعلومات، وأثر كل مرحلة في المجتمع.</p></div>
+    <div class="goal frag"><span class="n">٢</span><p>تذكر أمثلة على <strong>التغيرات الاجتماعية</strong> و<strong>التقنيات الناشئة</strong> اللي أحدثتها تكنولوجيا المعلومات، وتشرح خصائصها.</p></div>
+    <div class="goal frag"><span class="n">٣</span><p>تحلّل أثر إحدى تقنيات المعلومات في <strong>فئات مختلفة</strong> من المجتمع، وتبرّر قرارًا مستندًا إلى أدلة.</p></div>
+  </div>
+</section>
+
+<!-- ══════════ ٤ · تنبيه: الأهداف = الأسئلة ══════════ -->
+<section class="slide" data-title="🎯 الأهداف = ورقة الأسئلة">
+  <span class="tape tp-sun t1"></span>
+  <span class="tape tp-berry t4"></span>
+  <header class="head">
+    <span class="eyebrow" data-anim="drop">كلام معلّم</span>
+    <h2 class="t sm" data-anim="rise" style="--d:.12s">خُد بالك <span class="pop">من دي</span></h2>
+  </header>
+  <div class="body">
+    <div class="trap" data-anim="stamp" style="--d:.25s">
+      <div class="th"><i>🎯</i> الأهداف دي هي ورقة الأسئلة <em>خُد بالك</em></div>
+      <div class="tb">
+        <p>التلات أهداف اللي فاتوا مش كلام إنشا — دي حرفيًّا التلات أسئلة الكبيرة اللي بتتسأل على الدرس، وبنفس الأفعال: <strong>اشرح</strong> · <strong>اذكر أمثلة واشرح خصائصها</strong> · <strong>حلّل وبرّر</strong>.</p>
+        <div class="askform frag"><b>ممكن يجي كده</b><q>حلّل أثر إحدى تقنيات المعلومات في فئات مختلفة من المجتمع، وبرّر قرارك بشأنها مستندًا إلى أدلة.</q><span class="mk">٦ درجات</span></div>
+        <div class="trapline frag"><b>الفخّ</b><span>كلمة «<strong>مستندًا إلى أدلة</strong>» معناها لازم تحطّ دليل: رقم، أو ملاحظة، أو مثال واقعي. رأيك من غير دليل بياخد نُص الدرجة.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ٥ · الفكرة الكبرى ══════════ -->
+<section class="slide" data-title="الفكرة الكبرى">
+  <span class="tape tp-mint t1"></span>
+  <span class="tape tp-sun t2"></span>
+  <header class="head">
+    <span class="ghost">ب</span>
+    <span class="eyebrow m" data-anim="drop">لو مسكتها مسكت الدرس</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">الفكرة <span class="pop">الأساسية</span></h2>
+  </header>
+  <div class="body">
+    <div class="bigidea" data-anim="tilt" style="--d:.2s">
+      <span class="bulb">💡</span>
+      <span class="lbl">الفكرة الأساسية</span>
+      <p>في كل مرحلة، أضافت تكنولوجيا المعلومات <strong>جهازًا جديدًا</strong> — وغيّرت معه <strong>طريقة تواصل المجتمع وعمله وتعلّمه وتجارته</strong>.</p>
+    </div>
+    <p class="mid frag" style="margin-top:32px;max-width:1580px">يعني إيه؟ التطوّر مش «أجهزة أسرع وأصغر» وبس. كل جهاز جديد بيفتح <span class="hl hl-sun">سلوكًا اجتماعيًا جديدًا</span>: الحاسب الشخصي خلّى الشغل فردي، الإنترنت خلّى المعلومة عالمية، الموبايل خلّاها في جيبك، والسحابة خلّتها خدمة بتشتريها بالشهر.</p>
+    <div class="callout c-sky frag" style="margin-top:28px">
+      <span class="badge">📌</span>
+      <span class="lbl">مثال من يومك</span>
+      <p>الطالب في مصر بيبعت رسالة على تطبيق تواصل، يدفع فطاره بتطبيق دفع، يحضر درسًا أونلاين، ويطلب كتابًا من متجر إلكتروني — <strong>كل ده في يوم واحد</strong>. من ٣٠ سنة، ولا خدمة من دول كانت متاحة بالصورة دي.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ٦ · المفاهيم ══════════ -->
+<section class="slide" data-title="المفاهيم اللي هتقابلك">
+  <span class="tape tp-berry t1"></span>
+  <span class="tape tp-sky t2"></span>
+  <header class="head">
+    <span class="ghost">ج</span>
+    <span class="eyebrow v" data-anim="drop">خريطة الدرس في لمحة</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">المفاهيم <span class="pop">اللي هتقابلك</span></h2>
+  </header>
+  <div class="body" style="margin-top:40px">
+    <div class="terms">
+      <span data-anim="pop" style="--d:.05s">قانون مور</span>
+      <span data-anim="pop" style="--d:.11s">شبكات التواصل الاجتماعي (SNS)</span>
+      <span data-anim="pop" style="--d:.17s">التجارة الإلكترونية</span>
+      <span data-anim="pop" style="--d:.23s">العمل عن بُعد</span>
+      <span data-anim="pop" style="--d:.29s">التعلّم عبر الإنترنت</span>
+      <span data-anim="pop" style="--d:.35s">الدفع غير النقدي</span>
+      <span data-anim="pop" style="--d:.41s">الحوسبة الطرفية</span>
+      <span data-anim="pop" style="--d:.47s">الحوسبة السحابية</span>
+      <span data-anim="pop" style="--d:.53s">القيادة الذاتية</span>
+      <span data-anim="pop" style="--d:.59s">الواقع المعزز / الافتراضي</span>
+      <span data-anim="pop" style="--d:.65s">الحوسبة الكمومية</span>
+    </div>
+    <div class="callout c-mint frag" style="margin-top:54px">
+      <span class="badge">✎</span>
+      <span class="lbl">استكشف — في ثنائيات</span>
+      <p>مع زميلك، لكل فترة زمنية اذكروا جهازًا أو خدمة من الحقبة دي لسه بتستخدموها النهاردة. بعدين اتفقوا على المرحلة اللي غيّرت الحياة اليومية أكتر، وسجّلوا <strong>سببًا واحدًا</strong> يدعم اختياركم.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ٧ · المصطلحات ══════════ -->
+<section class="slide" data-title="مصطلحات لازم تحفظها">
+  <span class="tape tp-violet t1" style="background:var(--violet)"></span>
+  <span class="tape tp-sun t2"></span>
+  <header class="head">
+    <span class="ghost">م</span>
+    <span class="eyebrow v" data-anim="drop">دي بتتكتب بالنص في الامتحان</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">مصطلحات <span class="pop">لازم تحفظها</span></h2>
+  </header>
+  <div class="body g2" style="margin-top:34px;gap:26px 34px">
+    <div class="gterm frag"><b>قانون مور</b> <em>Moore&rsquo;s Law</em><span>الملاحظة القائلة إن عدد الترانزستورات في الشريحة يتضاعف تقريبًا كل عامين.</span></div>
+    <div class="gterm frag"><b>الحوسبة السحابية</b> <em>Cloud Computing</em><span>تكنولوجيا المعلومات المقدَّمة كخدمة عبر الإنترنت.</span></div>
+    <div class="gterm frag"><b>الحوسبة الطرفية</b> <em>Edge Computing</em><span>معالجة البيانات على الجهاز نفسه فورًا، بدل إرسالها إلى السحابة.</span></div>
+    <div class="gterm frag"><b>التجارة الإلكترونية</b> <em>E-commerce</em><span>بيع السلع والخدمات وشراؤها عبر الإنترنت.</span></div>
+    <div class="gterm frag"><b>العمل عن بُعد</b> <em>Remote Work</em><span>العمل من المنزل أو من موقع بعيد آخر عبر الإنترنت.</span></div>
+    <div class="gterm frag"><b>الدفع غير النقدي</b> <em>Cashless Payment</em><span>الدفع دون استخدام النقد (نقود إلكترونية، رموز QR).</span></div>
+  </div>
+</section>
+
+<!-- ══════════ ٨ · تنبيه: التعريف بييجي مقلوب ══════════ -->
+<section class="slide" data-title="🎯 التعريف بييجي مقلوب">
+  <span class="tape tp-sun t1"></span>
+  <span class="tape tp-mint t4"></span>
+  <header class="head">
+    <span class="eyebrow" data-anim="drop">كلام معلّم</span>
+    <h2 class="t sm" data-anim="rise" style="--d:.12s">التعريف <span class="pop">بييجي مقلوب</span></h2>
+  </header>
+  <div class="body">
+    <div class="trap" data-anim="stamp" style="--d:.25s">
+      <div class="th"><i>🎯</i> مش هيقولك «عرّف» — هيديك التعريف ويطلب الاسم <em>خُد بالك</em></div>
+      <div class="tb">
+        <p>الكتاب <strong>مش</strong> بيقولك «عرّف قانون مور». بيديك التعريف ويطلب المصطلح. يعني المطلوب منك تعرف تمشي في الاتجاهين.</p>
+        <div class="askform frag"><b>ممكن يجي كده</b><q>ما اسم الملاحظة التجريبية القائلة إن «عدد الترانزستورات في الدائرة المتكاملة يتضاعف تقريبًا كل عامين»؟</q></div>
+        <div class="trapline frag"><b>الفخّ</b><span>في <strong>خمس أسئلة</strong> من النوع ده على الدرس ده لوحده. عشان كده احفظ التعريف <strong>بالنص</strong> مش بالمعنى — الكلمة المفتاحية في كل تعريف هي اللي بتدلّك.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ٩ · ٨٠ سنة في صفحة ══════════ -->
+<section class="slide" data-title="٨٠ سنة في صفحة">
+  <span class="tape tp-sky t1"></span>
+  <span class="tape tp-berry t2"></span>
+  <span class="tape tp-sun t4"></span>
+  <header class="head" style="text-align:center">
+    <span class="eyebrow" data-anim="drop">أهم جزء في الدرس</span>
+    <h2 class="t" data-anim="wipe" style="--d:.15s;font-size:118px">٨٠ سنة <span class="pop">في صفحة</span></h2>
+    <p class="sub" data-anim="rise" style="--d:.5s;font-size:36px">تاريخ تكنولوجيا المعلومات (IT) — خمس مراحل متتابعة</p>
+  </header>
+  <div class="body" style="margin-top:70px">
+    <div class="chain">
+      <span class="lnk frag pop"><i>🏢</i><b>غرفة</b></span><span class="arw frag">←</span>
+      <span class="lnk frag pop"><i>🖥️</i><b>مكتب</b></span><span class="arw frag">←</span>
+      <span class="lnk frag pop"><i>🌍</i><b>العالم كله</b></span><span class="arw frag">←</span>
+      <span class="lnk frag pop"><i>📱</i><b>جيبك</b></span><span class="arw frag">←</span>
+      <span class="lnk frag pop"><i>☁️</i><b>السحابة</b></span>
+    </div>
+    <p class="big frag" style="margin-top:62px;text-align:center">احفظ الترتيب <strong>كقصّة مكان الجهاز</strong> — ومش هتلخبط تاني.</p>
+  </div>
+</section>
+
+<!-- ══════════ ١٠ · الخط الزمني (١) ══════════ -->
+<section class="slide" data-title="المراحل ١ – ٣">
+  <span class="tape tp-mint t1"></span>
+  <span class="tape tp-sun t2"></span>
+  <header class="head">
+    <span class="ghost">١</span>
+    <span class="eyebrow" data-anim="drop">من الغرفة … للعالم كله</span>
+    <h2 class="t sm" data-anim="rise" style="--d:.12s">المراحل <span class="pop">الأولى</span></h2>
+  </header>
+  <div class="body tl" style="margin-top:30px">
+    <span class="spine"></span>
+    <div class="era e1 frag">
+      <span class="yr">الأربعينيات<br>– الستينيات</span>
+      <div>
+        <h5><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#FF4D6D" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 8h4M7 12h8M8 21h8"/></svg> الحواسيب الإلكترونية الأولى</h5>
+        <p>ظهور الحواسيب الإلكترونية (ومنها <strong>ENIAC</strong>) باستخدام <strong>الصمامات المفرغة</strong>. الحاسب الواحد كان بيملأ غرفة بأكملها.</p>
+        <span class="imp">الأثر: أغراض عسكرية وحسابات علمية فقط</span>
+      </div>
+    </div>
+    <div class="era e2 frag">
+      <span class="yr">السبعينيات<br>– الثمانينيات</span>
+      <div>
+        <h5><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#6B4B00" stroke-width="2.2" stroke-linecap="round"><rect x="2" y="4" width="20" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg> انتشار الحواسب الشخصية (PCs)</h5>
+        <p>الحاسب نزل من الغرفة للمكتب. لأول مرة يبقى في إيد <strong>الفرد</strong> مش المؤسسة بس.</p>
+        <span class="imp">الأثر: بداية استخدام الأفراد للحاسب</span>
+      </div>
+    </div>
+    <div class="era e3 frag">
+      <span class="yr">التسعينيات</span>
+      <div>
+        <h5><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#005247" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14 0 18M12 3c-3 3.5-3 14 0 18"/></svg> إتاحة الإنترنت تجاريًا + ظهور الويب</h5>
+        <p>الإنترنت خرج من المعامل للناس، والويب خلّى المعلومة تتصفّح بسهولة.</p>
+        <span class="imp">الأثر: وصول عالمي للمعلومات + البريد الإلكتروني</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ١١ · الخط الزمني (٢) ══════════ -->
+<section class="slide" data-title="المراحل ٤ – ٥">
+  <span class="tape tp-sky t1"></span>
+  <span class="tape tp-berry t2"></span>
+  <header class="head">
+    <span class="ghost">٢</span>
+    <span class="eyebrow v" data-anim="drop">… لجيبك، وبعدين للسحابة</span>
+    <h2 class="t sm" data-anim="rise" style="--d:.12s">المراحل <span class="pop">الأخيرة</span></h2>
+  </header>
+  <div class="body tl" style="margin-top:30px">
+    <span class="spine" style="background:linear-gradient(180deg,var(--sky),var(--violet))"></span>
+    <div class="era e4 frag">
+      <span class="yr">العقد الأول<br>من الألفية</span>
+      <div>
+        <h5><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#0A4C7D" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18.5h2"/></svg> ظهور الهواتف الذكية</h5>
+        <p>الآيفون وغيره حوّلوا الإنترنت من حاجة بتقعد قدامها لحاجة <strong>ماشية معاك</strong>.</p>
+        <span class="imp">الأثر: انتشار سريع وواسع للإنترنت عبر المحمول</span>
+      </div>
+    </div>
+    <div class="era e5 frag">
+      <span class="yr">من العقد الثاني<br>فصاعدًا</span>
+      <div>
+        <h5><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#2E1C7A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18a4.5 4.5 0 0 1-.3-9 6 6 0 0 1 11.5 1.5 3.8 3.8 0 0 1-.7 7.5H6.5z"/></svg> انتشار الحوسبة السحابية</h5>
+        <p>القدرة الحاسوبية بقت <strong>خدمة تستأجرها</strong> مش جهاز تشتريه — وده اللي فتح الباب لتحليل البيانات الضخمة والذكاء الاصطناعي.</p>
+        <span class="imp">الأثر: البيانات الضخمة + الذكاء الاصطناعي + IT كخدمة</span>
+      </div>
+    </div>
+    <div class="callout c-mint frag" style="margin-top:34px">
+      <span class="badge">🧠</span>
+      <span class="lbl">إزاي تحفظ الترتيب من غير ما تلخبط</span>
+      <p style="font-size:30px">احفظه كقصة مكان الجهاز: <span class="hl hl-mint">غرفة ← مكتب ← العالم كله ← جيبك ← السحابة</span>. الترتيب ده بيتسأل عليه كتير في صورة «رتّب المراحل».</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ١١ · الغلطة الشائعة ══════════ -->
+<section class="slide" data-title="غلطة شائعة في الترتيب">
+  <span class="tape tp-berry t1"></span>
+  <span class="tape tp-sky t2"></span>
+  <header class="head">
+    <span class="ghost">⚠</span>
+    <span class="eyebrow b" data-anim="drop">أكتر غلطة بتتكرر</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">الموبايل اتبنى <span class="pop">فوق الإنترنت</span></h2>
+  </header>
+  <div class="body" style="margin-top:34px">
+    <div class="callout c-berry" data-anim="tilt" style="--d:.2s;padding:34px 118px 36px 46px">
+      <span class="badge">⚠️</span>
+      <span class="lbl">غلطة شائعة</span>
+      <p style="font-size:32px">الناس بتحط <strong>الهواتف الذكية قبل الإنترنت التجاري</strong>. لأ — الإنترنت اتاح تجاريًا في <strong>التسعينيات</strong>، والهواتف الذكية في <strong>العقد الأول من الألفية</strong>.</p>
+    </div>
+    <div class="g2 frag" style="margin-top:48px;gap:40px">
+      <div class="lane lane-b" style="border-radius:38px">
+        <h6 style="color:var(--berry-ink)">✕ ترتيب غلط</h6>
+        <p style="font-size:26px">الحاسب ← <strong>الهواتف الذكية</strong> ← الإنترنت تجاريًّا ← السحابية</p>
+      </div>
+      <div class="lane lane-a" style="border-radius:38px">
+        <h6>✔ الترتيب الصح</h6>
+        <p style="font-size:26px">الحاسب ← <strong>الإنترنت تجاريًّا</strong> ← الهواتف الذكية ← السحابية</p>
+        <span class="ms">ده اللي بيتحطّ في الامتحان</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ١٢ · تنبيه: تلات صيغ ══════════ -->
+<section class="slide" data-title="🎯 الترتيب بتلات صيغ">
+  <span class="tape tp-sun t1"></span>
+  <span class="tape tp-berry t4"></span>
+  <header class="head">
+    <span class="eyebrow" data-anim="drop">كلام معلّم</span>
+    <h2 class="t sm" data-anim="rise" style="--d:.12s">الترتيب <span class="pop">بيتسأل بتلات صيغ</span></h2>
+  </header>
+  <div class="body">
+    <div class="trap" data-anim="stamp" style="--d:.25s">
+      <div class="th"><i>🎯</i> نفس المعلومة — تلات أشكال مختلفة <em>خُد بالك</em></div>
+      <div class="tb">
+        <ol>
+          <li class="frag"><strong>اختيار من متعدد:</strong> «اختر الخيار الذي يُرتّب مراحل تطور IT بالترتيب الزمني الصحيح» (أ – د).</li>
+          <li class="frag"><strong>فقرة بفراغات:</strong> بيديك فقرة ناقصة وتكمّلها.</li>
+          <li class="frag"><strong>مقالي:</strong> «اشرح مرحلتين مع أثر كل منهما في المجتمع».</li>
+        </ol>
+        <div class="askform frag"><b>نص الفقرة اللي بتتسأل</b><q>ثم انتشرت (١) …… في السبعينيات والثمانينيات… وفي التسعينيات أُتيح (٢) …… للاستخدام التجاري… وفي العقد الأول من الألفية ظهرت (٣) ……</q></div>
+        <div class="trapline frag"><b>الفخّ</b><span>الاختيار الغلط دايمًا بيقدّم <strong>الهواتف الذكية على الإنترنت</strong>. احفظها بجملة: الموبايل اتبنى فوق الإنترنت، مش العكس.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ١٣ · قانون مور ══════════ -->
+<section class="slide" data-title="قانون مور">
+  <span class="tape tp-sky t1"></span>
+  <span class="tape tp-sun t2"></span>
+  <header class="head">
+    <span class="ghost">١</span>
+    <span class="eyebrow" data-anim="drop">المحرّك ورا التطوّر كله</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">قانون <span class="pop">مور</span></h2>
+  </header>
+  <div class="body split" style="margin-top:26px">
+    <div>
+      <p class="big" data-anim="rise" style="--d:.25s"><strong>ملاحظة تجريبية</strong> — مش قانون فيزيائي — بتقول إن <span class="hl hl-sky">عدد الترانزستورات في الدائرة المتكاملة يتضاعف تقريبًا كل عامين</span>.</p>
+      <div class="callout c-sun frag" style="margin-top:30px">
+        <span class="badge">🔑</span>
+        <span class="lbl">الكلمة اللي بتجيب الدرجة</span>
+        <p>كلمة «<strong>ملاحظة</strong>» دي مهمة جدًا في الامتحان. مش «قانون».</p>
+      </div>
+      <div class="callout c-berry frag" style="margin-top:24px">
+        <span class="badge">⚠️</span>
+        <span class="lbl">ليه الاتجاه بيتباطأ؟</span>
+        <p>استمرار <strong>تصغير مكوّنات الدوائر</strong> بيواجه تحديات هندسية وفيزيائية: <strong>ازدياد تيارات التسرّب</strong> و<strong>التأثيرات الكمومية</strong> زي <strong>النفق الكمومي</strong>.</p>
+      </div>
+    </div>
+
+    <figure style="margin:0;background:#FFFDF6;border-radius:38px;padding:30px 32px 20px;box-shadow:inset 0 0 0 5px rgba(30,42,70,.10)" data-anim="rise" style2="">
+      <svg viewBox="0 0 560 200" fill="none" style="width:100%;height:auto;display:block">
+        <g stroke="#DCE6F2" stroke-width="1.6"><path d="M46 52H540M46 88H540M46 124H540M46 160H540"/></g>
+        <path d="M46 30v150H540" stroke="#1E2A46" stroke-width="3" stroke-linecap="round"/>
+        <path class="draw" style="--len:560;--d:.55s" d="M62 168C150 160 240 134 330 92c40-18 66-30 100-36" stroke="#2FA8FF" stroke-width="5" stroke-linecap="round"/>
+        <path class="draw" style="--len:180;--d:1.5s" d="M430 56c40-8 74-12 108-15" stroke="#FF4D6D" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 10"/>
+        <g fill="#2FA8FF"><circle cx="62" cy="168" r="6"/><circle cx="170" cy="152" r="6"/><circle cx="280" cy="116" r="6"/><circle cx="390" cy="66" r="6"/></g>
+        <text x="52" y="20" font-family="Marhey, sans-serif" font-size="15" fill="#98A0B6">↑ عدد الترانزستورات</text>
+        <text x="536" y="196" font-family="Marhey, sans-serif" font-size="15" fill="#98A0B6" text-anchor="end">الزمن ←</text>
+        <text x="470" y="30" font-family="Marhey, sans-serif" font-size="15" fill="#FF4D6D" text-anchor="middle">الاتجاه بيتباطأ</text>
+      </svg>
+      <figcaption style="margin-top:12px;text-align:center;font-family:Marhey,sans-serif;font-size:21px;color:var(--ink-faint)">الشكل ١.١.١ — الأزرق: الاتجاه التاريخي · الأحمر المتقطّع: التباطؤ الحالي</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════ ١٤ · تنبيه: كلمة واحدة ══════════ -->
+<section class="slide" data-title="🎯 كلمة واحدة بين ○ و×">
+  <span class="tape tp-berry t1"></span>
+  <span class="tape tp-mint t4"></span>
+  <header class="head">
+    <span class="eyebrow" data-anim="drop">كلام معلّم</span>
+    <h2 class="t sm" data-anim="rise" style="--d:.12s">كلمة واحدة <span class="pop">بتفرّق بين ○ و ×</span></h2>
+  </header>
+  <div class="body">
+    <div class="trap" data-anim="stamp" style="--d:.25s">
+      <div class="th"><i>🎯</i> اقرا الجملة كلمة كلمة <em>خُد بالك</em></div>
+      <div class="tb">
+        <p>قانون مور <strong>ملاحظة تجريبية</strong> — مش قانون فيزيائي. والحوسبة الكمومية <strong>ليست بديلًا عامًّا</strong> لكل الحواسيب. الجملتين دول بييجوا صح/خطأ حرفيًّا.</p>
+        <div class="askform frag"><b>ممكن يجي كده</b><q>ضع ○ إذا كانت العبارة صحيحة أو × إذا كانت خاطئة: «قانون مور هو الملاحظة التجريبية القائلة إن عدد الترانزستورات في الدائرة المتكاملة يتضاعف تقريبًا كل عامين».</q></div>
+        <div class="trapline frag"><b>الفخّ</b><span>لو الجملة قالت «قانون <strong>فيزيائي</strong>» أو «كل <strong>عام</strong>» بدل «كل عامين» → تبقى <strong>×</strong>.</span></div>
+        <div class="trapline ok frag"><b>لو جت ✔</b><span>الجملة اللي فوق بالنص ده إجابتها <strong>○</strong> — دي بتتحطّ عشان تلغبطك مع اللي قبلها.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ١٥ · خمس تحوّلات ══════════ -->
+<section class="slide" data-title="خمس تحوّلات اجتماعية">
+  <span class="tape tp-mint t1"></span>
+  <span class="tape tp-berry t2"></span>
+  <header class="head">
+    <span class="ghost">٢</span>
+    <span class="eyebrow m" data-anim="drop">النتيجة اللي وصلت لينا</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">خمس تحوّلات <span class="pop">اجتماعية</span></h2>
+  </header>
+  <div class="body g5" style="margin-top:46px">
+    <div class="shift s1 frag pop">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#7A0C24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 1 1-3.2-6.4"/><path d="M8 11h8M8 15h5"/></svg></span>
+      <b>شبكات التواصل</b><span>منصات للتواصل ونشر المحتوى ومشاركته بسرعة.</span>
+    </div>
+    <div class="shift s2 frag pop">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0A4C7D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16l-1.6 9H7.2L5.5 3H2"/><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/></svg></span>
+      <b>التجارة الإلكترونية</b><span>بيع السلع والخدمات وشراؤها عبر الإنترنت.</span>
+    </div>
+    <div class="shift s3 frag pop">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#005247" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="10" rx="2"/><path d="M6 20h8M10 14v6"/><path d="M18 8h4v6h-4z"/></svg></span>
+      <b>العمل عن بُعد</b><span>أداء المهام من المنزل أو موقع بعيد عبر الإنترنت.</span>
+    </div>
+    <div class="shift s4 frag pop">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#2E1C7A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5 3 9l9 4 9-4-9-4z"/><path d="M6 11v5c0 1.6 2.7 3 6 3s6-1.4 6-3v-5"/></svg></span>
+      <b>التعلّم أونلاين</b><span>تقديم الدروس والمواد التعليمية عبر الإنترنت.</span>
+    </div>
+    <div class="shift s5 frag pop">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#6B4B00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20M6 15h4"/></svg></span>
+      <b>الدفع غير النقدي</b><span>بطاقات مصرفية أو تطبيقات هاتف أو رموز QR.</span>
+    </div>
+  </div>
+  <p class="aside frag" style="margin-top:54px;font-size:29px;text-align:center;padding:0 40px">لاحظ إن التحوّلات الخمسة دي <strong>مش تقنيات</strong> — دي <strong>سلوكيات</strong> اتغيّرت بسبب التقنية. الفرق ده هو اللي بيفرّق بين إجابة كاملة وإجابة ناقصة.</p>
+</section>
+
+<!-- ══════════ ١٦ · تنبيه: التجارة الإلكترونية ══════════ -->
+<section class="slide" data-title="🎯 فخّ التجارة الإلكترونية">
+  <span class="tape tp-sun t1"></span>
+  <span class="tape tp-sky t4"></span>
+  <header class="head">
+    <span class="eyebrow" data-anim="drop">كلام معلّم</span>
+    <h2 class="t sm" data-anim="rise" style="--d:.12s">الفخّ الكلاسيكي <span class="pop">في التجارة الإلكترونية</span></h2>
+  </header>
+  <div class="body">
+    <div class="trap" data-anim="stamp" style="--d:.25s">
+      <div class="th"><i>🎯</i> بتتحطّ وسط عبارات صح عشان متاخدش بالك <em>خُد بالك</em></div>
+      <div class="tb">
+        <p>أشهر عبارة خاطئة في الدرس كله بتيجي عن التجارة الإلكترونية.</p>
+        <div class="askform frag"><b>العبارة الخاطئة اللي بتتحطّ</b><q>التجارة الإلكترونية تعني شراء السلع من المتاجر الفعلية باستخدام النقد.</q></div>
+        <div class="trapline ok frag"><b>الصح</b><span>التجارة الإلكترونية = <strong>البيع والشراء عبر الإنترنت</strong>. أي كلمة زي «متاجر فعلية» أو «نقد» في التعريف ده = <strong>×</strong>.</span></div>
+        <div class="trapline frag"><b>فخّ تاني</b><span>في سؤال تصنيف بيديك «الدفع بتطبيق على الهاتف» — ده <strong>دفع غير نقدي</strong>، مش تجارة إلكترونية. ركّز على الفعل: بتشتري ولّا بتدفع؟</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ١٧ · الطرفية ولّا السحابية ══════════ -->
+<section class="slide" data-title="الطرفية ولّا السحابية؟">
+  <span class="tape tp-mint t1"></span>
+  <span class="tape tp-sun t2"></span>
+  <header class="head">
+    <span class="ghost">٣</span>
+    <span class="eyebrow m" data-anim="drop">فين بتتعالج البيانات؟</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">الطرفية <span class="pop">ولّا السحابية؟</span></h2>
+  </header>
+  <div class="body" style="margin-top:38px">
+    <div class="edge">
+      <div class="lane lane-a" data-anim="right" style="--d:.2s">
+        <h6>الحوسبة الطرفية</h6>
+        <p>معالجة البيانات <strong>على الجهاز نفسه، فورًا</strong>، بدل إرسالها للسحابة.</p>
+        <span class="ms">زمن استجابة أقل</span>
+      </div>
+      <span class="vs" data-anim="pop" style="--d:.42s">ضد</span>
+      <div class="lane lane-b" data-anim="left" style="--d:.2s">
+        <h6>الحوسبة السحابية</h6>
+        <p>تكنولوجيا المعلومات <strong>مقدَّمة كخدمة</strong> عبر الإنترنت.</p>
+        <span class="ms">قدرة أكبر · انتظار أطول</span>
+      </div>
+    </div>
+    <div class="callout c-sky frag" style="margin-top:46px">
+      <span class="badge">🎯</span>
+      <span class="lbl">الربط اللي بيجيب الدرجة</span>
+      <p style="font-size:30px">السيارة ذاتية القيادة بتعالج جزءًا من البيانات <strong>محليًا بالحوسبة الطرفية</strong>، لأن <span class="hl hl-sky">التأخير في معالجة بيانات القيادة قد يؤثر في السلامة</span> — فبتاخد قرارها على متنها من غير ما تستنى السحابة.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ١٨ · تنبيه: سؤال الست درجات ══════════ -->
+<section class="slide" data-title="🎯 سؤال الست درجات">
+  <span class="tape tp-berry t1"></span>
+  <span class="tape tp-sun t4"></span>
+  <header class="head">
+    <span class="eyebrow" data-anim="drop">كلام معلّم</span>
+    <h2 class="t sm" data-anim="rise" style="--d:.12s">سؤال الست درجات <span class="pop">اللي بيتكرر</span></h2>
+  </header>
+  <div class="body">
+    <div class="trap" data-anim="stamp" style="--d:.25s">
+      <div class="th"><i>🎯</i> له مفتاح تصحيح ثابت — تلات نقط <em>خُد بالك</em></div>
+      <div class="tb">
+        <p>ده أكتر سؤال متوقّع في الدرس. كل نقطة بدرجتين.</p>
+        <div class="askform frag"><b>ممكن يجي كده</b><q>حلّل كيف غيّر انتشار الحوسبة السحابية (من العقد الثاني من الألفية فصاعدًا) طريقة استخدام تكنولوجيا المعلومات.</q><span class="mk">٦ درجات</span></div>
+        <div class="trapline ok frag"><b>التلات نقط</b><span><strong>تحليل البيانات الضخمة</strong> · <strong>الذكاء الاصطناعي</strong> · <strong>تكنولوجيا المعلومات كخدمة</strong>.</span></div>
+        <div class="trapline frag"><b>الفخّ</b><span>لو كتبت نقطتين بس تاخد <strong>٤ من ٦</strong>. وفي سؤال الطرفية: السبب المطلوب هو <strong>السلامة</strong> — مش «عشان أسرع» وخلاص.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ١٩ · التقنيات الناشئة ══════════ -->
+<section class="slide" data-title="تقنيات ناشئة بارزة">
+  <span class="tape tp-sky t1"></span>
+  <span class="tape tp-berry t2"></span>
+  <header class="head">
+    <span class="ghost">٤</span>
+    <span class="eyebrow v" data-anim="drop">الجزء اللي بيتسأل عليه</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">تقنيات ناشئة <span class="pop">بارزة</span></h2>
+  </header>
+  <div class="body g3" style="margin-top:40px">
+    <div class="tech t-1 frag">
+      <span class="scene">
+        <svg width="330" height="168" viewBox="0 0 150 76" fill="none">
+          <path d="M20 52h110" stroke="#98A0B6" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="7 8"/>
+          <path d="M38 48V38c0-2 1.6-3.6 3.6-3.6h8l6-8h24l5 8h8c2 0 3.6 1.6 3.6 3.6v10" stroke="#0A4C7D" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M34 48h74" stroke="#0A4C7D" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="48" cy="52" r="4.6" stroke="#0A4C7D" stroke-width="3"/><circle cx="94" cy="52" r="4.6" stroke="#0A4C7D" stroke-width="3"/>
+          <path d="M112 30a20 20 0 0 1 0 16M120 24a30 30 0 0 1 0 28" stroke="#2FA8FF" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M30 30a20 20 0 0 0 0 16M22 24a30 30 0 0 0 0 28" stroke="#2FA8FF" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <h5>القيادة الذاتية</h5>
+      <p>كاميرات ومستشعرات بتدرك المحيط، والنظام بيعالج البيانات ويتخذ قرارات القيادة بالذكاء الاصطناعي.</p>
+    </div>
+
+    <div class="tech t-2 frag">
+      <span class="scene">
+        <svg width="330" height="168" viewBox="0 0 150 76" fill="none">
+          <rect x="16" y="16" width="46" height="44" rx="5" stroke="#7A0C24" stroke-width="3"/>
+          <path d="M22 52l12-13 8 8 7-7 7 12" stroke="#7A0C24" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="34" y="22" width="18" height="12" rx="3" fill="#FF4D6D" opacity=".55"/>
+          <path d="M74 38h10M84 34l5 4-5 4" stroke="#98A0B6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="97" y="25" width="44" height="27" rx="9" stroke="#7A0C24" stroke-width="3"/>
+          <circle cx="108" cy="38" r="5.2" fill="#FF4D6D" opacity=".55"/><circle cx="130" cy="38" r="5.2" fill="#FF4D6D" opacity=".55"/>
+          <path d="M97 32h-7M141 32h7" stroke="#7A0C24" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <h5>الواقع المعزز / الافتراضي</h5>
+      <p><strong>AR</strong> بيضيف عناصر رقمية فوق العالم الحقيقي. <strong>VR</strong> بيحطك جوه بيئة افتراضية كاملة مولَّدة حاسوبيًا.</p>
+    </div>
+
+    <div class="tech t-3 frag">
+      <span class="scene">
+        <svg width="330" height="168" viewBox="0 0 150 76" fill="none">
+          <circle cx="75" cy="38" r="22" stroke="#2E1C7A" stroke-width="3"/>
+          <ellipse cx="75" cy="38" rx="22" ry="8" stroke="#7A5CFF" stroke-width="2.4"/>
+          <ellipse cx="75" cy="38" rx="8" ry="22" stroke="#7A5CFF" stroke-width="2.4"/>
+          <circle cx="75" cy="38" r="4.6" fill="#7A5CFF"/>
+          <text x="30" y="26" font-family="Marhey, sans-serif" font-size="13" fill="#2E1C7A">0</text>
+          <text x="115" y="58" font-family="Marhey, sans-serif" font-size="13" fill="#2E1C7A">1</text>
+        </svg>
+      </span>
+      <h5>الحوسبة الكمومية</h5>
+      <p>البت التقليدي بيحمل <strong>حالة واحدة</strong>، أما <strong>الكيوبت</strong> فبيستخدم مبدأ <strong>التراكب الكمومي</strong>.</p>
+    </div>
+  </div>
+  <p class="aside frag" style="margin-top:44px;font-size:28px;text-align:center;padding:0 60px">الحوسبة الكمومية <strong>نهج مختلف</strong> قد يفيد في فئات محدّدة من المسائل — وهي <strong>ليست بديلًا عامًا</strong> لكل الحواسيب التقليدية.</p>
+</section>
+
+<!-- ══════════ ٢٠ · تنبيه: ناشئة ولّا قديمة ══════════ -->
+<section class="slide" data-title="🎯 ناشئة ولّا قديمة؟">
+  <span class="tape tp-mint t1"></span>
+  <span class="tape tp-berry t4"></span>
+  <header class="head">
+    <span class="eyebrow" data-anim="drop">كلام معلّم</span>
+    <h2 class="t sm" data-anim="rise" style="--d:.12s">ناشئة ولّا قديمة؟ <span class="pop">وAR ولّا VR؟</span></h2>
+  </header>
+  <div class="body">
+    <div class="trap" data-anim="stamp" style="--d:.25s">
+      <div class="th"><i>🎯</i> فخّين في سؤال واحد <em>خُد بالك</em></div>
+      <div class="tb">
+        <ol>
+          <li class="frag"><strong>«اختر كل ما يُعد من التقنيات الناشئة»:</strong> البريد الإلكتروني والحواسب الشخصية <strong>مش</strong> ناشئة — دول من مراحل قديمة. الناشئة: القيادة الذاتية · AR · VR · الكمومية.</li>
+          <li class="frag"><strong>AR بيضيف فوق الواقع، VR بيحطّك جوّه بيئة كاملة.</strong> ده الفرق اللي بيتسأل عليه بالمطابقة.</li>
+        </ol>
+        <div class="askform frag"><b>الوصف الغلط اللي بيتحطّ</b><q>الواقع الافتراضي تقنية تُحسّن بشكل كبير سرعة معالجة الحاسب.</q></div>
+        <div class="trapline frag"><b>الفخّ</b><span>الجملة دي بتخلط VR بالحوسبة الكمومية. VR <strong>مالوش علاقة</strong> بسرعة المعالجة. والكيوبت = <strong>تراكب كمومي</strong>، والبت = <strong>حالة واحدة</strong>.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ٢١ · مثال محلول ══════════ -->
+<section class="slide" data-title="مثال محلول">
+  <span class="tape tp-sun t1"></span>
+  <span class="tape tp-mint t2"></span>
+  <header class="head">
+    <span class="ghost">٥</span>
+    <span class="eyebrow s" data-anim="drop">اتدرّب معايا</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">مثال <span class="pop">محلول</span></h2>
+  </header>
+  <div class="body" style="margin-top:26px">
+    <div class="qbox" data-anim="rise" style="--d:.2s">
+      <div class="qh">✎ رتّب مراحل تطوّر تكنولوجيا المعلومات (IT) بالترتيب الزمني الصحيح</div>
+      <ul class="opts">
+        <li class="frag"><b>أ</b> بداية ظهور الحاسب ← ظهور الهواتف الذكية ← تسويق الإنترنت تجاريًا ← انتشار الحوسبة السحابية</li>
+        <li class="right frag"><b>ب</b> بداية ظهور الحاسب ← تسويق الإنترنت تجاريًا ← ظهور الهواتف الذكية ← انتشار الحوسبة السحابية ✔</li>
+        <li class="frag"><b>جـ</b> تسويق الإنترنت تجاريًا ← بداية ظهور الحاسب ← انتشار الحوسبة السحابية ← ظهور الهواتف الذكية</li>
+      </ul>
+      <div class="answer frag"><strong>✓ الحل: ب</strong> — الحاسب (الأربعينيات–الستينيات) ← الإنترنت تجاريًا (التسعينيات) ← الهواتف الذكية (العقد الأول من الألفية) ← السحابية (العقد الثاني فصاعدًا).</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ٢٢ · سؤال نمط الامتحان ══════════ -->
+<section class="slide" data-title="سؤال على نمط الامتحان">
+  <span class="tape tp-berry t1"></span>
+  <span class="tape tp-sky t2"></span>
+  <header class="head">
+    <span class="eyebrow b" data-anim="drop">جرّب تجاوب قبل ما أقولك</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">سؤال على <span class="pop">نمط الامتحان</span></h2>
+  </header>
+  <div class="body" style="margin-top:30px">
+    <div class="qbox" data-anim="rise" style="--d:.2s">
+      <div class="qh">📝 سؤال مقالي <span class="mk">٦ درجات</span></div>
+      <p style="font-size:34px;line-height:1.5">حلّل كيف غيّر انتشار الحوسبة السحابية (من العقد الثاني من الألفية فصاعدًا) طريقة استخدام تكنولوجيا المعلومات.</p>
+      <div class="answer frag" style="font-size:29px">في إجابتك لازم تشير إلى ثلاث نقاط: <strong>تحليل البيانات الضخمة</strong> · <strong>الذكاء الاصطناعي</strong> · <strong>تكنولوجيا المعلومات كخدمة</strong>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ٢٣ · خريطة الفخاخ ══════════ -->
+<section class="slide" data-title="★ خريطة الفخاخ">
+  <span class="tape tp-sun t1"></span>
+  <span class="tape tp-berry t2"></span>
+  <header class="head">
+    <span class="eyebrow" data-anim="drop">مراجعة آخر يوم</span>
+    <h2 class="t sm" data-anim="rise" style="--d:.12s">خريطة <span class="pop">الفخاخ</span></h2>
+  </header>
+  <div class="body" style="margin-top:18px">
+    <table class="tmap" data-anim="rise" style="--d:.22s">
+      <tr><th>الجزئية</th><th>بتيجي إزاي</th><th>الفخّ</th></tr>
+      <tr><td class="a">ترتيب المراحل</td><td>اختيار من متعدد · فقرة بفراغات · اشرح مرحلتين</td><td class="c">تقديم الموبايل على الإنترنت</td></tr>
+      <tr><td class="a">قانون مور</td><td>صح/خطأ على نصّ التعريف</td><td class="c">«قانون فيزيائي» بدل «ملاحظة تجريبية»</td></tr>
+      <tr><td class="a">تباطؤ قانون مور</td><td>علّل: ليه الاتجاه بيتباطأ؟</td><td class="c">نسيان تيارات التسرّب والتأثيرات الكمومية</td></tr>
+      <tr><td class="a">الحوسبة الكمومية</td><td>صح/خطأ · اختر الوصف غير المناسب</td><td class="c">«بديل عام» أو «تسرّع كل الحسابات»</td></tr>
+      <tr><td class="a">التجارة الإلكترونية</td><td>صح/خطأ · تصنيف أمثلة</td><td class="c">«متاجر فعلية» و«نقد» في التعريف</td></tr>
+      <tr><td class="a">التحوّلات الخمسة</td><td>اذكر أمثلة واشرح خصائص اثنين</td><td class="c">ذكرها كتقنيات بدل سلوكيات</td></tr>
+      <tr><td class="a">الطرفية والسحابية</td><td>قارن · علّل السيارة ذاتية القيادة</td><td class="c">السبب هو السلامة، مش السرعة بس</td></tr>
+      <tr><td class="a">السحابية [٦ درجات]</td><td>حلّل كيف غيّرت طريقة استخدام IT</td><td class="c">كتابة نقطتين بدل التلاتة</td></tr>
+      <tr><td class="a">AR / VR</td><td>مطابقة · اختر الوصف غير المناسب</td><td class="c">خلط VR بسرعة المعالجة</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ ٢٤ · الخلاصة ══════════ -->
+<section class="slide" data-title="الخلاصة في سطر">
+  <span class="tape tp-mint t1"></span>
+  <span class="tape tp-sun t2"></span>
+  <header class="head">
+    <span class="ghost">٦</span>
+    <span class="eyebrow m" data-anim="drop">لو هتفتكر حاجة واحدة</span>
+    <h2 class="t" data-anim="rise" style="--d:.12s">الخلاصة <span class="pop">في سطر</span></h2>
+  </header>
+  <div class="body" style="margin-top:44px">
+    <div class="recap">
+      <div data-anim="pop" style="--d:.1s"><b>الحاسب</b><span>الحساب خرج من الورق</span></div>
+      <div data-anim="pop" style="--d:.2s"><b>الإنترنت</b><span>المعلومة بقت عالمية</span></div>
+      <div data-anim="pop" style="--d:.3s"><b>الموبايل</b><span>المعلومة بقت في جيبك</span></div>
+      <div data-anim="pop" style="--d:.4s"><b>السحابة</b><span>القدرة بقت خدمة</span></div>
+    </div>
+    <div class="pq frag" style="margin-top:70px">
+      <span class="qm">”</span>
+      <q>في كل مرحلة أضافت جهازًا جديدًا، وغيّرت معه طريقة تواصل المجتمع وعمله وتعلّمه وتجارته.</q>
+      <svg width="300" height="20" viewBox="0 0 128 9" fill="none" style="display:block;margin:22px auto 0;color:var(--sun)">
+        <path class="draw" style="--len:140" d="M3 6c22-4 44 3 66-1s40 1 56-1" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ٢٥ · النهاية ══════════ -->
+<section class="slide no-rule" data-title="شكرًا · الدرس الجاي" data-nofoot>
+  <span class="tape tp-sun t1"></span>
+  <span class="tape tp-berry t2"></span>
+  <span class="tape tp-mint t3"></span>
+  <div class="cover">
+    <div>
+      <span class="eyebrow s" data-anim="drop">خلصنا الدرس ١-١</span>
+      <h1 class="t" data-anim="wipe" style="--d:.18s">شكرًا <span class="pop">لمتابعتك</span></h1>
+      <p class="sub" data-anim="rise" style="--d:.5s;font-size:34px">الدرس الجاي: ١-٢ &nbsp;·&nbsp; كيف يعمل الذكاء الاصطناعي</p>
+
+      <div class="callout c-mint frag" style="margin-top:44px;max-width:860px">
+        <span class="badge">✅</span>
+        <span class="lbl">مذاكرتك بعد الحصة</span>
+        <p>افتح <strong>كتاب الشرح</strong> واقرا خريطة الفخاخ، وبعدين حلّ <strong>كتاب الأسئلة</strong> — ٥٠ سؤال + أسئلة الكتاب المدرسي.</p>
+      </div>
+
+      <div class="links" style="margin-top:36px" data-anim="rise">
+        <span class="chip yt"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+        <span class="chip fb"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+        <span class="chip wa"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> 01114840373</span>
+      </div>
+    </div>
+
+    <div class="burstwrap">
+      <span class="burst" data-anim="pop" style="--d:.1s"></span>
+      <div style="position:relative;z-index:2;display:grid;place-items:center;gap:52px">
+        <div style="position:relative" data-anim="pop">
+          <span class="photo-tape"></span>
+          <div class="photo" style="--ps:270px" role="img" aria-label="صورة المهندس محمد ناجح"></div>
+        </div>
+        <h2 class="lockup" data-anim="tilt" style="--d:.35s;align-items:center">
+          <span class="w1">بــن</span>
+          <span class="w2" style="font-size:126px">ناجح</span>
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- ═══════════ واجهة العرض ═══════════ -->
+  <div id="hud">
+    <div id="cam"><span>مكان الكاميرا<br>(OBS)</span></div>
+
+
+    <footer id="foot">
+      <span class="favatar" title="صورتك"></span>
+      <div class="fbook"><b>الدرس ١-١</b><span>تطوّر تكنولوجيا المعلومات</span></div>
+      <span class="fsep"></span>
+      <div class="fbrand">
+        <span class="mrow">
+          <span class="star">✦</span>
+          <span class="fmark">بــــــن نــــــاجــــــح</span>
+          <span class="star">✦</span>
+        </span>
+        <span class="flinks">
+          <span class="yt"><span class="i"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6v-7l6.3 3.5-6.3 3.5z"/></svg></span> يوتيوب: محمد ناجح</span>
+          <span class="fdot"></span>
+          <span class="fb"><span class="i"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></span> فيسبوك: محمد ناجح</span>
+          <span class="fdot"></span>
+          <span class="wa"><span class="i"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.04 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4"/></svg></span> 01114840373</span>
+        </span>
+      </div>
+      <span class="fsep"></span>
+      <div class="fpage"><b id="pnum">١</b><span>من <span id="ptot">٢٥</span></span></div>
+    </footer>
+
+    <div id="nav">
+      <button id="bPrev" title="السابق">›</button>
+      <button id="bNext" title="التالي">‹</button>
+      <button id="bGrid" title="نظرة عامة (O)">▦</button>
+      <button id="bFull" title="ملء الشاشة (F)">⛶</button>
+      <button id="bHelp" title="الاختصارات (؟)">؟</button>
+    </div>
+
+    <div id="bar"><i></i></div>
+  </div>
+</div><!-- /stage -->
+</div><!-- /viewport -->
+
+<div id="grid"><h3>نظرة عامة على الشرائح</h3><div class="gwrap"></div></div>
+
+<div id="help">
+  <div class="card">
+    <h3>اختصارات العرض</h3>
+    <dl>
+      <dt>← → / مسافة</dt><dd>التالي والسابق (بيكشف الأجزاء واحد واحد)</dd>
+      <dt>↑ ↓</dt><dd>شريحة كاملة للأمام أو للخلف من غير أجزاء</dd>
+      <dt>F</dt><dd>ملء الشاشة</dd>
+      <dt>O</dt><dd>نظرة عامة على كل الشرائح</dd>
+      <dt>P</dt><dd>إظهار / إخفاء صورتك في الشريط</dd>
+      <dt>C</dt><dd>إظهار مكان الكاميرا للتسجيل على OBS</dd>
+      <dt>U</dt><dd>إخفاء أزرار التنقّل (للتسجيل النضيف)</dd>
+      <dt>B</dt><dd>شاشة سودا مؤقتة</dd>
+      <dt>Home / End</dt><dd>أول شريحة / آخر شريحة</dd>
+      <dt>؟</dt><dd>اللوحة دي</dd>
+    </dl>
+  </div>
+</div>
+
+<div id="rotate">
+  <div>
+    <div class="ph"></div>
+    <b>لفّ الموبايل بالعرض</b>
+    <span>العرض مصمّم بمقاس الشاشة العريضة (16:9). لفّ الموبايل أفقيًّا عشان الشرائح تملأ الشاشة وتقدر تقرأها.</span>
+    <i id="rotateSkip">كمّل كده برضه</i>
+  </div>
+</div>
+
+<div id="black" style="position:fixed;inset:0;background:#000;z-index:300;display:none"></div>
+
+<script>
+(function(){
+  'use strict';
+  var AR = '٠١٢٣٤٥٦٧٨٩';
+  function ar(n){ return String(n).split('').map(function(c){ return AR[+c]; }).join(''); }
+
+  var stage   = document.getElementById('stage');
+  var slides  = [].slice.call(document.querySelectorAll('.slide'));
+  var barFill = document.querySelector('#bar i');
+  var pnum    = document.getElementById('pnum');
+  var ptot    = document.getElementById('ptot');
+  var gwrap   = document.querySelector('#grid .gwrap');
+  var body    = document.body;
+
+  var idx = 0, step = 0, busy = false;
+  ptot.textContent = ar(slides.length);
+
+  /* ── تحجيم المسرح: توسيط صريح + ملء الشاشة ── */
+  var skipRotate = false;
+  function fit(){
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var k = Math.min(vw / 1920, vh / 1080);
+    stage.style.transform = 'translate(-50%,-50%) scale(' + k + ')';
+    var portrait = vh > vw && vw < 820 && !skipRotate;
+    body.classList.toggle('portrait', portrait);
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', function(){ setTimeout(fit, 120); });
+  fit();
+
+  function frags(el){ return [].slice.call(el.querySelectorAll('.frag')); }
+
+  function paint(){
+    var cur = slides[idx];
+    pnum.textContent = ar(idx + 1);
+    barFill.style.width = ((idx + 1) / slides.length * 100) + '%';
+    body.classList.toggle('hide-foot', cur.hasAttribute('data-nofoot'));
+    [].forEach.call(gwrap.children, function(g, i){ g.classList.toggle('cur', i === idx); });
+  }
+
+  function show(n, dir){
+    if (busy || n < 0 || n >= slides.length) return;
+    if (n === idx) return;
+    busy = true;
+    var out = slides[idx], inn = slides[n];
+    var fwd = dir > 0;
+
+    out.classList.remove('in-fwd','in-bwd');
+    out.classList.add('is-leaving', fwd ? 'out-fwd' : 'out-bwd');
+    setTimeout(function(){
+      out.classList.remove('is-active','is-leaving','out-fwd','out-bwd');
+      frags(out).forEach(function(f){ f.classList.remove('on'); });
+    }, 620);
+
+    inn.classList.remove('out-fwd','out-bwd');
+    inn.classList.add('is-active', fwd ? 'in-fwd' : 'in-bwd');
+    idx = n; step = 0;
+    paint();
+    setTimeout(function(){ inn.classList.remove('in-fwd','in-bwd'); busy = false; }, 800);
+  }
+
+  function next(){
+    var f = frags(slides[idx]);
+    if (step < f.length){ f[step].classList.add('on'); step++; return; }
+    show(idx + 1, 1);
+  }
+  function prev(){
+    var f = frags(slides[idx]);
+    if (step > 0){ step--; f[step].classList.remove('on'); return; }
+    if (idx > 0){
+      show(idx - 1, -1);
+      var pf = frags(slides[idx]);
+      pf.forEach(function(x){ x.classList.add('on'); });
+      step = pf.length;
+    }
+  }
+  function jump(n){ if (n !== idx) show(n, n > idx ? 1 : -1); }
+
+  /* ── نظرة عامة ── */
+  slides.forEach(function(s, i){
+    var g = document.createElement('div');
+    g.className = 'gi';
+    g.innerHTML = '<i>' + ar(i + 1) + '</i><b>' + (s.getAttribute('data-title') || ('شريحة ' + ar(i + 1))) + '</b>';
+    g.addEventListener('click', function(){ body.classList.remove('grid-on'); jump(i); });
+    gwrap.appendChild(g);
+  });
+
+  /* ── لوحة المفاتيح ── */
+  document.addEventListener('keydown', function(e){
+    var k = e.key;
+    if (body.classList.contains('grid-on') && k !== 'o' && k !== 'O' && k !== 'Escape') return;
+    if (k === 'ArrowLeft'  || k === ' ' || k === 'PageDown'){ e.preventDefault(); next(); }
+    else if (k === 'ArrowRight' || k === 'PageUp'){ e.preventDefault(); prev(); }
+    else if (k === 'ArrowDown'){ e.preventDefault(); show(idx + 1, 1); }
+    else if (k === 'ArrowUp'){ e.preventDefault(); show(idx - 1, -1); }
+    else if (k === 'Home'){ jump(0); }
+    else if (k === 'End'){ jump(slides.length - 1); }
+    else if (k === 'f' || k === 'F'){ toggleFull(); }
+    else if (k === 'o' || k === 'O'){ body.classList.toggle('grid-on'); }
+    else if (k === 'p' || k === 'P'){ body.classList.toggle('no-pres'); }
+    else if (k === 'c' || k === 'C'){ body.classList.toggle('show-cam'); }
+    else if (k === 'u' || k === 'U'){ body.classList.toggle('hide-ui'); }
+    else if (k === 'b' || k === 'B'){ var bl = document.getElementById('black'); bl.style.display = bl.style.display === 'block' ? 'none' : 'block'; }
+    else if (k === '?' || k === '/' || k === '؟'){ body.classList.toggle('help-on'); }
+    else if (k === 'Escape'){ body.classList.remove('grid-on','help-on'); }
+  });
+
+  function toggleFull(){
+    if (!document.fullscreenElement) { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
+    else { document.exitFullscreen && document.exitFullscreen(); }
+  }
+
+  document.getElementById('bNext').addEventListener('click', next);
+  document.getElementById('bPrev').addEventListener('click', prev);
+  document.getElementById('bGrid').addEventListener('click', function(){ body.classList.toggle('grid-on'); });
+  document.getElementById('bFull').addEventListener('click', toggleFull);
+  document.getElementById('bHelp').addEventListener('click', function(){ body.classList.toggle('help-on'); });
+
+  /* ── الضغط: ربع الشاشة الشمال = رجوع، الباقي = تقدّم ── */
+  stage.addEventListener('click', function(e){
+    if (e.target.closest('#nav')) return;
+    var r = stage.getBoundingClientRect();
+    var rel = (e.clientX - r.left) / r.width;   // ٠ عند الشمال
+    if (rel < 0.22) prev(); else next();
+  });
+
+  /* ── السحب على اللمس ── */
+  var x0 = null, y0 = null, moved = false;
+  document.addEventListener('touchstart', function(e){
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; moved = false;
+  }, {passive:true});
+  document.addEventListener('touchmove', function(){ moved = true; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if (x0 === null || !moved) { x0 = null; return; }
+    var dx = e.changedTouches[0].clientX - x0;
+    var dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? prev() : next(); }
+    x0 = null;
+  }, {passive:true});
+
+  var rs = document.getElementById('rotateSkip');
+  if (rs) rs.addEventListener('click', function(ev){
+    ev.stopPropagation(); skipRotate = true; body.classList.remove('portrait');
+  });
+
+  /* ── إخفاء المؤشر أثناء السكون (مفيد في التسجيل) ── */
+  var idleT;
+  function wake(){
+    body.classList.remove('idle');
+    clearTimeout(idleT);
+    idleT = setTimeout(function(){ body.classList.add('idle'); }, 2600);
+  }
+  ['mousemove','mousedown','keydown','touchstart'].forEach(function(ev){
+    document.addEventListener(ev, wake, {passive:true});
+  });
+  wake();
+
+  /* ── تشغيل ── */
+  slides[0].classList.add('is-active');
+  paint();
+})();
+</script>
+</body>
+</html>

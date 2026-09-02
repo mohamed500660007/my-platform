@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مذكرة البكالوريا المصرية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Marhey:wght@300..700&family=Tajawal:wght@300;400;500;700;800&family=Aref+Ruqaa:wght@400;700&display=swap">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   مذكرة البكالوريا المصرية — الوحدة التمهيدية
+   لوحة الألوان: ورق عاجي دافئ + حبر نيلي + ٥ ألوان أقلام فسفورية
+   ═══════════════════════════════════════════════════════════ */
+
+:root{
+  /* الورق والحبر */
+  --paper:      #FFFCF2;
+  --paper-2:    #FBF5E4;
+  --rule:       #DCE6F2;
+  --ink:        #1E2A46;
+  --ink-soft:   #5C6683;
+  --ink-faint:  #98A0B6;
+  --desk:       #C9C4B4;
+  --desk-2:     #B7B2A1;
+
+  /* أقلام التحديد */
+  --sun:        #FFC93C;
+  --sun-ink:    #6B4B00;
+  --berry:      #FF4D6D;
+  --berry-ink:  #7A0C24;
+  --mint:       #00C2A8;
+  --mint-ink:   #005247;
+  --violet:     #7A5CFF;
+  --violet-ink: #2E1C7A;
+  --sky:        #2FA8FF;
+  --sky-ink:    #0A4C7D;
+
+  --shadow: 0 1px 2px rgba(30,42,70,.06), 0 12px 28px rgba(30,42,70,.10);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; }
+
+body{
+  margin:0;
+  background:var(--desk);
+  color:var(--ink);
+  font-family:"Tajawal","Segoe UI",Tahoma,sans-serif;
+}
+
+/* ── المكتب: خلفية كتان خفيفة تحت الورق ───────────────────── */
+.desk{
+  direction:rtl;
+  min-height:100%;
+  padding:34px 16px 60px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.16) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(0deg,  rgba(0,0,0,.035) 0 1px, transparent 1px 4px),
+    linear-gradient(160deg, var(--desk) 0%, var(--desk-2) 100%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:34px;
+}
+
+/* ═══ الورقة ═══════════════════════════════════════════════ */
+.sheet{
+  position:relative;
+  width:210mm;
+  min-height:297mm;
+  max-width:100%;
+  background:
+    /* شبكة نقطية باهتة */
+    radial-gradient(circle at 1px 1px, rgba(30,42,70,.055) 1px, transparent 1.6px) 0 0/5mm 5mm,
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+  box-shadow:var(--shadow);
+  border-radius:2px;
+  padding:20mm 24mm 22mm 16mm;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+/* حافة مثنية خفيفة تدي إحساس الورق المطبوع */
+.sheet::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(30,42,70,.07), inset 0 22px 34px -30px rgba(30,42,70,.35);
+  border-radius:2px;
+}
+
+/* خط الهامش الأحمر + خرم الأجندة على اليمين */
+.sheet::before{
+  content:"";
+  position:absolute;
+  top:0; bottom:0; right:19mm;
+  width:1.4px;
+  background:linear-gradient(180deg, transparent 0, rgba(255,77,109,.55) 6%, rgba(255,77,109,.55) 94%, transparent 100%);
+}
+.holes{
+  position:absolute; top:0; bottom:0; right:6mm;
+  width:8mm;
+  display:flex; flex-direction:column; justify-content:center; gap:42mm;
+  z-index:2;
+}
+.holes i{
+  display:block; width:6mm; height:6mm; border-radius:50%;
+  background:var(--desk-2);
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.28), 0 1px 0 rgba(255,255,255,.7);
+}
+
+/* ═══ شرائط الواشي تيب ═════════════════════════════════════ */
+.tape{
+  position:absolute;
+  height:13mm;
+  opacity:.92;
+  z-index:3;
+  box-shadow:0 2px 5px rgba(30,42,70,.16);
+  mask-image:linear-gradient(90deg, transparent 0 2px, #000 2px calc(100% - 2px), transparent calc(100% - 2px));
+}
+.tape::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,0) 55%);
+}
+.tape.stripe-sun{
+  background:repeating-linear-gradient(-58deg, var(--sun) 0 7px, #FFE49A 7px 14px);
+}
+.tape.stripe-mint{
+  background:repeating-linear-gradient(-58deg, var(--mint) 0 6px, #9DF0E4 6px 12px);
+}
+.tape.dot-berry{
+  background:radial-gradient(circle at 4px 4px, rgba(255,255,255,.85) 1.8px, transparent 2px) 0 0/9px 9px, var(--berry);
+}
+.tape.plain-sky{ background:var(--sky); }
+
+.t-a{ top:-4mm;  right:26mm; width:46mm; transform:rotate(-3.2deg); }
+.t-b{ top:-5mm;  left:18mm;  width:34mm; transform:rotate(4.6deg); }
+.t-c{ bottom:8mm;left:-6mm;  width:38mm; transform:rotate(-6deg); }
+.t-d{ top:112mm; left:-9mm;  width:30mm; transform:rotate(8deg); }
+
+/* ═══ الترويسة ═════════════════════════════════════════════ */
+.eyebrow{
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:"Marhey",sans-serif; font-weight:600;
+  font-size:10.5pt; letter-spacing:.045em;
+  color:var(--violet-ink);
+  background:#EFEAFF;
+  border:1.6px solid var(--violet);
+  border-radius:999px;
+  padding:3px 13px;
+  transform:rotate(-1deg);
+}
+.eyebrow b{ color:var(--violet); font-weight:700; }
+
+.masthead{ position:relative; z-index:4; margin-bottom:11mm; }
+
+.title{
+  font-family:"Lalezar",cursive,sans-serif;
+  font-size:44pt;
+  line-height:1.06;
+  margin:9px 0 0;
+  color:var(--ink);
+  text-wrap:balance;
+  letter-spacing:-.005em;
+}
+.title .pop{
+  color:var(--berry);
+  position:relative;
+  display:inline-block;
+  text-shadow:2.5px 2.5px 0 var(--sun);
+}
+.subtitle{
+  font-family:"Marhey",sans-serif;
+  font-weight:400;
+  font-size:12.5pt;
+  color:var(--ink-soft);
+  margin:6px 0 0;
+}
+.rule-doodle{ display:block; margin:9px 0 0; color:var(--sky); }
+
+/* ═══ العناوين المرقّمة ════════════════════════════════════ */
+.h2{
+  display:flex; align-items:center; gap:11px;
+  margin:0 0 9px;
+  font-family:"Lalezar",cursive,sans-serif;
+  font-size:20pt; font-weight:400; color:var(--ink);
+  line-height:1.25;
+}
+.num{
+  flex:0 0 auto;
+  width:32px; height:32px;
+  display:grid; place-items:center;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:14pt;
+  color:#fff;
+  border-radius:56% 44% 47% 53% / 50% 55% 45% 50%;
+  transform:rotate(-6deg);
+  box-shadow:2px 2px 0 rgba(30,42,70,.18);
+}
+.n-sun{ background:var(--sun); color:var(--sun-ink); }
+.n-berry{ background:var(--berry); }
+.n-mint{ background:var(--mint); }
+.n-violet{ background:var(--violet); }
+.n-sky{ background:var(--sky); }
+
+section{ position:relative; z-index:4; margin-bottom:9mm; }
+
+p{ margin:0 0 8px; font-size:11.5pt; line-height:1.95; color:var(--ink); max-width:62ch; }
+p.lead{ font-size:12.5pt; }
+strong{ font-weight:800; }
+
+/* ═══ التحديد بالقلم الفسفوري ══════════════════════════════ */
+.hl{
+  background-repeat:no-repeat;
+  background-size:100% .78em;
+  background-position:0 .62em;
+  padding:0 .18em;
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
+  font-weight:700;
+}
+.hl-sun{   background-image:linear-gradient(100deg, rgba(255,201,60,0) 0 1%,  rgba(255,201,60,.85) 1% 99%, rgba(255,201,60,0) 99%); }
+.hl-mint{  background-image:linear-gradient(100deg, rgba(0,194,168,0) 0 1%,   rgba(0,194,168,.42) 1% 99%, rgba(0,194,168,0) 99%); }
+.hl-berry{ background-image:linear-gradient(100deg, rgba(255,77,109,0) 0 1%,  rgba(255,77,109,.34) 1% 99%, rgba(255,77,109,0) 99%); }
+.hl-sky{   background-image:linear-gradient(100deg, rgba(47,168,255,0) 0 1%,  rgba(47,168,255,.34) 1% 99%, rgba(47,168,255,0) 99%); }
+
+/* دائرة مرسومة باليد حوالين كلمة */
+.circled{
+  position:relative; padding:0 .3em; font-weight:800; white-space:nowrap;
+}
+.circled::before{
+  content:"";
+  position:absolute; inset:-6px -4px -7px -4px;
+  border:2.2px solid var(--berry);
+  border-radius:52% 48% 45% 55% / 58% 42% 58% 42%;
+  transform:rotate(-1.6deg);
+  opacity:.85;
+}
+
+/* ═══ الصناديق ═════════════════════════════════════════════ */
+.box{
+  position:relative;
+  border-radius:14px;
+  padding:15px 17px 14px;
+  margin:12px 0 14px;
+  background:#fff;
+  border:2px solid var(--ink);
+  box-shadow:4px 4px 0 rgba(30,42,70,.14);
+}
+.box > p:last-child{ margin-bottom:0; }
+.box .tag{
+  position:absolute;
+  top:-13px; right:16px;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:10.5pt;
+  padding:2px 12px;
+  border-radius:999px;
+  border:2px solid var(--ink);
+  transform:rotate(-1.8deg);
+  white-space:nowrap;
+}
+.box p{ font-size:11pt; line-height:1.85; }
+
+.box-note{   border-color:var(--sky);    background:#F1F8FF; box-shadow:4px 4px 0 rgba(47,168,255,.22); }
+.box-note .tag{   border-color:var(--sky);    background:var(--sky);    color:#fff; }
+.box-tip{    border-color:var(--mint);   background:#EFFCF9; box-shadow:4px 4px 0 rgba(0,194,168,.22); }
+.box-tip .tag{    border-color:var(--mint);   background:var(--mint);   color:#03332C; }
+.box-warn{   border-color:var(--berry);  background:#FFF1F4; box-shadow:4px 4px 0 rgba(255,77,109,.22); }
+.box-warn .tag{   border-color:var(--berry);  background:var(--berry);  color:#fff; }
+.box-key{    border-color:var(--sun);    background:#FFF9E6; box-shadow:4px 4px 0 rgba(255,201,60,.35); }
+.box-key .tag{    border-color:var(--sun);    background:var(--sun);    color:var(--sun-ink); }
+.box-src{    border-color:var(--ink-faint); background:#F7F7FA; box-shadow:4px 4px 0 rgba(152,160,182,.22); }
+.box-src .tag{    border-color:var(--ink-faint); background:#EDEEF3; color:var(--ink-soft); }
+.box-src p{ font-size:10pt; color:var(--ink-soft); }
+
+/* ═══ الورقة اللاصقة (استيكي نوت) ══════════════════════════ */
+.sticky{
+  position:relative;
+  width:100%;
+  padding:16px 16px 18px;
+  background:linear-gradient(175deg, #FFF06B 0%, #FFE43D 100%);
+  box-shadow:3px 6px 14px rgba(30,42,70,.22);
+  transform:rotate(-1.4deg);
+  margin:14px 0 16px;
+  font-family:"Marhey",sans-serif;
+  color:#4A3600;
+}
+.sticky::before{
+  content:"";
+  position:absolute; top:-8px; left:50%; transform:translateX(-50%) rotate(2deg);
+  width:52px; height:17px;
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:0 1px 3px rgba(0,0,0,.12);
+}
+.sticky b{ font-size:12.5pt; display:block; margin-bottom:4px; }
+.sticky span{ font-size:10.5pt; line-height:1.8; display:block; }
+
+/* ═══ جدول المقارنة ════════════════════════════════════════ */
+.compare{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:10px 0 4px;
+}
+.col{
+  border:2px dashed var(--ink-faint);
+  border-radius:12px;
+  padding:12px 13px;
+  background:rgba(255,255,255,.6);
+}
+.col.now{ border-style:solid; border-color:var(--violet); background:#F5F2FF; }
+.col h4{
+  margin:0 0 8px;
+  font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:14pt;
+}
+.col.old h4{ color:var(--ink-soft); }
+.col.now h4{ color:var(--violet-ink); }
+.col ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px; }
+.col li{ font-size:10.5pt; line-height:1.6; padding-right:18px; position:relative; color:var(--ink); }
+.col li::before{
+  content:"—"; position:absolute; right:0; top:0; color:var(--ink-faint); font-weight:700;
+}
+.col.now li::before{ content:"✦"; color:var(--violet); font-size:9pt; top:1px; }
+
+/* ═══ كروت المسارات ════════════════════════════════════════ */
+.tracks{
+  display:grid; grid-template-columns:repeat(2,1fr); gap:11px;
+  margin-top:10px;
+}
+.track{
+  position:relative;
+  border-radius:13px;
+  padding:13px 14px 12px;
+  background:#fff;
+  border:2px solid var(--ink);
+  box-shadow:3px 3px 0 rgba(30,42,70,.15);
+  overflow:hidden;
+}
+.track .bar{ position:absolute; inset:0 0 auto 0; height:7px; }
+.track h4{
+  margin:8px 0 5px;
+  font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:14.5pt;
+  line-height:1.2;
+}
+.track p{ font-size:10pt; line-height:1.7; color:var(--ink-soft); margin:0; max-width:none; }
+.track .kicker{
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:8.5pt;
+  letter-spacing:.08em; text-transform:uppercase; opacity:.9;
+}
+.tk-1{ border-color:var(--berry);  } .tk-1 .bar{ background:var(--berry); }  .tk-1 h4{ color:var(--berry-ink); }  .tk-1 .kicker{ color:var(--berry); }
+.tk-2{ border-color:var(--sky);    } .tk-2 .bar{ background:var(--sky); }    .tk-2 h4{ color:var(--sky-ink); }    .tk-2 .kicker{ color:var(--sky); }
+.tk-3{ border-color:var(--mint);   } .tk-3 .bar{ background:var(--mint); }   .tk-3 h4{ color:var(--mint-ink); }   .tk-3 .kicker{ color:var(--mint); }
+.tk-4{ border-color:var(--violet); } .tk-4 .bar{ background:var(--violet); } .tk-4 h4{ color:var(--violet-ink); } .tk-4 .kicker{ color:var(--violet); }
+
+/* ═══ شرائح المواد ═════════════════════════════════════════ */
+.stack{ display:flex; flex-direction:column; gap:9px; margin-top:10px; }
+.slab{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:12px;
+  align-items:center;
+  border-radius:12px;
+  padding:11px 13px;
+  border:2px solid var(--ink);
+  background:#fff;
+  box-shadow:3px 3px 0 rgba(30,42,70,.13);
+}
+.slab .chip{
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:10pt;
+  padding:5px 11px; border-radius:8px; white-space:nowrap;
+  transform:rotate(-1.2deg);
+}
+.slab h5{ margin:0 0 2px; font-family:"Tajawal",sans-serif; font-weight:800; font-size:11pt; }
+.slab span{ font-size:10pt; color:var(--ink-soft); line-height:1.6; display:block; }
+.sl-1{ border-color:var(--sun); }    .sl-1 .chip{ background:var(--sun); color:var(--sun-ink); }
+.sl-2{ border-color:var(--violet); } .sl-2 .chip{ background:var(--violet); color:#fff; }
+.sl-3{ border-color:var(--mint); }   .sl-3 .chip{ background:var(--mint); color:#03332C; }
+
+/* ═══ الخط الزمني للمحاولتين ═══════════════════════════════ */
+.steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px; position:relative; }
+.step{
+  background:#fff; border:2px solid var(--ink); border-radius:12px;
+  padding:12px 12px 11px; box-shadow:3px 3px 0 rgba(30,42,70,.13);
+  position:relative;
+}
+.step .dot{
+  width:26px; height:26px; border-radius:50%;
+  display:grid; place-items:center;
+  font-family:"Marhey",sans-serif; font-weight:700; font-size:11pt;
+  background:var(--ink); color:var(--paper);
+  margin-bottom:7px;
+}
+.step h5{ margin:0 0 4px; font-family:"Lalezar",cursive,sans-serif; font-weight:400; font-size:13pt; }
+.step p{ font-size:9.8pt; line-height:1.65; color:var(--ink-soft); margin:0; max-width:none; }
+.step:nth-child(1){ transform:rotate(-.8deg); } .step:nth-child(1) .dot{ background:var(--sky); }
+.step:nth-child(2){ transform:rotate(.5deg); }  .step:nth-child(2) .dot{ background:var(--sun); color:var(--sun-ink); }
+.step:nth-child(3){ transform:rotate(-.4deg); } .step:nth-child(3) .dot{ background:var(--mint); color:#03332C; }
+
+/* ═══ التشيك ليست ══════════════════════════════════════════ */
+.checklist{ list-style:none; margin:10px 0 0; padding:0; display:flex; flex-direction:column; gap:9px; }
+.checklist li{
+  display:grid; grid-template-columns:auto 1fr; gap:11px; align-items:start;
+  font-size:11pt; line-height:1.7;
+}
+.checklist li::before{
+  content:"";
+  width:19px; height:19px; margin-top:3px;
+  border:2.2px solid var(--ink);
+  border-radius:5px 6px 5px 7px;
+  transform:rotate(-2deg);
+  background:#fff;
+}
+.checklist li:nth-child(2n)::before{ transform:rotate(1.8deg); }
+
+/* ═══ اقتباس ختامي ═════════════════════════════════════════ */
+.quote{
+  margin:16px 0 0;
+  text-align:center;
+  font-family:"Aref Ruqaa",serif;
+  font-size:16pt;
+  line-height:1.9;
+  color:var(--violet-ink);
+  padding:18px 14px;
+  border-top:2.5px dashed var(--sun);
+  border-bottom:2.5px dashed var(--sun);
+}
+.quote small{
+  display:block; margin-top:8px;
+  font-family:"Marhey",sans-serif; font-size:9.5pt; color:var(--ink-faint);
+}
+
+/* ═══ ترقيم الصفحة ═════════════════════════════════════════ */
+.pagenum{
+  position:absolute;
+  bottom:9mm; left:16mm;
+  z-index:5;
+  display:flex; align-items:center; gap:9px;
+}
+.pagenum .stamp{
+  width:34px; height:34px;
+  display:grid; place-items:center;
+  font-family:"Lalezar",cursive,sans-serif; font-size:17pt;
+  color:var(--berry);
+  border:2.4px solid var(--berry);
+  border-radius:49% 51% 55% 45% / 53% 47% 53% 47%;
+  transform:rotate(-7deg);
+  background:rgba(255,255,255,.7);
+}
+.pagenum .of{
+  font-family:"Marhey",sans-serif; font-size:9.5pt; color:var(--ink-faint); letter-spacing:.04em;
+}
+.footnote{
+  position:absolute; bottom:11mm; right:24mm; z-index:5;
+  font-family:"Marhey",sans-serif; font-size:9pt; color:var(--ink-faint);
+}
+
+/* ═══ الطباعة ══════════════════════════════════════════════ */
+@page{ size:A4; margin:0; }
+@media print{
+  body{ background:#fff; }
+  .desk{ padding:0; gap:0; background:#fff; }
+  .sheet{ box-shadow:none; border-radius:0; break-after:page; page-break-after:always; }
+  .sheet:last-child{ break-after:auto; page-break-after:auto; }
+  .holes i{ background:#EDEDED; box-shadow:inset 0 0 0 1px #CFCFCF; }
+}
+
+/* ═══ الشاشات الصغيرة ══════════════════════════════════════ */
+@media (max-width:820px){
+  .sheet{ width:100%; min-height:0; padding:16mm 14mm 20mm 10mm; }
+  .sheet::before{ right:11mm; }
+  .holes{ right:3mm; gap:26mm; }
+  .title{ font-size:32pt; }
+  .compare,.tracks,.steps{ grid-template-columns:1fr; }
+  .t-d{ display:none; }
+  .pagenum{ left:10mm; }
+  .footnote{ display:none; }
+}
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="desk" dir="rtl" lang="ar">
+
+<!-- ══════════════════ الصفحة الأولى ══════════════════ -->
+<article class="sheet">
+  <span class="tape stripe-sun t-a"></span>
+  <span class="tape dot-berry t-b"></span>
+  <span class="tape stripe-mint t-c"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="eyebrow">الوحدة التمهيدية &nbsp;<b>•</b>&nbsp; الصف الثاني الثانوي</span>
+    <h1 class="title">البكالوريا <span class="pop">المصرية</span></h1>
+    <p class="subtitle">الجزء الأول: خريطة النظام قبل ما تختار</p>
+    <svg class="rule-doodle" width="290" height="14" viewBox="0 0 290 14" fill="none" aria-hidden="true">
+      <path d="M2 9C34 3 46 12 78 7s44 5 76-1 46 8 78 2 54-4 54-4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </header>
+
+  <section>
+    <h2 class="h2"><span class="num n-sun">١</span> يعني إيه «بكالوريا»؟</h2>
+    <p class="lead">
+      البكالوريا المصرية هي <span class="hl hl-sun">نظام تعليمي جديد للمرحلة الثانوية</span>،
+      اتقرّ في سنة ٢٠٢٥ ليكون <strong>بديلًا اختياريًا</strong> جنب نظام الثانوية العامة —
+      يعني مش إلغاء للثانوية، ده <span class="circled">طريق تاني</span> الطالب يقدر يمشي فيه.
+    </p>
+    <p>
+      الفكرة الأساسية إنك بدل ما تذاكر <span class="hl hl-berry">كل حاجة لكل حد</span>،
+      تختار <strong>مسارًا</strong> قريبًا من الكلية اللي نفسك فيها، وتركّز مجهودك في مواده،
+      مع مواد أساسية بتفضل مشتركة على الكل.
+    </p>
+
+    <div class="box box-note">
+      <span class="tag">📌 ملاحظة</span>
+      <p>
+        النظام بيبدأ من <strong>الصف الثاني الثانوي</strong> — يعني سنة أولى ثانوي بتفضل زي ما هي لكل الطلبة،
+        وبعدها بتيجي لحظة الاختيار. عشان كده المذكرة دي بتوصلك قبل القرار مش بعده.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="h2"><span class="num n-violet">٢</span> الفرق في نص صفحة</h2>
+    <div class="compare">
+      <div class="col old">
+        <h4>الثانوية العامة</h4>
+        <ul>
+          <li>شعبتان أساسيتان: علمي وأدبي</li>
+          <li>امتحان واحد في آخر السنة</li>
+          <li>عدد مواد أكبر بتدخل المجموع</li>
+          <li>فرصة واحدة تحدد التنسيق</li>
+        </ul>
+      </div>
+      <div class="col now">
+        <h4>البكالوريا</h4>
+        <ul>
+          <li>أربعة مسارات متخصصة</li>
+          <li>إمكانية إعادة الامتحان لتحسين الدرجة</li>
+          <li>مواد أقل لكن أعمق في تخصصك</li>
+          <li>تُحتسب الدرجة الأعلى بين المحاولتين</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sticky">
+      <b>✋ استنى بس…</b>
+      <span>«مواد أقل» مش معناها «مذاكرة أقل». معناها إن المجهود بيتركّز في مكان واحد — والمستوى المطلوب في المواد دي بيبقى أعلى.</span>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="h2"><span class="num n-berry">٣</span> المسارات الأربعة</h2>
+    <p>كل مسار بيوصّلك لمجموعة كليات، والمواد اللي بتدخل مجموعك بتتغير معاه:</p>
+    <div class="tracks">
+      <div class="track tk-1">
+        <span class="bar"></span>
+        <span class="kicker">Track 01</span>
+        <h4>الطب وعلوم الحياة</h4>
+        <p>للي شايف نفسه في الطب، الصيدلة، الأسنان، العلاج الطبيعي، التمريض والعلوم الحيوية.</p>
+      </div>
+      <div class="track tk-2">
+        <span class="bar"></span>
+        <span class="kicker">Track 02</span>
+        <h4>الهندسة وعلوم الحاسب</h4>
+        <p>للي بيحب الرياضيات والفيزياء والبرمجة: الهندسة، الحاسبات، الذكاء الاصطناعي.</p>
+      </div>
+      <div class="track tk-3">
+        <span class="bar"></span>
+        <span class="kicker">Track 03</span>
+        <h4>الأعمال</h4>
+        <p>الاقتصاد، التجارة، إدارة الأعمال، المحاسبة والعلوم المالية والإحصاء.</p>
+      </div>
+      <div class="track tk-4">
+        <span class="bar"></span>
+        <span class="kicker">Track 04</span>
+        <h4>الآداب والفنون</h4>
+        <p>اللغات، الإعلام، الآثار، الحقوق، الفنون الجميلة والتربية النوعية.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="pagenum">
+    <span class="stamp">١</span>
+    <span class="of">صفحة ١ من ٢</span>
+  </div>
+  <div class="footnote">مذكرة البكالوريا · الوحدة التمهيدية</div>
+</article>
+
+
+<!-- ══════════════════ الصفحة الثانية ══════════════════ -->
+<article class="sheet">
+  <span class="tape plain-sky t-a"></span>
+  <span class="tape stripe-sun t-b"></span>
+  <span class="tape dot-berry t-d"></span>
+  <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="masthead">
+    <span class="eyebrow">تكملة الوحدة التمهيدية &nbsp;<b>•</b>&nbsp; صفحة ٢</span>
+    <h1 class="title">المواد <span class="pop">والمحاولات</span></h1>
+    <p class="subtitle">إزاي بيتحسب مجموعك، وإيه اللي في إيدك</p>
+    <svg class="rule-doodle" width="250" height="14" viewBox="0 0 250 14" fill="none" aria-hidden="true">
+      <path d="M2 8c28 6 40-6 68-1s40 7 66 1 40 4 62-2 50-2 50-2" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </header>
+
+  <section>
+    <h2 class="h2"><span class="num n-sky">٤</span> المواد بتتقسم ٣ طبقات</h2>
+    <div class="stack">
+      <div class="slab sl-1">
+        <span class="chip">الطبقة ١</span>
+        <div>
+          <h5>مواد أساسية مشتركة</h5>
+          <span>زي اللغة العربية واللغة الأجنبية الأولى — بتتدرس مع كل المسارات وبتدخل المجموع.</span>
+        </div>
+      </div>
+      <div class="slab sl-2">
+        <span class="chip">الطبقة ٢</span>
+        <div>
+          <h5>مواد المسار</h5>
+          <span>مواد تخصصك اللي اخترته، وهي <strong>قلب المجموع</strong> والفيصل في التنسيق.</span>
+        </div>
+      </div>
+      <div class="slab sl-3">
+        <span class="chip">الطبقة ٣</span>
+        <div>
+          <h5>مواد للنجاح فقط</h5>
+          <span>زي التربية الدينية والوطنية والمهارات الرقمية — لازم تنجح فيها، لكنها لا تُضاف للمجموع.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-tip">
+      <span class="tag">💡 نصيحة مذاكرة</span>
+      <p>
+        رتّب وقتك بنسبة المجموع مش بنسبة عدد الحصص. <span class="hl hl-mint">مواد المسار تاخد النصيب الأكبر</span>،
+        والمواد اللي «للنجاح فقط» ياخدوا مراجعة قصيرة منتظمة بدل ما يتساب لآخر السنة ويضيّع أسبوع كامل.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="h2"><span class="num n-mint">٥</span> نظام المحاولتين</h2>
+    <p>أهم ميزة في النظام إن الامتحان مش «فرصة واحدة ونصيب»:</p>
+    <div class="steps">
+      <div class="step">
+        <span class="dot">١</span>
+        <h5>المحاولة الأولى</h5>
+        <p>بتمتحن مع كل الطلبة في الموعد الرسمي، وتطلع نتيجتك عادي.</p>
+      </div>
+      <div class="step">
+        <span class="dot">٢</span>
+        <h5>قرار التحسين</h5>
+        <p>لو النتيجة مش قد طموحك، تقدر تتقدم لإعادة امتحان المادة (بمقابل مادي محدد).</p>
+      </div>
+      <div class="step">
+        <span class="dot">٣</span>
+        <h5>الأعلى هو المعتمد</h5>
+        <p>بيتحسب لك <strong>أفضل درجة</strong> بين المحاولتين، فمفيش خسارة من المحاولة.</p>
+      </div>
+    </div>
+
+    <div class="box box-warn">
+      <span class="tag">⚠️ خلي بالك</span>
+      <p>
+        وجود محاولة تانية <span class="hl hl-berry">مش رخصة للتأجيل</span>. الطالب اللي بيدخل الأولى «يجرّب»
+        بيدخل التانية وهو متأخر ومضغوط. اعتبر المحاولة الأولى هي الأصل، والتانية شبكة أمان.
+      </p>
+    </div>
+
+    <div class="box box-src">
+      <span class="tag">تنويه</span>
+      <p>
+        الخطوط العريضة هنا ثابتة، لكن التفاصيل الدقيقة (أسماء المواد في كل مسار، توزيع الدرجات،
+        مواعيد ورسوم المحاولة الثانية) بتصدر بقرارات وزارية وبتتحدّث. راجع آخر قرار رسمي قبل ما تبني عليه قرار مصيري.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="h2"><span class="num n-sun">٦</span> قبل ما تختار مسارك</h2>
+    <ul class="checklist">
+      <li>اكتب أعلى ٣ كليات نفسك فيها، وشوف كل واحدة تابعة لأنهي مسار.</li>
+      <li>راجع درجاتك في مواد الصف الأول: فين بتتفوق من غير مجهود خرافي؟</li>
+      <li>افصل بين «الكلية اللي أنا عايزها» و«الكلية اللي حد عايزها ليّا».</li>
+      <li>اسأل طالب في الكلية دي فعليًا عن يومه، مش عن اسمها.</li>
+      <li>حدّد قرارك قبل بداية الترم بأسبوعين — مش في أول امتحان.</li>
+    </ul>
+
+    <p class="quote">
+      «الاختيار الصح مش أسهل طريق، لكنه الطريق اللي هتقدر تكمّله وأنت صاحي.»
+      <small>— نهاية الوحدة التمهيدية · الوحدة الجاية: تفاصيل كل مسار</small>
+    </p>
+  </section>
+
+  <div class="pagenum">
+    <span class="stamp">٢</span>
+    <span class="of">صفحة ٢ من ٢</span>
+  </div>
+  <div class="footnote">مذكرة البكالوريا · الوحدة التمهيدية</div>
+</article>
+
+</div>
+
+</body>
+</html>
