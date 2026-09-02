@@ -8,7 +8,7 @@ import { chromium } from 'playwright';
 import { pathToFileURL } from 'url';
 import path from 'path';
 
-const URL = pathToFileURL(path.resolve('index.html')).href;
+const URL = process.env.SITE || pathToFileURL(path.resolve('index.html')).href;
 
 const VIEWPORTS = [
   { name: 'موبايل',  width: 390,  height: 844 },
